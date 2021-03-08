@@ -7,6 +7,7 @@ import TextField from './TextField'
 import Spinner from './Spinner'
 import { FormProvider, FormContext } from './contexts/Form'
 import Items from './contexts/Items'
+import Form from './Form'
 import { PagingContext, PagingProvider } from './contexts/Paging'
 import { SearchContext, SearchProvider } from './contexts/Search'
 import useFetch from './hooks/useFetch'
@@ -18,7 +19,7 @@ import useReducerModal from './hooks/useReducerModal'
 import useReducerRequest from './hooks/useReducerRequest'
 import useReducerTab from './hooks/useReducerTab'
 import useSearch from './hooks/useSearch'
-export {AppProvider, MainFrame, ResourceList, Util, FormProvider, FormContext, Items,
+export {AppProvider, MainFrame, ResourceList, Util, FormProvider, FormContext, Form, Items,
   PagingContext, PagingProvider, SearchContext, SearchProvider, EditModal, TextField, Spinner,
 useFetch, useReducer, useReducerFetch, useReducerForm, useReducerItem, useReducerModal,
 useReducerRequest, useReducerTab, useSearch}
