@@ -14,7 +14,7 @@ export default function MainFrame(props) {
   const navigateTo = (href) => {
     if (href) {
       setLoading(true)
-      window.location.href = `/${href}`
+      window.location.assign(`/${href}`)
     }
   };
 
@@ -32,11 +32,11 @@ export default function MainFrame(props) {
   );
 
   const searchFieldMarkup = (
-    props.withoutSearch ? null : <TopBar.SearchField
+    props.withoutSearch ? null : <div onKeyDown={props.onSearchKeyPress}><TopBar.SearchField
       onChange={handleSearchFieldChange}
       value={searchValue}
       placeholder={props.searchPlaceHolder || "Search"}
-    />
+    /></div>
   );
 
   const topBarMarkup = (<TopBar

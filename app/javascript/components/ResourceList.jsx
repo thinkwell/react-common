@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import axios from 'axios';
-import {Card, Stack, ResourceList as ResourceListShopify, Pagination, InlineError} from '@shopify/polaris';
+import {Card, Stack, ResourceList as ResourceListShopify, Pagination, InlineError, EmptyState} from '@shopify/polaris';
 import useReducerForm from './hooks/useReducerForm'
 import useReducerRequest from './hooks/useReducerRequest'
 import { PagingContext } from './contexts/Paging'
@@ -68,6 +68,8 @@ export default function ResourceList(props) {
       {label: 'Oldest update', value: `${orderProp} asc`},
     ] : null;
 
+  const emptyStateMarkup = !props.items || !props.items.length ?  <EmptyState heading={`No ${resourceName.plural} found`}></EmptyState> : null
+
   return (
     <Stack vertical={true}>
       { props.fetchItemsState && props.fetchItemsState.error ? <InlineError message={props.fetchItemsState && props.fetchItemsState.error} fieldID="resourceListError" /> : null }
@@ -76,6 +78,7 @@ export default function ResourceList(props) {
       onSelectionChange={props.selectable && form.onData && form.onData(props.name)}
       selectable={props.selectable}
       resourceName={resourceName}
+      emptyState={emptyStateMarkup}
       items={itemsSorted}
       renderItem={props.renderItem}
       sortValue={order}
