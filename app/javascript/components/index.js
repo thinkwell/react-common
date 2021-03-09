@@ -4,6 +4,7 @@ import ResourceList from './ResourceList'
 import Util from './Util'
 import EditModal from './EditModal'
 import TextField from './TextField'
+import CKTextArea from './CKTextArea'
 import Spinner from './Spinner'
 import { FormProvider, FormContext } from './contexts/Form'
 import Items from './contexts/Items'
@@ -20,6 +21,6 @@ import useReducerRequest from './hooks/useReducerRequest'
 import useReducerTab from './hooks/useReducerTab'
 import useSearch from './hooks/useSearch'
 export {AppProvider, MainFrame, ResourceList, Util, FormProvider, FormContext, Form, Items,
-  PagingContext, PagingProvider, SearchContext, SearchProvider, EditModal, TextField, Spinner,
+  PagingContext, PagingProvider, SearchContext, SearchProvider, EditModal, TextField, CKTextArea, Spinner,
 useFetch, useReducer, useReducerFetch, useReducerForm, useReducerItem, useReducerModal,
 useReducerRequest, useReducerTab, useSearch}

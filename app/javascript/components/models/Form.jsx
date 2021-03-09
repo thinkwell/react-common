@@ -3,6 +3,7 @@ import useReducerForm from '../hooks/useReducerForm'
 import Util from '../Util'
 import values from 'lodash/values'
 import omit from 'lodash/omit'
+import get from 'lodash/get'
 
 export default function Form (props) {
   const [formState, onAction] = useReducerForm({}, {})
@@ -30,7 +31,7 @@ export default function Form (props) {
   const obj = {
     field: (name) => {
       const data = Object.assign({}, props.data && props.data[scope] || props.data, formState.data, formState[scope])
-      return data[name]
+      return get(data, name)
     },
     get data() {
       const childrenData = values(children).map((form) => form.data)
@@ -49,7 +50,8 @@ export default function Form (props) {
     register: register,
     setChild: (name, form) => {
       children[name] = form
-    }
+    },
+    rootName: props.rootName
   }
 
   if (props.parent) {

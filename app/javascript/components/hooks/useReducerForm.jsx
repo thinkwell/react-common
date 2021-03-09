@@ -1,5 +1,6 @@
 import React from 'react';
 import useReducer from './useReducer'
+import set from 'lodash/set'
 
 export default function useReducerForm (props, data) {
   function reducer(state, action, attribute) {
@@ -7,9 +8,11 @@ export default function useReducerForm (props, data) {
     switch (action.type) {
       case attribute:
         if (action.field) {
-          return {...state, [attribute]: {...state[attribute], [action.field]: payload}};
+          set(state, action.field, payload)
+          return state;
         } else {
-          return {...state, [attribute]: payload};
+          set(state, attribute, payload)
+          return state;
         }
     }
   }

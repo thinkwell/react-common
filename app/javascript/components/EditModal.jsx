@@ -66,6 +66,7 @@ export default function EditModal(props) {
       </Spinner>
       <Modal
         open={state.active}
+        onTransitionEnd={props.onTransitionEnd}
         onClose={() => onActive(false)}
         title={title}
         primaryAction={typeof saveText != 'undefined' && !saveText ? null : {

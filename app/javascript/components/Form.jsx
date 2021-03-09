@@ -59,7 +59,9 @@ export default function Form(props) {
       const formData = form.data
       const method = props.method ? (typeof props.method == 'function' ? props.method() : props.method) : 'put';
       const url = typeof props.url == 'function' ? props.url(form) : props.url;
-      return axios({method: method, url: url, data: {item: formData}})
+      const data = {};
+      data[form.rootName || "item"] = formData
+      return axios({method: method, url: url, data: data})
       .then(onSuccess)
       .catch(onError)
     } else {
