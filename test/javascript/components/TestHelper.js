@@ -26,6 +26,12 @@ afterAll(() => {
   console.error = originalError
 })
 
+delete global.window.location;
+global.window = Object.create(window);
+global.window.location = {
+  href: 'http://test.url'
+};
+
 export const queryByClass = (className) => {
   return queryByText((content, element) => new RegExp("\\b" + className + "\\b").test(element.className))
 }
