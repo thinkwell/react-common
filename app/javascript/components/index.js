@@ -9,6 +9,7 @@ import Spinner from './Spinner'
 import { FormProvider, FormContext } from './contexts/Form'
 import Items from './contexts/Items'
 import Form from './Form'
+import Select from './Select'
 import { PagingContext, PagingProvider } from './contexts/Paging'
 import { SearchContext, SearchProvider } from './contexts/Search'
 import useFetch from './hooks/useFetch'
@@ -21,6 +22,6 @@ import useReducerRequest from './hooks/useReducerRequest'
 import useReducerTab from './hooks/useReducerTab'
 import useSearch from './hooks/useSearch'
 export {AppProvider, MainFrame, ResourceList, Util, FormProvider, FormContext, Form, Items,
-  PagingContext, PagingProvider, SearchContext, SearchProvider, EditModal, TextField, CKTextArea, Spinner,
+  PagingContext, PagingProvider, SearchContext, SearchProvider, EditModal, TextField, CKTextArea, Spinner, Select,
 useFetch, useReducer, useReducerFetch, useReducerForm, useReducerItem, useReducerModal,
 useReducerRequest, useReducerTab, useSearch}
