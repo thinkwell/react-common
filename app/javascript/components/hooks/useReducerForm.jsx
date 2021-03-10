@@ -8,11 +8,14 @@ export default function useReducerForm (props, data) {
     switch (action.type) {
       case attribute:
         if (action.field) {
-          set(state, action.field, payload)
-          return state;
+          if (Array.isArray(action.field)) {
+            const attributeObj = set({...state[attribute]}, action.field, payload)
+            return {...state, [attribute]: attributeObj};
+          } else {
+            return {...state, [attribute]: {...state[attribute], [action.field]: payload}};
+          }
         } else {
-          set(state, attribute, payload)
-          return state;
+          return {...state, [attribute]: payload};
         }
     }
   }

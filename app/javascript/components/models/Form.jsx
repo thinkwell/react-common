@@ -4,6 +4,8 @@ import Util from '../Util'
 import values from 'lodash/values'
 import omit from 'lodash/omit'
 import get from 'lodash/get'
+import mergeWith from 'lodash/mergeWith'
+import unset from 'lodash/unset'
 
 export default function Form (props) {
   const [formState, onAction] = useReducerForm({}, {})
@@ -30,8 +32,20 @@ export default function Form (props) {
 
   const obj = {
     field: (name) => {
-      const data = Object.assign({}, props.data && props.data[scope] || props.data, formState.data, formState[scope])
-      return get(data, name)
+      const data = mergeWith({},
+        props.data && props.data[scope] || props.data,
+        formState.data,
+        formState[scope],
+        (objValue, srcValue, key) => {
+          if (typeof objValue != 'undefined' && typeof srcValue == 'undefined') {
+            return null
+          }
+      })
+      if (Array.isArray(name)) {
+        return get(data, name)
+      } else {
+        return data[name]
+      }
     },
     get data() {
       const childrenData = values(children).map((form) => form.data)
