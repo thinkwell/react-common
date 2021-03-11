@@ -30,6 +30,12 @@ export default function Form (props) {
     return errors
   }
 
+  const isInt = (value) => {
+    return !isNaN(value) &&
+      parseInt(Number(value)) == value &&
+      !isNaN(parseInt(value, 10));
+  }
+
   const obj = {
     field: (name) => {
       const data = mergeWith({},
@@ -37,6 +43,11 @@ export default function Form (props) {
         formState.data,
         formState[scope],
         (objValue, srcValue, key) => {
+          // merge with default for arrays
+          if (isInt(key)) {
+            return;
+          }
+
           if (typeof objValue != 'undefined' && typeof srcValue == 'undefined') {
             return null
           }
@@ -49,7 +60,21 @@ export default function Form (props) {
     },
     get data() {
       const childrenData = values(children).map((form) => form.data)
-      const data = Object.assign({}, props.data && props.data[scope] || props.data, formState.data, formState[scope], ...childrenData)
+      const data = mergeWith({},
+        props.data && props.data[scope] || props.data,
+        formState.data,
+        formState[scope],
+        ...childrenData,
+        (objValue, srcValue, key) => {
+          // merge with default for arrays
+          if (isInt(key)) {
+            return;
+          }
+          
+          if (typeof objValue != 'undefined' && typeof srcValue == 'undefined') {
+            return null
+          }
+      })
       const value = omit(data, props.omit || [])
       return props.format && props.format(value) || value
     },
