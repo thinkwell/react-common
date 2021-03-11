@@ -8,8 +8,9 @@ import mergeWith from 'lodash/mergeWith'
 import unset from 'lodash/unset'
 
 export default function Form (props) {
-  const [formState, onAction] = useReducerForm({}, {})
   const scope = props.scope || 'data'
+  const initialData = props.data && props.data[scope] || props.data || {}
+  const [formState, onAction] = useReducerForm({}, initialData)
   const validations = {}
   const children = {}
 
@@ -48,6 +49,11 @@ export default function Form (props) {
             return;
           }
 
+          // don't merge arrays but assign src array
+          if (Array.isArray(objValue) && Array.isArray(srcValue)) {
+            return srcValue
+          }
+
           if (typeof objValue != 'undefined' && typeof srcValue == 'undefined') {
             return null
           }
@@ -70,7 +76,12 @@ export default function Form (props) {
           if (isInt(key)) {
             return;
           }
-          
+
+          // don't merge arrays but assign src array
+          if (Array.isArray(objValue) && Array.isArray(srcValue)) {
+            return srcValue
+          }
+
           if (typeof objValue != 'undefined' && typeof srcValue == 'undefined') {
             return null
           }
