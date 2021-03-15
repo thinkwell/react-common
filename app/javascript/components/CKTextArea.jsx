@@ -24,6 +24,10 @@ export default function CKTextArea(props) {
       const data = evt.editor.getData()
       onChange(data)
     });
+    CKEDITOR.instances[id].on('focus', (evt) => {
+      const data = evt.editor.getData()
+      onChange(data)
+    });
   }, []);
 
   const validate = () => {
