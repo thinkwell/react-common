@@ -65,6 +65,7 @@ export default function EditModal(props) {
         }
       </Spinner>
       <Modal
+        activator={props.activator}
         open={state.active}
         onTransitionEnd={props.onTransitionEnd}
         onClose={() => onActive(false)}
