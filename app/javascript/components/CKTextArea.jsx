@@ -24,7 +24,7 @@ export default function CKTextArea(props) {
       const data = evt.editor.getData()
       onChange(data)
     });
-    CKEDITOR.instances[id].on('focus', (evt) => {
+    CKEDITOR.instances[id].on('blur', (evt) => {
       const data = evt.editor.getData()
       onChange(data)
     });
