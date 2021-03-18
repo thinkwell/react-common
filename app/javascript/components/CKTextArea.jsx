@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
 import {TextField as TextFieldPolaris} from '@shopify/polaris';
 import {FormContext} from './contexts/Form'
+import basePath from './ckeditor/basePath';
+import ckeditorConfig from './ckeditor/config';
+
 
 export default function CKTextArea(props) {
   if (!props.name) {
@@ -18,8 +21,12 @@ export default function CKTextArea(props) {
     props.onChange && props.onChange(value, form)
   }
 
+  CKEDITOR.plugins.addExternal( 'autogrow', `${basePath}/plugins/autogrow/`, 'plugin.js' );
+  CKEDITOR.plugins.addExternal( 'base64image', `${basePath}/plugins/base64image/`, 'plugin.js' );
+  CKEDITOR.plugins.addExternal( 'ckeditor_wiris', `${basePath}/plugins/ckeditor_wiris/`, 'plugin.js' );
+
   useEffect(() => {
-    CKEDITOR.replace(id)
+    CKEDITOR.replace(id, ckeditorConfig)
     CKEDITOR.instances[id].on('change', (evt) => {
       const data = evt.editor.getData()
       onChange(data)
