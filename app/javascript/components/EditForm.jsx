@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
-import {FormLayout, InlineError, Heading, Scrollable, Button} from '@shopify/polaris';
+import {FormLayout, InlineError, Heading, Scrollable, Button, Card, Stack} from '@shopify/polaris';
 import {MobileCancelMajor} from '@shopify/polaris-icons';
 import Form from './Form';
 import Spinner from './Spinner';
@@ -58,33 +58,21 @@ export default function EditForm(props) {
   const title = props.title && (typeof props.title == 'function' ? props.title(form) : props.title)
 
   return (
+    <Card>
     <div className={props.className}>
       { state.active ?
-        (<div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              height: '100%',
-            }}
-          >
-          <div
-            style={{
-              alignItems: 'center',
-              borderBottom: '1px solid #DFE3E8',
-              display: 'flex',
-              justifyContent: 'space-between',
-              padding: '1.6rem',
-              width: '100%',
-            }}
-          >
-            <Heading>{title}</Heading>
+        (<div><Card.Section>
+          <Stack>
+            <Stack.Item fill><Heading>{title}</Heading></Stack.Item>
             <Button
               accessibilityLabel="Cancel"
               icon={MobileCancelMajor}
               onClick={() => onActive(false)}
               plain
             />
-          </div>
+          </Stack>
+        </Card.Section>
+        <Card.Section>
           <Scrollable style={{padding: '1.6rem', height: '100%'}}>
           { state.saveClicked && form.errors.length ?
             <InlineError message={(<div> {form.errors.map((error) => (<div key={error}>{error}</div>)) } </div>)} fieldID="validationErrorFieldID" />
@@ -105,24 +93,17 @@ export default function EditForm(props) {
               </Form>
             </div>
           </Scrollable>
-          <div
-            style={{
-              alignItems: 'center',
-              borderTop: '1px solid #DFE3E8',
-              display: 'flex',
-              justifyContent: 'space-between',
-              padding: '1.6rem',
-              width: '100%',
-            }}
-          >
-            <Button onClick={() => onActive(false)}>Cancel</Button>
-            {
-              typeof saveText != 'undefined' && !saveText ? null :
-                <Button primary loading={state.saving} onClick={save}>{saveText || 'Save'}</Button>
-            }
-          </div>
+        </Card.Section>
+        <Card.Section>
+          <Button onClick={() => onActive(false)}>Cancel</Button>
+          {
+            typeof saveText != 'undefined' && !saveText ? null :
+              <Button primary loading={state.saving} onClick={save}>{saveText || 'Save'}</Button>
+          }
+        </Card.Section>
       </div>) : null
     }
     </div>
+    </Card>
   );
 }
