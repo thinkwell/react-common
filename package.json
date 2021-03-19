@@ -8,7 +8,7 @@
   },
   "main": "app/javascript/components/index.js",
   "files": [
-    "app/assets",
+    "app/assets"
   ],
   "peerDependencies": {
     "@shopify/polaris": "^6.1.0",
