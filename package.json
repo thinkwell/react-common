@@ -7,6 +7,9 @@
     "test:watch": "npm run test -- --watch"
   },
   "main": "app/javascript/components/index.js",
+  "directories": {
+     "assets:": "./app/assets"
+  },
   "peerDependencies": {
     "@shopify/polaris": "^6.1.0",
     "react": "^17.0.1",
