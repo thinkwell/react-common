@@ -1,5 +1,5 @@
 export default {
-  extraPlugins: 'ckeditor_wiris,base64image,autogrow',
+  extraPlugins: 'ckeditor_wiris,base64image,autogrow,editorplaceholder',
   removePlugins: 'resize,elementspath',
   allowedContent: true,
   autoParagraph: false,

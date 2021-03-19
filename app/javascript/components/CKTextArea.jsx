@@ -24,9 +24,10 @@ export default function CKTextArea(props) {
   CKEDITOR.plugins.addExternal( 'autogrow', `${basePath}/plugins/autogrow/`, 'plugin.js' );
   CKEDITOR.plugins.addExternal( 'base64image', `${basePath}/plugins/base64image/`, 'plugin.js' );
   CKEDITOR.plugins.addExternal( 'ckeditor_wiris', `${basePath}/plugins/ckeditor_wiris/`, 'plugin.js' );
+  CKEDITOR.plugins.addExternal( 'editorplaceholder', `${basePath}/plugins/editorplaceholder/`, 'plugin.js' );
 
   useEffect(() => {
-    CKEDITOR.replace(id, ckeditorConfig)
+    CKEDITOR.replace(id, Object.assign({}, ckeditorConfig, {editorplaceholder: props.placeholder}))
     CKEDITOR.instances[id].on('change', (evt) => {
       const data = evt.editor.getData()
       onChange(data)
