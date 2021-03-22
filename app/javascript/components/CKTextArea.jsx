@@ -10,7 +10,8 @@ export default function CKTextArea(props) {
     throw `Property name is required for CKTextArea ${props.label}`
   }
   const form = useContext(FormContext)
-  const id = props.id || props.name
+  const nameHtml = Array.isArray(props.name) ? props.name.join('_') : props.name
+  const id = props.id || nameHtml
 
   const isInvalid = (value) => {
     return !new RegExp("^" + props.pattern + "$").test(value);
@@ -28,14 +29,19 @@ export default function CKTextArea(props) {
 
   useEffect(() => {
     CKEDITOR.replace(id, Object.assign({}, ckeditorConfig, {editorplaceholder: props.placeholder}))
-    CKEDITOR.instances[id].on('change', (evt) => {
-      const data = evt.editor.getData()
-      onChange(data)
-    });
-    CKEDITOR.instances[id].on('blur', (evt) => {
-      const data = evt.editor.getData()
-      onChange(data)
-    });
+    const instance = CKEDITOR.instances[id]
+    if (instance) {
+      instance.on('change', (evt) => {
+        const data = evt.editor.getData()
+        onChange(data)
+      });
+      instance.on('blur', (evt) => {
+        const data = evt.editor.getData()
+        onChange(data)
+      });
+    } else {
+      console.warn(`${id} : no CKEDITOR.instances exists`)
+    }
   }, []);
 
   const validate = () => {
@@ -54,17 +60,16 @@ export default function CKTextArea(props) {
   }
 
   form.register(props.name, validate)
-
   return (
     <div>
       <div>
-        <label id={`${props.name}Label`} htmlFor={props.name} className="Polaris-Label__Text">{props.label}</label>
+        <label id={`${id}Label`} htmlFor={id} className="Polaris-Label__Text">{props.label}</label>
       </div>
       <div>
         <textarea
           value={form.field(props.name)}
-          name={props.name}
-          onChange={onChange}
+          name={nameHtml}
+          onChange={(evt) => { onChange(evt.target.value) } }
           id={id}
           pattern={props.pattern}
           maxLength={props.maxLength}
