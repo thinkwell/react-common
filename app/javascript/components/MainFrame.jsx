@@ -10,6 +10,7 @@ export default function MainFrame(props) {
 
   let isMounted;
   useEffect(() => {
+    isMounted = true
     if (isMounted) {
       setLoading(props.loading)
     }
