@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import {TextField as TextFieldPolaris} from '@shopify/polaris';
 import {FormContext} from './contexts/Form'
 import basePath from './ckeditor/basePath';
 import ckeditorConfig from './ckeditor/config';
-
+import useEffect from './hooks/useEffect'
 
 export default function CKTextArea(props) {
   if (!props.name) {
@@ -39,8 +39,6 @@ export default function CKTextArea(props) {
         const data = evt.editor.getData()
         onChange(data)
       });
-    } else {
-      console.warn(`${id} : no CKEDITOR.instances exists`)
     }
   }, []);
 

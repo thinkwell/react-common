@@ -14,6 +14,7 @@ import Form from './Form'
 import Select from './Select'
 import { PagingContext, PagingProvider } from './contexts/Paging'
 import { SearchContext, SearchProvider } from './contexts/Search'
+import useEffect from './hooks/useEffect'
 import useFetch from './hooks/useFetch'
 import useReducer from './hooks/useReducer'
 import useReducerFetch from './hooks/useReducerFetch'
@@ -26,5 +27,5 @@ import useSearch from './hooks/useSearch'
 export {AppProvider, MainFrame, ResourceList, Util, FormProvider, FormContext, Form, Items,
   PagingContext, PagingProvider, SearchContext, SearchProvider, EditModal, EditSheet, EditForm,
   TextField, CKTextArea, Spinner, Select,
-useFetch, useReducer, useReducerFetch, useReducerForm, useReducerItem, useReducerModal,
+useEffect, useFetch, useReducer, useReducerFetch, useReducerForm, useReducerItem, useReducerModal,
 useReducerRequest, useReducerTab, useSearch}

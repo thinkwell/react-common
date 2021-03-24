@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useContext } from 'react';
+import React, { useState, useRef, useContext } from 'react';
 import {FormLayout, InlineError, Heading, Scrollable, Button, Card, Stack} from '@shopify/polaris';
 import {MobileCancelMajor} from '@shopify/polaris-icons';
 import Form from './Form';
@@ -6,6 +6,7 @@ import Spinner from './Spinner';
 import Util from './Util';
 import {FormContext} from './contexts/Form'
 import useReducerModal from './hooks/useReducerModal'
+import useEffect from './hooks/useEffect'
 
 export default function EditForm(props) {
   const form = useContext(FormContext)
@@ -32,8 +33,8 @@ export default function EditForm(props) {
   }
 
   const onSuccess = (response) => {
-    onActive(false)
     form.onData(null)({})
+    onActive(false)
     props.onSave && props.onSave(response, form)
   }
 

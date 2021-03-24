@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useRef, useContext } from 'react';
+import React, { useState, useRef, useContext } from 'react';
 import {FormLayout, InlineError, Link, Button} from '@shopify/polaris';
 import Spinner from './Spinner'
 import Util from './Util';
 import {FormContext} from './contexts/Form'
 import axios from 'axios';
+import useEffect from './hooks/useEffect'
 
 export default function Form(props) {
   const form = useContext(FormContext)

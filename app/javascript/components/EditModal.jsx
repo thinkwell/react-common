@@ -1,10 +1,11 @@
-import React, { useState, useEffect, useRef, useContext } from 'react';
+import React, { useState, useRef, useContext } from 'react';
 import {FormLayout, Modal, InlineError, Link, TextStyle} from '@shopify/polaris';
 import Form from './Form';
 import Spinner from './Spinner';
 import Util from './Util';
 import {FormContext} from './contexts/Form'
 import useReducerModal from './hooks/useReducerModal'
+import useEffect from './hooks/useEffect'
 
 export default function EditModal(props) {
   const form = useContext(FormContext)

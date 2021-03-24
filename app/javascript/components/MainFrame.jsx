@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect, useContext } from 'react'
+import React, { useState, useEffect, useCallback, useContext } from 'react'
 import {Frame, TopBar, Card, ActionList, Loading, Navigation} from '@shopify/polaris';
 import {ProductsMajor, CustomersMajor, AffiliateMajor, ClockMajor, ReportsMajor} from '@shopify/polaris-icons';
 import {SearchContext} from './contexts/Search'
@@ -8,15 +8,28 @@ export default function MainFrame(props) {
   const [loading, setLoading] = useState(props.loading);
   const [mobileNavigationActive, setMobileNavigationActive] = useState(false);
 
-  useEffect(() => setLoading(props.loading), [props.loading])
-  useEffect(() => navigateTo(props.href), [props.href])
+  let isMounted;
+  useEffect(() => {
+    if (isMounted) {
+      setLoading(props.loading)
+    }
+    return () => {
+      isMounted = false
+    };
+  }, [props.loading])
 
   const navigateTo = (href) => {
     if (href) {
-      setLoading(true)
+      if (isMounted) {
+        setLoading(true)
+      }
       window.location.assign(`/${href}`)
     }
   };
+
+  if (props.navigateToRef) {
+    props.navigateToRef.current = navigateTo
+  }
 
   const handleSearchFieldChange = useCallback((value) => {
     setSearchValue(value);
@@ -50,7 +63,7 @@ export default function MainFrame(props) {
   />)
 
   return (
-    <div className={`${mobileNavigationActive ? 'mobile-nav-active' : 'mobile-nav-hidden'}`}>
+    <div className={`${mobileNavigationActive ? 'mobile-nav-active' : 'mobile-nav-hidden'}`} data-href={props.href}>
       <Frame
         topBar={topBarMarkup}
         navigation={props.navigation}
