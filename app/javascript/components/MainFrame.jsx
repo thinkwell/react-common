@@ -1,29 +1,18 @@
-import React, { useState, useEffect, useCallback, useContext } from 'react'
+import React, { useState, useEffect as useEffectReact, useCallback, useContext } from 'react'
 import {Frame, TopBar, Card, ActionList, Loading, Navigation} from '@shopify/polaris';
 import {ProductsMajor, CustomersMajor, AffiliateMajor, ClockMajor, ReportsMajor} from '@shopify/polaris-icons';
 import {SearchContext} from './contexts/Search'
+import useEffect from './hooks/useEffect'
 
 export default function MainFrame(props) {
   const [searchValue, setSearchValue] = useContext(SearchContext);
   const [loading, setLoading] = useState(props.loading);
   const [mobileNavigationActive, setMobileNavigationActive] = useState(false);
 
-  let isMounted;
-  useEffect(() => {
-    isMounted = true
-    if (isMounted) {
-      setLoading(props.loading)
-    }
-    return () => {
-      isMounted = false
-    };
-  }, [props.loading])
+  useEffect(() => { setLoading(props.loading) }, [props.loading])
 
   const navigateTo = (href) => {
     if (href) {
-      if (isMounted) {
-        setLoading(true)
-      }
       window.location.assign(`/${href}`)
     }
   };
