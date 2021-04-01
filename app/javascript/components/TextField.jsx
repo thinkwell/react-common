@@ -7,6 +7,8 @@ export default function TextField(props) {
     throw `Property name is required for TextField ${props.label}`
   }
   const form = useContext(FormContext)
+  const nameHtml = Array.isArray(props.name) ? props.name.join('_') : props.name
+  const id = props.id || nameHtml
 
   const isInvalid = (value) => {
     return !new RegExp("^" + props.pattern + "$").test(value);
@@ -41,8 +43,8 @@ export default function TextField(props) {
     value={form.field(props.name)}
     onChange={onChange}
     onBlur={props.onBlur}
-    name={props.name}
-    id={props.id}
+    name={nameHtml}
+    id={id}
     pattern={props.pattern}
     maxLength={props.maxLength}
     placeholder={props.placeholder}
