@@ -2,6 +2,12 @@ import React, { useState, useContext } from 'react';
 import {TextField as TextFieldPolaris} from '@shopify/polaris';
 import {FormContext} from './contexts/Form'
 import basePath from './ckeditor/basePath';
+import ClassicEditor from '@ckeditor/ckeditor5-editor-classic/src/classiceditor';
+import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials';
+import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
+import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold';
+import Italic from '@ckeditor/ckeditor5-basic-styles/src/italic';
+import MathType from '@wiris/mathtype-ckeditor5/src/plugin';
 import ckeditorConfig from './ckeditor/config';
 import useEffect from './hooks/useEffect'
 
@@ -22,24 +28,40 @@ export default function CKTextArea(props) {
     props.onChange && props.onChange(value, form)
   }
 
-  CKEDITOR.plugins.addExternal( 'autogrow', `${basePath}/plugins/autogrow/`, 'plugin.js' );
-  CKEDITOR.plugins.addExternal( 'base64image', `${basePath}/plugins/base64image/`, 'plugin.js' );
-  CKEDITOR.plugins.addExternal( 'ckeditor_wiris', `${basePath}/plugins/ckeditor_wiris/`, 'plugin.js' );
-  CKEDITOR.plugins.addExternal( 'editorplaceholder', `${basePath}/plugins/editorplaceholder/`, 'plugin.js' );
+  // CKEDITOR.plugins.addExternal( 'autogrow', `${basePath}/plugins/autogrow/`, 'plugin.js' );
+  // CKEDITOR.plugins.addExternal( 'base64image', `${basePath}/plugins/base64image/`, 'plugin.js' );
+  // CKEDITOR.plugins.addExternal( 'ckeditor_wiris', `${basePath}/plugins/ckeditor_wiris/`, 'plugin.js' );
+  // CKEDITOR.plugins.addExternal( 'editorplaceholder', `${basePath}/plugins/editorplaceholder/`, 'plugin.js' );
 
   useEffect(() => {
-    CKEDITOR.replace(id, Object.assign({}, ckeditorConfig, {editorplaceholder: props.placeholder}))
-    const instance = CKEDITOR.instances[id]
-    if (instance) {
-      instance.on('change', (evt) => {
+    ClassicEditor.create( document.querySelector( `#${id}` ), {
+      plugins: [ Essentials, Paragraph, Bold, Italic, MathType ],
+      toolbar: {
+        items: [
+          'bold', 'italic', 'MathType'
+        ]
+      }
+    } ).then( editor => {
+      console.log( editor );
+      editor.on('change', (evt) => {
         const data = evt.editor.getData()
         onChange(data)
-      });
-      instance.on('blur', (evt) => {
-        const data = evt.editor.getData()
-        onChange(data)
-      });
-    }
+      })
+    })
+    .catch( error => {
+      console.error( error );
+    });
+    // const instance = CKEDITOR.instances[id]
+    // if (instance) {
+    //   instance.on('change', (evt) => {
+    //     const data = evt.editor.getData()
+    //     onChange(data)
+    //   });
+    //   instance.on('blur', (evt) => {
+    //     const data = evt.editor.getData()
+    //     onChange(data)
+    //   });
+    // }
   }, []);
 
   const validate = () => {
