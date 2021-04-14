@@ -14,19 +14,12 @@
     "@shopify/polaris": "^6.1.0",
     "axios": "^0.19.0",
     "lodash": "^4.17.21",
+    "postcss-loader": "3",
     "prop-types": "^15.7.2",
+    "raw-loader": "3",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react_ujs": "^2.6.1",
-    "@ckeditor/ckeditor5-basic-styles": "^27.0.0",
-    "@ckeditor/ckeditor5-dev-utils": "^24.4.2",
-    "@ckeditor/ckeditor5-editor-classic": "^27.0.0",
-    "@ckeditor/ckeditor5-essentials": "^27.0.0",
-    "@ckeditor/ckeditor5-paragraph": "^27.0.0",
-    "@ckeditor/ckeditor5-theme-lark": "^27.0.0",
-    "@wiris/mathtype-ckeditor5": "^7.26.0",
-    "postcss-loader": "3",
-    "raw-loader": "3",
     "style-loader": "1"
   },
   "devDependencies": {
@@ -47,5 +40,19 @@
     "react-dom": "^17.0.1",
     "react_ujs": "^2.6.1",
     "webpack-dev-server": "^3.11.2"
+  },
+  "dependencies": {
+    "@ckeditor/ckeditor5-basic-styles": "^27.0.0",
+    "@ckeditor/ckeditor5-dev-utils": "^24.4.2",
+    "@ckeditor/ckeditor5-editor-inline": "^27.0.0",
+    "@ckeditor/ckeditor5-essentials": "^27.0.0",
+    "@ckeditor/ckeditor5-paragraph": "^27.0.0",
+    "@ckeditor/ckeditor5-remove-format": "^27.0.0",
+    "@ckeditor/ckeditor5-special-characters": "^27.0.0",
+    "@ckeditor/ckeditor5-table": "^27.0.0",
+    "@ckeditor/ckeditor5-theme-lark": "^27.0.0",
+    "@ckeditor/ckeditor5-upload": "^27.0.0",
+    "@wiris/mathtype-ckeditor5": "^7.26.0",
+    "react-html-parser": "^2.0.2"
   }
 }
