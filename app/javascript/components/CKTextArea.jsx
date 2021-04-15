@@ -21,48 +21,50 @@ export default function CKTextArea(props) {
   }
 
   useEffect(() => {
-    InlineEditor.create( document.querySelector( `#${id}` ), {
-			toolbar: {
-				items: [
-					'bold',
-					'italic',
-					'strikethrough',
-					'|',
-					'removeFormat',
-					'|',
-					'imageUpload',
-					'insertTable',
-					'specialCharacters',
-					'|',
-					'MathType'
-				]
-			},
-			language: 'en',
-			image: {
-				toolbar: [
-					'imageTextAlternative',
-					'imageStyle:full',
-					'imageStyle:side'
-				]
-			},
-			table: {
-				contentToolbar: [
-					'tableColumn',
-					'tableRow',
-					'mergeTableCells'
-				]
-			},
-			placeholder: props.placeholder
-		}).then( editor => {
-      editor.setData(form.field(props.name))
-      editor.model.document.on('change:data', (evt) => {
-        const data = editor.getData()
-        onChange(data)
+    if (window.InlineEditor) {
+      InlineEditor.create( document.querySelector( `#${id}` ), {
+  			toolbar: {
+  				items: [
+  					'bold',
+  					'italic',
+  					'strikethrough',
+  					'|',
+  					'removeFormat',
+  					'|',
+  					'imageUpload',
+  					'insertTable',
+  					'specialCharacters',
+  					'|',
+  					'MathType'
+  				]
+  			},
+  			language: 'en',
+  			image: {
+  				toolbar: [
+  					'imageTextAlternative',
+  					'imageStyle:full',
+  					'imageStyle:side'
+  				]
+  			},
+  			table: {
+  				contentToolbar: [
+  					'tableColumn',
+  					'tableRow',
+  					'mergeTableCells'
+  				]
+  			},
+  			placeholder: props.placeholder
+  		}, {onChange: onChange, value: value}).then( editor => {
+        editor.setData(form.field(props.name))
+        editor.model.document.on('change:data', (evt) => {
+          const data = editor.getData()
+          onChange(data)
+        })
       })
-    })
-    .catch( error => {
-      console.error( error );
-    });
+      .catch( error => {
+        console.error( error );
+      });
+    }
   }, []);
 
   const validate = () => {
@@ -87,10 +89,19 @@ export default function CKTextArea(props) {
         <label id={`${id}Label`} htmlFor={id} className="Polaris-Label__Text">{props.label}</label>
       </div>
       <div>
-        <div className={nameHtml}
-          id={id}
-        >
-        </div>
+        { window.InlineEditor ?
+          <div className={nameHtml}
+            aria-label={props.label}
+            id={id}
+          /> :
+          <TextFieldPolaris
+            className={nameHtml}
+            aria-label={props.label}
+            id={id}
+            value={form.field(props.name)}
+            onChange={onChange}
+          />
+        }
       </div>
     </div>
   )
