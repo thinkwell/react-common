@@ -42,7 +42,7 @@ export default function CKTextArea(props) {
         SpecialCharacters, SpecialCharactersCurrency, SpecialCharactersMathematical, Base64UploadAdapter, MathType ],
       removePlugins: ['Resize', 'Elementspath'],
       toolbar: {
-        items: ['paragraph', '|', 'bold', 'italic', 'strikethrough', 'removeFormat','|', 'insertTable',
+        items: ['bold', 'italic', 'strikethrough', 'removeFormat','|', 'insertTable',
         'specialCharacters','|', 'MathType', 'ChemType'],
         shouldNotGroupWhenFull: true
       },
