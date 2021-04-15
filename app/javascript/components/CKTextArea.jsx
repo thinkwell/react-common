@@ -1,22 +1,6 @@
 import React, { useState, useContext } from 'react';
 import {TextField as TextFieldPolaris} from '@shopify/polaris';
 import {FormContext} from './contexts/Form'
-import basePath from './ckeditor/basePath';
-import InlineEditor from '@ckeditor/ckeditor5-editor-inline/src/inlineeditor';
-import Base64UploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/base64uploadadapter';
-import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials';
-import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
-import RemoveFormat from '@ckeditor/ckeditor5-remove-format/src/removeformat'
-import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold';
-import Italic from '@ckeditor/ckeditor5-basic-styles/src/italic';
-import Strikethrough from '@ckeditor/ckeditor5-basic-styles/src/strikethrough';
-import MathType from '@wiris/mathtype-ckeditor5/src/plugin';
-import Table from '@ckeditor/ckeditor5-table/src/table';
-import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
-import SpecialCharacters from '@ckeditor/ckeditor5-special-characters/src/specialcharacters';
-import SpecialCharactersCurrency from '@ckeditor/ckeditor5-special-characters/src/specialcharacterscurrency';
-import SpecialCharactersMathematical from '@ckeditor/ckeditor5-special-characters/src/specialcharactersmathematical';
-import ReactHtmlParser from 'react-html-parser'
 import useEffect from './hooks/useEffect'
 
 export default function CKTextArea(props) {
@@ -38,19 +22,38 @@ export default function CKTextArea(props) {
 
   useEffect(() => {
     InlineEditor.create( document.querySelector( `#${id}` ), {
-      extraPlugins: [ Essentials, Paragraph, Bold, Italic, Strikethrough, RemoveFormat, Table, TableToolbar,
-        SpecialCharacters, SpecialCharactersCurrency, SpecialCharactersMathematical, Base64UploadAdapter, MathType ],
-      removePlugins: ['Resize', 'Elementspath'],
-      toolbar: {
-        items: ['bold', 'italic', 'strikethrough', 'removeFormat','|', 'insertTable',
-        'specialCharacters','|', 'MathType', 'ChemType'],
-        shouldNotGroupWhenFull: true
-      },
-      table: {
-        contentToolbar: [ 'tableColumn', 'tableRow', 'mergeTableCells' ]
-      },
-      placeholder: props.placeholder
-    } ).then( editor => {
+			toolbar: {
+				items: [
+					'bold',
+					'italic',
+					'strikethrough',
+					'|',
+					'removeFormat',
+					'|',
+					'imageUpload',
+					'insertTable',
+					'specialCharacters',
+					'|',
+					'MathType'
+				]
+			},
+			language: 'en',
+			image: {
+				toolbar: [
+					'imageTextAlternative',
+					'imageStyle:full',
+					'imageStyle:side'
+				]
+			},
+			table: {
+				contentToolbar: [
+					'tableColumn',
+					'tableRow',
+					'mergeTableCells'
+				]
+			},
+			placeholder: props.placeholder
+		}).then( editor => {
       editor.setData(form.field(props.name))
       editor.model.document.on('change:data', (evt) => {
         const data = editor.getData()
