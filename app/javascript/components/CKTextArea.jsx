@@ -2,6 +2,8 @@ import React, { useState, useContext } from 'react';
 import {TextField as TextFieldPolaris} from '@shopify/polaris';
 import {FormContext} from './contexts/Form'
 import useEffect from './hooks/useEffect'
+import ReactHtmlParser from 'react-html-parser'
+import 'requestidlecallback-polyfill';
 
 export default function CKTextArea(props) {
   if (!props.name) {
@@ -20,52 +22,59 @@ export default function CKTextArea(props) {
     props.onChange && props.onChange(value, form)
   }
 
-  useEffect(() => {
-    if (window.InlineEditor) {
-      InlineEditor.create( document.querySelector( `#${id}` ), {
-  			toolbar: {
-  				items: [
-  					'bold',
-  					'italic',
-  					'strikethrough',
-  					'|',
-  					'removeFormat',
-  					'|',
-  					'imageUpload',
-  					'insertTable',
-  					'specialCharacters',
-  					'|',
-  					'MathType'
-  				]
-  			},
-  			language: 'en',
-  			image: {
-  				toolbar: [
-  					'imageTextAlternative',
-  					'imageStyle:full',
-  					'imageStyle:side'
-  				]
-  			},
-  			table: {
-  				contentToolbar: [
-  					'tableColumn',
-  					'tableRow',
-  					'mergeTableCells'
-  				]
-  			},
-  			placeholder: props.placeholder
-  		}, {onChange: onChange, value: value}).then( editor => {
-        editor.setData(form.field(props.name))
-        editor.model.document.on('change:data', (evt) => {
-          const data = editor.getData()
-          onChange(data)
+  if (window.InlineEditor) {
+    useEffect(() => {
+      window.requestIdleCallback(() => {
+        InlineEditor.create( document.querySelector( `#${id}` ), {
+          toolbar: {
+            items: [
+              'bold',
+              'italic',
+              'strikethrough',
+              '|',
+              'removeFormat',
+              '|',
+              'imageUpload',
+              'insertTable',
+              'specialCharacters',
+              '|',
+              'MathType'
+            ]
+          },
+          language: 'en',
+          image: {
+            toolbar: [
+              'imageTextAlternative',
+              'imageStyle:full',
+              'imageStyle:side'
+            ]
+          },
+          mathTypeParameters : {
+            serviceProviderProperties : {
+              URI : '/wirispluginengine/integration',
+              server : 'ruby'
+            }
+          },
+          table: {
+            contentToolbar: [
+              'tableColumn',
+              'tableRow',
+              'mergeTableCells'
+            ]
+          },
+          placeholder: props.placeholder
+        }, {onChange: onChange, value: value}).then( editor => {
+          editor.model.document.on('change:data', (evt) => {
+            const data = editor.getData()
+            onChange(data)
+          })
         })
-      })
-      .catch( error => {
-        console.error( error );
-      });
-    }
-  }, []);
+        .catch( error => {
+          console.error( error );
+        });
+      }, { timeout: 100 });
+    }, [])
+  }
 
   const validate = () => {
     const errors = [];
@@ -83,6 +92,7 @@ export default function CKTextArea(props) {
   }
 
   form.register(props.name, validate)
+  const value = form.field(props.name)
   return (
     <div>
       <div>
@@ -90,15 +100,17 @@ export default function CKTextArea(props) {
       </div>
       <div>
         { window.InlineEditor ?
-          <div className={nameHtml}
+          <div className={`ck-content ck ck-editor__editable ck-rounded-corners ck-editor__editable_inline ck-blurred ${nameHtml}`}
             aria-label={props.label}
             id={id}
-          /> :
+          >
+            {ReactHtmlParser(value)}
+          </div> :
           <TextFieldPolaris
             className={nameHtml}
             aria-label={props.label}
             id={id}
-            value={form.field(props.name)}
+            value={value}
             onChange={onChange}
           />
         }
