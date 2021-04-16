@@ -64,6 +64,7 @@ export default function CKTextArea(props) {
           },
           placeholder: props.placeholder
         }, {onChange: onChange, value: value}).then( editor => {
+          editor.setData(form.field(props.name))
           editor.model.document.on('change:data', (evt) => {
             const data = editor.getData()
             onChange(data)
@@ -103,9 +104,7 @@ export default function CKTextArea(props) {
           <div className={`ck-content ck ck-editor__editable ck-rounded-corners ck-editor__editable_inline ck-blurred ${nameHtml}`}
             aria-label={props.label}
             id={id}
-          >
-            {ReactHtmlParser(value)}
-          </div> :
+          /> :
           <TextFieldPolaris
             className={nameHtml}
             aria-label={props.label}
