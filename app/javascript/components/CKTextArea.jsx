@@ -41,6 +41,9 @@ export default function CKTextArea(props) {
               'MathType'
             ]
           },
+          alignment: {
+            options: [ 'left', 'right', 'center', 'justify' ]
+          },
           language: 'en',
           image: {
             toolbar: [
@@ -57,10 +60,9 @@ export default function CKTextArea(props) {
           },
           table: {
             contentToolbar: [
-              'tableColumn',
-              'tableRow',
-              'mergeTableCells'
-            ]
+              'tableColumn', 'tableRow', 'mergeTableCells',
+              'tableProperties', 'tableCellProperties'
+            ],
           },
           placeholder: props.placeholder
         }, {onChange: onChange, value: value}).then( editor => {
