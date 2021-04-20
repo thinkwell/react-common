@@ -66,7 +66,10 @@ export default function CKTextArea(props) {
           },
           placeholder: props.placeholder
         }, {onChange: onChange, value: value}).then( editor => {
-          editor.setData(form.field(props.name))
+          const value = form.field(props.name);
+          if (value) {
+            editor.setData(value)
+          }
           editor.model.document.on('change:data', (evt) => {
             const data = editor.getData()
             onChange(data)
