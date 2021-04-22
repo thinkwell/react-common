@@ -6,6 +6,7 @@ import InlineEditor from '@ckeditor/ckeditor5-editor-inline/src/inlineeditor.js'
 import Base64UploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/base64uploadadapter.js';
 import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold.js';
 import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials.js';
+import HtmlEmbed from '@ckeditor/ckeditor5-html-embed/src/htmlembed.js';
 import Image from '@ckeditor/ckeditor5-image/src/image.js';
 import ImageUpload from '@ckeditor/ckeditor5-image/src/imageupload.js';
 import Italic from '@ckeditor/ckeditor5-basic-styles/src/italic.js';
@@ -28,6 +29,7 @@ Editor.builtinPlugins = [
 	Base64UploadAdapter,
 	Bold,
 	Essentials,
+	HtmlEmbed,
 	Image,
 	ImageUpload,
 	Italic,

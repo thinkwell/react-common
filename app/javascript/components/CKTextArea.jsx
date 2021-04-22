@@ -28,6 +28,8 @@ export default function CKTextArea(props) {
         InlineEditor.create( document.querySelector( `#${id}` ), {
           toolbar: {
             items: [
+              'htmlEmbed',
+              '|',
               'bold',
               'italic',
               'strikethrough',
