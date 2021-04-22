@@ -66,6 +66,9 @@ export default function CKTextArea(props) {
               'tableProperties', 'tableCellProperties'
             ],
           },
+          htmlEmbed: {
+            showPreviews: true
+          },
           placeholder: props.placeholder
         }, {onChange: onChange, value: value}).then( editor => {
           const value = form.field(props.name);
