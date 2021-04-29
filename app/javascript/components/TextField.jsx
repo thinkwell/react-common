@@ -19,6 +19,14 @@ export default function TextField(props) {
     props.onChange && props.onChange(value, form)
   }
 
+  const handleKeyPress = (event) => {
+    const enterKeyPressed = event.keyCode === 13;
+    if (enterKeyPressed) {
+      event.preventDefault();
+      props.onEnterPressed && props.onEnterPressed()
+    }
+  }
+
   const validate = () => {
     const errors = [];
     const value = form.field(props.name)
@@ -36,7 +44,8 @@ export default function TextField(props) {
 
   form.register(props.name, validate)
 
-  return (<TextFieldPolaris
+  return (<div onKeyDown={handleKeyPress}>
+    <TextFieldPolaris
     multiline={props.multiline}
     label={props.label}
     type={props.type || 'text'}
@@ -48,5 +57,5 @@ export default function TextField(props) {
     pattern={props.pattern}
     maxLength={props.maxLength}
     placeholder={props.placeholder}
-  />);
+  /></div>);
 }
