@@ -22,7 +22,6 @@ export default function TextField(props) {
   const handleKeyPress = (event) => {
     const enterKeyPressed = event.keyCode === 13;
     if (enterKeyPressed) {
-      event.preventDefault();
       props.onEnterPressed && props.onEnterPressed()
     }
   }
