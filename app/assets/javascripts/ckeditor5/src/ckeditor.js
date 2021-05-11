@@ -25,6 +25,7 @@ import SpecialCharactersEssentials from '@ckeditor/ckeditor5-special-characters/
 import SpecialCharactersText from '@ckeditor/ckeditor5-special-characters/src/specialcharacterstext.js';
 import Strikethrough from '@ckeditor/ckeditor5-basic-styles/src/strikethrough.js';
 import Table from '@ckeditor/ckeditor5-table/src/table.js';
+import TableCellProperties from '@ckeditor/ckeditor5-table/src/tablecellproperties';
 import TableProperties from '@ckeditor/ckeditor5-table/src/tableproperties';
 import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar.js';
 
@@ -54,6 +55,7 @@ Editor.builtinPlugins = [
 	SpecialCharactersText,
 	Strikethrough,
 	Table,
+	TableCellProperties,
 	TableProperties,
 	TableToolbar
 ];
