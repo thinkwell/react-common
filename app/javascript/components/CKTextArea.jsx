@@ -120,7 +120,7 @@ export default function CKTextArea(props) {
         .catch( error => {
           console.error( error );
         });
-      }, { timeout: 100 });
+      });
     }, [])
   }
 
