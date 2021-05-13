@@ -5,6 +5,7 @@
 import InlineEditor from '@ckeditor/ckeditor5-editor-inline/src/inlineeditor.js';
 import Base64UploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/base64uploadadapter.js';
 import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold.js';
+import Code from '@ckeditor/ckeditor5-basic-styles/src/code.js';
 import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials.js';
 import HtmlEmbed from '@ckeditor/ckeditor5-html-embed/src/htmlembed.js';
 import Image from '@ckeditor/ckeditor5-image/src/image.js';
@@ -22,8 +23,11 @@ import RemoveFormat from '@ckeditor/ckeditor5-remove-format/src/removeformat.js'
 import SpecialCharacters from '@ckeditor/ckeditor5-special-characters/src/specialcharacters.js';
 import SpecialCharactersCurrency from '@ckeditor/ckeditor5-special-characters/src/specialcharacterscurrency.js';
 import SpecialCharactersEssentials from '@ckeditor/ckeditor5-special-characters/src/specialcharactersessentials.js';
+import SpecialCharactersMathematical from '@ckeditor/ckeditor5-special-characters/src/specialcharactersmathematical.js';
 import SpecialCharactersText from '@ckeditor/ckeditor5-special-characters/src/specialcharacterstext.js';
 import Strikethrough from '@ckeditor/ckeditor5-basic-styles/src/strikethrough.js';
+import Subscript from '@ckeditor/ckeditor5-basic-styles/src/subscript.js';
+import Superscript from '@ckeditor/ckeditor5-basic-styles/src/superscript.js';
 import Table from '@ckeditor/ckeditor5-table/src/table.js';
 import TableCellProperties from '@ckeditor/ckeditor5-table/src/tablecellproperties';
 import TableProperties from '@ckeditor/ckeditor5-table/src/tableproperties';
@@ -35,6 +39,7 @@ class Editor extends InlineEditor {}
 Editor.builtinPlugins = [
 	Base64UploadAdapter,
 	Bold,
+	Code,
 	Essentials,
 	HtmlEmbed,
 	Image,
@@ -52,8 +57,11 @@ Editor.builtinPlugins = [
 	SpecialCharacters,
 	SpecialCharactersCurrency,
 	SpecialCharactersEssentials,
+	SpecialCharactersMathematical,
 	SpecialCharactersText,
 	Strikethrough,
+	Subscript,
+	Superscript,
 	Table,
 	TableCellProperties,
 	TableProperties,
