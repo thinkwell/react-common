@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useRef } from 'react';
 import {TextField as TextFieldPolaris} from '@shopify/polaris';
 import {FormContext} from './contexts/Form'
 import useEffect from './hooks/useEffect'
@@ -12,6 +12,7 @@ export default function CKTextArea(props) {
   const form = useContext(FormContext)
   const nameHtml = Array.isArray(props.name) ? props.name.join('_') : props.name
   const id = props.id || nameHtml
+  const divHolder = useRef();
 
   const isInvalid = (value) => {
     return !new RegExp("^" + props.pattern + "$").test(value);
@@ -25,7 +26,7 @@ export default function CKTextArea(props) {
   if (window.InlineEditor) {
     useEffect(() => {
       window.requestIdleCallback(() => {
-        InlineEditor.create( document.querySelector( `#${id}` ), {
+        InlineEditor.create( divHolder.current, {
           toolbar: {
             items: [
               'htmlEmbed',
@@ -151,6 +152,7 @@ export default function CKTextArea(props) {
           <div className={`ck-content ck ck-editor__editable ck-rounded-corners ck-editor__editable_inline ck-blurred ${nameHtml}`}
             aria-label={props.label}
             id={id}
+            ref={el => divHolder.current = el}
           /> :
           <TextFieldPolaris
             className={nameHtml}
