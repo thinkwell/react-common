@@ -23,12 +23,21 @@ export default function EditForm(props) {
   }
 
   const save = () => {
+    // hippo#76 : trigger blur on CKEditor instances on save
+    // TODO : remove after moving to ckeditor v5
+    for (var key in CKEDITOR.instances) {
+      CKEDITOR.instances[key].focusManager.blur()
+    }
     onSaveClicked()
     if (form.errors.length) {
       console.error(`validation errors : ${JSON.stringify(form.errors)}`)
     } else {
-      submitRef.current()
-      onSaveSubmitted()
+      // hippo#76 : setTimeout to allow CKTextArea#blur handler to fire
+      // TODO : remove after moving to ckeditor v5
+      setTimeout(() => {
+        submitRef.current()
+        onSaveSubmitted()
+      }, 100)
     }
   }
 
