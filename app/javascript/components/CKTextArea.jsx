@@ -67,11 +67,14 @@ export default function CKTextArea(props) {
         <label id={`${id}Label`} htmlFor={id} className="Polaris-Label__Text">{props.label}</label>
       </div>
       <div>
-        <textarea className={`ck-content ck ck-editor__editable ck-rounded-corners ck-editor__editable_inline ck-blurred ${nameHtml}`}
+        <textarea
+          name={nameHtml}
           value={value}
-          aria-label={props.label}
-          onChange={onChange}
+          onChange={(evt) => { onChange(evt.target.value) } }
           id={id}
+          pattern={props.pattern}
+          maxLength={props.maxLength}
+          placeholder={props.placeholder}
         />
       </div>
     </div>
