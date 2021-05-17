@@ -34,10 +34,16 @@ export default function EditForm(props) {
     } else {
       // hippo#76 : setTimeout to allow CKTextArea#blur handler to fire
       // TODO : remove after moving to ckeditor v5
-      setTimeout(() => {
-        submitRef.current()
-        onSaveSubmitted()
-      }, 100)
+      while(true) {
+        const isDirty = Object.keys(CKEDITOR.instances).find((key) => CKEDITOR.instances[key].checkDirty())
+        if (!isDirty) {
+          submitRef.current()
+          onSaveSubmitted()
+          break;
+        } else {
+          setTimeout(() => {}, 100)
+        }
+      }
     }
   }
 
