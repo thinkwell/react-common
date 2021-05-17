@@ -70,6 +70,7 @@ export default function CKTextArea(props) {
         <textarea className={`ck-content ck ck-editor__editable ck-rounded-corners ck-editor__editable_inline ck-blurred ${nameHtml}`}
           value={value}
           aria-label={props.label}
+          onChange={onChange}
           id={id}
         />
       </div>
