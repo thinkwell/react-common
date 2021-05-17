@@ -13,6 +13,11 @@ export default function EditForm(props) {
 
   const onActiveProp = props.onActive
   const [state, onActive, onSaveClicked, onSaveSubmitted, onSaveError, onSaving, onClear] = useReducerModal({...props, onActive: (active) => {
+    if(!active) {
+      setTimeout(() => {
+        MathJax.Hub.Typeset()
+      }, 100)
+    }
     onActiveProp && onActiveProp(active, form)
   }}, props.active)
 
