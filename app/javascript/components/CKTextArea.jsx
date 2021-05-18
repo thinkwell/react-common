@@ -72,7 +72,7 @@ export default function CKTextArea(props) {
       <div>
         <textarea
           name={nameHtml}
-          value={value}
+          value={value || ''}
           onChange={(evt) => { onChange(evt.target.value) } }
           id={id}
           pattern={props.pattern}

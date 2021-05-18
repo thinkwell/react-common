@@ -18,10 +18,12 @@ export default function EditForm(props) {
         MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
       }, 100)
     } else {
-      // trigger editor.fire('contentDom') when editor loads for autogrow
-      for (var key in CKEDITOR.instances) {
-        CKEDITOR.instances[key].fire('contentDom')
-      }
+      // trigger when editor loads for autogrow
+      setTimeout(() => {
+        for (var key in CKEDITOR.instances) {
+          CKEDITOR.instances[key].commands.autogrow.exec()
+        }
+      }, 100)
     }
     onActiveProp && onActiveProp(active, form)
   }}, props.active)
