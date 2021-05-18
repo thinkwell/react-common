@@ -31,7 +31,7 @@ export default function EditForm(props) {
     // hippo#76 : trigger blur on CKEditor instances on save
     // TODO : remove after moving to ckeditor v5
     for (var key in CKEDITOR.instances) {
-      CKEDITOR.instances[key].focusManager.blur()
+      CKEDITOR.instances[key].focusManager.blur(true)
     }
     onSaveClicked()
     if (form.errors.length) {
