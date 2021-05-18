@@ -1,6 +1,6 @@
 {
   "name": "@thinkwell/react-common",
-  "version": "1.0.15",
+  "version": "1.0.22",
   "private": true,
   "scripts": {
     "test": "jest --coverage",

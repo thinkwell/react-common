@@ -13,6 +13,16 @@ export default function EditForm(props) {
 
   const onActiveProp = props.onActive
   const [state, onActive, onSaveClicked, onSaveSubmitted, onSaveError, onSaving, onClear] = useReducerModal({...props, onActive: (active) => {
+    if(!active) {
+      setTimeout(() => {
+        MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+      }, 100)
+    } else {
+      // trigger editor.fire('contentDom') when editor loads for autogrow
+      for (var key in CKEDITOR.instances) {
+        CKEDITOR.instances[key].fire('contentDom')
+      }
+    }
     onActiveProp && onActiveProp(active, form)
   }}, props.active)
 
@@ -23,12 +33,27 @@ export default function EditForm(props) {
   }
 
   const save = () => {
+    // hippo#76 : trigger blur on CKEditor instances on save
+    // TODO : remove after moving to ckeditor v5
+    for (var key in CKEDITOR.instances) {
+      CKEDITOR.instances[key].focusManager.blur(true)
+    }
     onSaveClicked()
     if (form.errors.length) {
       console.error(`validation errors : ${JSON.stringify(form.errors)}`)
     } else {
-      submitRef.current()
-      onSaveSubmitted()
+      // hippo#76 : setTimeout to allow CKTextArea#blur handler to fire
+      // TODO : remove after moving to ckeditor v5
+      while(true) {
+        const isDirty = Object.keys(CKEDITOR.instances).find((key) => CKEDITOR.instances[key].checkDirty())
+        if (!isDirty) {
+          submitRef.current()
+          onSaveSubmitted()
+          break;
+        } else {
+          setTimeout(() => {}, 100)
+        }
+      }
     }
   }
 
