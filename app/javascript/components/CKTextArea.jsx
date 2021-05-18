@@ -21,7 +21,7 @@ export default function CKTextArea(props) {
 
   const onChange = (value) => {
     form.onData(props.name)(value)
-    CKEDITOR.instances[id].resetDirty();
+    CKEDITOR.instances[id] && CKEDITOR.instances[id].resetDirty();
     props.onChange && props.onChange(value, form)
   }
 
