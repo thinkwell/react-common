@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import {TextField as TextFieldPolaris} from '@shopify/polaris';
 import {FormContext} from './contexts/Form'
+import ConvertAttributes from './ConvertAttributes'
 import useEffect from './hooks/useEffect'
 import ReactHtmlParser from 'react-html-parser'
 import 'requestidlecallback-polyfill';
@@ -26,6 +27,7 @@ export default function CKTextArea(props) {
     useEffect(() => {
       window.requestIdleCallback(() => {
         InlineEditor.create( document.querySelector( `#${id}` ), {
+          extraPlugins: [ ConvertAttributes('em'), ConvertAttributes('b'), ConvertAttributes('span') ],
           toolbar: {
             items: [
               'htmlEmbed',
@@ -111,6 +113,16 @@ export default function CKTextArea(props) {
             window.requestIdleCallback(() => {
               editor.setData(value)
             })
+          }
+          if (props.setDataRef) {
+            props.setDataRef.current = (data) => {
+              editor.setData(data)
+            }
+          }
+          if (props.getDataRef) {
+            props.getDataRef.current = () => {
+              return editor.getData()
+            }
           }
           editor.model.document.on('change:data', (evt) => {
             const data = editor.getData()
