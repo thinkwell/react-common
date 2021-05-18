@@ -27,7 +27,11 @@ export default function CKTextArea(props) {
     useEffect(() => {
       window.requestIdleCallback(() => {
         InlineEditor.create( document.querySelector( `#${id}` ), {
-          extraPlugins: [ ConvertAttributes('em'), ConvertAttributes('b'), ConvertAttributes('span') ],
+          extraPlugins: [
+            ConvertAttributes('em', {isBlock: true, allowWhere: '$block', allowContentOf: '$root'}),
+            ConvertAttributes('b', {isBlock: true, allowWhere: '$block', allowContentOf: '$root'}),
+            ConvertAttributes('span', {isInline: true, allowWhere: '$block', allowContentOf: '$root'})
+          ],
           toolbar: {
             items: [
               'htmlEmbed',
