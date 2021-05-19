@@ -1,9 +1,11 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useRef } from 'react';
 import {TextField as TextFieldPolaris} from '@shopify/polaris';
 import {FormContext} from './contexts/Form'
 import useEffect from './hooks/useEffect'
 import ReactHtmlParser from 'react-html-parser'
 import 'requestidlecallback-polyfill';
+import basePath from './ckeditor/basePath';
+import ckeditorConfig from './ckeditor/config';
 
 export default function CKTextArea(props) {
   if (!props.name) {
@@ -12,6 +14,7 @@ export default function CKTextArea(props) {
   const form = useContext(FormContext)
   const nameHtml = Array.isArray(props.name) ? props.name.join('_') : props.name
   const id = props.id || nameHtml
+  const divHolder = useRef();
 
   const isInvalid = (value) => {
     return !new RegExp("^" + props.pattern + "$").test(value);
@@ -19,110 +22,32 @@ export default function CKTextArea(props) {
 
   const onChange = (value) => {
     form.onData(props.name)(value)
+    CKEDITOR.instances[id] && CKEDITOR.instances[id].resetDirty();
     props.onChange && props.onChange(value, form)
   }
 
-  if (window.InlineEditor) {
-    useEffect(() => {
-      window.requestIdleCallback(() => {
-        InlineEditor.create( document.querySelector( `#${id}` ), {
-          toolbar: {
-            items: [
-              'htmlEmbed',
-              '|',
-              'bold',
-              'italic',
-              'strikethrough',
-              '|',
-              'removeFormat',
-              '|',
-              'imageUpload',
-              'insertTable',
-              'specialCharacters',
-              '|',
-              'MathType'
-            ]
-          },
-          alignment: {
-            options: [ 'left', 'right', 'center', 'justify' ]
-          },
-          language: 'en',
-          image: {
-            toolbar: [
-              'imageTextAlternative',
-              'imageStyle:full',
-              'imageStyle:side'
-            ]
-          },
-          mathTypeParameters : {
-            serviceProviderProperties : {
-              URI : '/wirispluginengine/integration',
-              server : 'ruby'
-            }
-          },
-          table: {
-            contentToolbar: [
-              'tableColumn', 'tableRow', 'mergeTableCells',
-              'tableProperties', 'tableCellProperties'
-            ],
-          },
-          image: {
-            // Configure the available styles.
-            styles: [
-                'alignLeft', 'alignCenter', 'alignRight'
-            ],
+  CKEDITOR.plugins.addExternal( 'autogrow', `${basePath}/plugins/autogrow/`, 'plugin.js' );
+  CKEDITOR.plugins.addExternal( 'base64image', `${basePath}/plugins/base64image/`, 'plugin.js' );
+  CKEDITOR.plugins.addExternal( 'ckeditor_wiris', `${basePath}/plugins/ckeditor_wiris/`, 'plugin.js' );
+  CKEDITOR.plugins.addExternal( 'editorplaceholder', `${basePath}/plugins/editorplaceholder/`, 'plugin.js' );
 
-            // Configure the available image resize options.
-            resizeOptions: [
-                {
-                    name: 'resizeImage:original',
-                    label: 'Original',
-                    value: null
-                },
-                {
-                    name: 'resizeImage:50',
-                    label: '50%',
-                    value: '50'
-                },
-                {
-                    name: 'resizeImage:75',
-                    label: '75%',
-                    value: '75'
-                }
-            ],
-
-            // You need to configure the image toolbar, too, so it shows the new style
-            // buttons as well as the resize buttons.
-            toolbar: [
-                'imageStyle:alignLeft', 'imageStyle:alignCenter', 'imageStyle:alignRight',
-                '|',
-                'resizeImage',
-                '|',
-                'imageTextAlternative'
-            ]
-          },
-          htmlEmbed: {
-            showPreviews: true
-          },
-          placeholder: props.placeholder
-        }, {onChange: onChange, value: value}).then( editor => {
-          const value = form.field(props.name);
-          if (value) {
-            window.requestIdleCallback(() => {
-              editor.setData(value)
-            })
-          }
-          editor.model.document.on('change:data', (evt) => {
-            const data = editor.getData()
-            onChange(data)
-          })
-        })
-        .catch( error => {
-          console.error( error );
+  useEffect(() => {
+    window.requestIdleCallback(() => {
+      CKEDITOR.replace(divHolder.current, Object.assign({}, ckeditorConfig, {editorplaceholder: props.placeholder}))
+      const instance = CKEDITOR.instances[id]
+      if (instance) {
+        instance.resetDirty();
+        instance.on('change', (evt) => {
+          const data = evt.editor.getData()
+          onChange(data)
         });
-      });
-    }, [])
-  }
+        instance.on('blur', (evt) => {
+          const data = evt.editor.getData()
+          onChange(data)
+        });
+      }
+    })
+  }, []);
 
   const validate = () => {
     const errors = [];
@@ -147,19 +72,16 @@ export default function CKTextArea(props) {
         <label id={`${id}Label`} htmlFor={id} className="Polaris-Label__Text">{props.label}</label>
       </div>
       <div>
-        { window.InlineEditor ?
-          <div className={`ck-content ck ck-editor__editable ck-rounded-corners ck-editor__editable_inline ck-blurred ${nameHtml}`}
-            aria-label={props.label}
-            id={id}
-          /> :
-          <TextFieldPolaris
-            className={nameHtml}
-            aria-label={props.label}
-            id={id}
-            value={value}
-            onChange={onChange}
-          />
-        }
+        <textarea
+          name={nameHtml}
+          value={value || ''}
+          onChange={(evt) => { onChange(evt.target.value) } }
+          id={id}
+          pattern={props.pattern}
+          maxLength={props.maxLength}
+          placeholder={props.placeholder}
+          ref={el => divHolder.current = el}
+        />
       </div>
     </div>
   )
