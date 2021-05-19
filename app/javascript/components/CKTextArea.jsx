@@ -32,19 +32,21 @@ export default function CKTextArea(props) {
   CKEDITOR.plugins.addExternal( 'editorplaceholder', `${basePath}/plugins/editorplaceholder/`, 'plugin.js' );
 
   useEffect(() => {
-    CKEDITOR.replace(divHolder.current, Object.assign({}, ckeditorConfig, {editorplaceholder: props.placeholder}))
-    const instance = CKEDITOR.instances[id]
-    if (instance) {
-      instance.resetDirty();
-      instance.on('change', (evt) => {
-        const data = evt.editor.getData()
-        onChange(data)
-      });
-      instance.on('blur', (evt) => {
-        const data = evt.editor.getData()
-        onChange(data)
-      });
-    }
+    window.requestIdleCallback(() => {
+      CKEDITOR.replace(divHolder.current, Object.assign({}, ckeditorConfig, {editorplaceholder: props.placeholder}))
+      const instance = CKEDITOR.instances[id]
+      if (instance) {
+        instance.resetDirty();
+        instance.on('change', (evt) => {
+          const data = evt.editor.getData()
+          onChange(data)
+        });
+        instance.on('blur', (evt) => {
+          const data = evt.editor.getData()
+          onChange(data)
+        });
+      }
+    })
   }, []);
 
   const validate = () => {
