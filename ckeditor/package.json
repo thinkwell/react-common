@@ -1,8 +1,7 @@
 {
-  "name": "@thinkwell/react-common",
+  "name": "@thinkwell/react.ckeditor",
   "version": "1.0.24",
   "private": true,
-  "workspaces": ["base", "ckeditor", "polaris"]
   "scripts": {
     "test": "jest --coverage",
     "test:watch": "npm run test -- --watch"
