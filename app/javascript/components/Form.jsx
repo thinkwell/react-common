@@ -53,11 +53,11 @@ export default function Form(props) {
     }
   }
 
-  const submit = () => {
+  const submit = (extraData) => {
     onSubmitting(true)
     if (!props.useHtml) {
       axios.defaults.headers.common['X-CSRF-Token'] = document.querySelector("meta[name=csrf-token]").content
-      const formData = form.data
+      const formData = Object.assign({}, form.data, extraData || {})
       const method = props.method ? (typeof props.method == 'function' ? props.method() : props.method) : 'put';
       const url = typeof props.url == 'function' ? props.url(form) : props.url;
       const data = {};
