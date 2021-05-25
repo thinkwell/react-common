@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import {TextField as TextFieldPolaris} from '@shopify/polaris';
-import {FormContext} from './contexts/Form'
+import {FormContext} from '@thinkwell/react.common';
 
 export default function TextField(props) {
   if (!props.name) {

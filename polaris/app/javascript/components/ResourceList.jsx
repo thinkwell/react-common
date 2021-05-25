@@ -1,11 +1,7 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import axios from 'axios';
 import {Card, Stack, ResourceList as ResourceListShopify, Pagination, InlineError, EmptyState} from '@shopify/polaris';
-import useReducerForm from './hooks/useReducerForm'
-import useReducerRequest from './hooks/useReducerRequest'
-import { PagingContext } from './contexts/Paging'
-import { SearchContext } from './contexts/Search'
-import { FormContext } from './contexts/Form'
+import {SearchContext, PagingContext, FormContext, useReducerForm, useReducerRequest} from '@thinkwell/react.common';
 
 export default function ResourceList(props) {
   const form = useContext(FormContext)

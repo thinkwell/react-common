@@ -1,8 +1,5 @@
 import React, { useState, useContext, useRef } from 'react';
-import {TextField as TextFieldPolaris} from '@shopify/polaris';
-import {FormContext} from './contexts/Form'
-import useEffect from './hooks/useEffect'
-import ReactHtmlParser from 'react-html-parser'
+import {FormContext, useEffect} from '@thinkwell/react.common';
 import 'requestidlecallback-polyfill';
 import basePath from './ckeditor/basePath';
 import ckeditorConfig from './ckeditor/config';

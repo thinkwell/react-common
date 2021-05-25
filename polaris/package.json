@@ -14,12 +14,10 @@
     "@shopify/polaris": "^6.1.0",
     "axios": "^0.19.0",
     "lodash": "^4.17.21",
-    "prop-types": "^15.7.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-html-parser": "^2.0.2",
-    "react_ujs": "^2.6.1",
-    "requestidlecallback-polyfill": "^1.0.2"
+    "react_ujs": "^2.6.1"
   },
   "devDependencies": {
     "@babel/plugin-transform-runtime": "^7.13.9",

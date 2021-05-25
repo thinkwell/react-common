@@ -1,6 +1,6 @@
 import React from 'react'
 import AppProvider from 'AppProvider';
-import {FormProvider} from 'contexts/Form';
+import {FormProvider} from '@thinkwell/react.common';
 import EditModal from 'EditModal';
 import {doRender, getByText, getAllByText, queryByText, queryByClass, fireClick, getByLabelText, select, type} from './TestHelper'
 import mockAxios from 'jest-mock-axios';

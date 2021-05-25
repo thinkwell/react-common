@@ -2,7 +2,7 @@ import React from 'react'
 import {doRender, getByText, getAllByText, queryByText, queryByClass, fireClick, getByLabelText, select, type, getByTitle, queryByTitle} from './TestHelper'
 import mockAxios from 'jest-mock-axios';
 import AppProvider from 'AppProvider';
-import {FormProvider} from 'contexts/Form';
+import {FormProvider} from '@thinkwell/react.common';
 import Form from 'Form';
 
 afterEach(() => {

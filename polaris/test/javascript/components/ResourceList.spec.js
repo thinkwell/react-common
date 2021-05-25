@@ -2,8 +2,7 @@ import React from 'react'
 import {doRender, getByText, getAllByText, queryByText, queryByClass, fireClick, getByLabelText, select, type} from './TestHelper'
 import mockAxios from 'jest-mock-axios';
 import AppProvider from 'AppProvider';
-import {PagingProvider} from 'contexts/Paging';
-import {SearchProvider} from 'contexts/Search';
+import {PagingProvider, SearchProvider} from '@thinkwell/react.common';
 import ResourceList from 'ResourceList';
 
 afterEach(() => {

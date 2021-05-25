@@ -1,8 +1,7 @@
 import React, { useState, useEffect as useEffectReact, useCallback, useContext } from 'react'
 import {Frame, TopBar, Card, ActionList, Loading, Navigation} from '@shopify/polaris';
 import {ProductsMajor, CustomersMajor, AffiliateMajor, ClockMajor, ReportsMajor} from '@shopify/polaris-icons';
-import {SearchContext} from './contexts/Search'
-import useEffect from './hooks/useEffect'
+import {SearchContext, useEffect} from '@thinkwell/react.common';
 
 export default function MainFrame(props) {
   const [searchValue, setSearchValue] = useContext(SearchContext);

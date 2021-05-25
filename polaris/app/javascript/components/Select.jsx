@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import {Select as SelectPolaris, Stack} from '@shopify/polaris';
 import Spinner from './Spinner'
-import {FormContext} from './contexts/Form'
+import {FormContext} from '@thinkwell/react.common';
 import startCase from 'lodash/startCase';
 
 export default function Select(props) {
