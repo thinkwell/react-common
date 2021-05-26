@@ -1,4 +1,5 @@
 {
+  "name": "@thinkwell/react-common",
   "private": true,
   "workspaces": ["packages/*"]
 }
