@@ -8,7 +8,8 @@
   },
   "main": "app/javascript/components/index.js",
   "files": [
-    "app/assets"
+    "app/assets",
+    "app/javascript"
   ],
   "peerDependencies": {
     "react": "^17.0.1",
