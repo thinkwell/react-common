@@ -1,7 +1,6 @@
 import React, { useState, useContext, useRef } from 'react';
 import {FormContext, useEffect} from '@thinkwell/react.common';
 import 'requestidlecallback-polyfill';
-import basePath from './ckeditor/basePath';
 import ckeditorConfig from './ckeditor/config';
 
 export default function CKTextArea(props) {
@@ -23,10 +22,10 @@ export default function CKTextArea(props) {
     props.onChange && props.onChange(value, form)
   }
 
-  CKEDITOR.plugins.addExternal( 'autogrow', `${basePath}/plugins/autogrow/`, 'plugin.js' );
-  CKEDITOR.plugins.addExternal( 'base64image', `${basePath}/plugins/base64image/`, 'plugin.js' );
-  CKEDITOR.plugins.addExternal( 'ckeditor_wiris', `${basePath}/plugins/ckeditor_wiris/`, 'plugin.js' );
-  CKEDITOR.plugins.addExternal( 'editorplaceholder', `${basePath}/plugins/editorplaceholder/`, 'plugin.js' );
+  CKEDITOR.plugins.addExternal( 'autogrow', `${CKEDITOR_BASEPATH}/plugins/autogrow/`, 'plugin.js' );
+  CKEDITOR.plugins.addExternal( 'base64image', `${CKEDITOR_BASEPATH}/plugins/base64image/`, 'plugin.js' );
+  CKEDITOR.plugins.addExternal( 'ckeditor_wiris', `${CKEDITOR_BASEPATH}/plugins/ckeditor_wiris/`, 'plugin.js' );
+  CKEDITOR.plugins.addExternal( 'editorplaceholder', `${CKEDITOR_BASEPATH}/plugins/editorplaceholder/`, 'plugin.js' );
 
   useEffect(() => {
     window.requestIdleCallback(() => {
