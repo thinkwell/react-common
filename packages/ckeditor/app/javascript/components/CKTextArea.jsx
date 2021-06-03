@@ -2,6 +2,7 @@ import React, { useState, useContext, useRef } from 'react';
 import {FormContext, useEffect} from '@thinkwell/react.common';
 import 'requestidlecallback-polyfill';
 import ckeditorConfig from './ckeditor/config';
+import basePath from './ckeditor/basePath';
 
 export default function CKTextArea(props) {
   if (!props.name) {
@@ -21,8 +22,6 @@ export default function CKTextArea(props) {
     CKEDITOR.instances[id] && CKEDITOR.instances[id].resetDirty();
     props.onChange && props.onChange(value, form)
   }
-
-  const basePath = CKEDITOR_BASEPATH;
 
   CKEDITOR.plugins.addExternal( 'autogrow', `${basePath}/plugins/autogrow/`, 'plugin.js' );
   CKEDITOR.plugins.addExternal( 'base64image', `${basePath}/plugins/base64image/`, 'plugin.js' );

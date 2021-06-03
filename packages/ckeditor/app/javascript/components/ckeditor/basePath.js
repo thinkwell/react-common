@@ -1,4 +1,4 @@
-const basePath = '/assets/@thinkwell/react-common/app/assets/javascripts/ckeditor4'
+const basePath = '/packs/ckeditor'
 window.CKEDITOR_BASEPATH = basePath;
 
 export default basePath
