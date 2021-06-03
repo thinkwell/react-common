@@ -29,7 +29,7 @@ export default function MainFrame(props) {
           path = Util.setParam(path, 'page_info', page_info)
         }
         if (searchValue) {
-          path = Util.setParam(path, 'query', searchValue)
+          path = Util.setParam(path, 'query', encodeURIComponent(searchValue))
         }
       }
       window.location.assign(path)
@@ -57,7 +57,7 @@ export default function MainFrame(props) {
   const searchFieldMarkup = (
     props.withoutSearch ? null : <div onKeyDown={props.onSearchKeyPress}><TopBar.SearchField
       onChange={handleSearchFieldChange}
-      value={searchValue}
+      value={decodeURIComponent(searchValue)}
       placeholder={props.searchPlaceHolder || "Search"}
     /></div>
   );
