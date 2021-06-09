@@ -1,2 +1,6 @@
 /node_modules
+/ckeditor/node_modules
+/common/node_modules
+/polaris/node_modules
 yarn-error.log
+/coverage
