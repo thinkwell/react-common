@@ -1,6 +1,7 @@
 import Util from './Util'
 import { FormProvider, FormContext } from './contexts/Form'
 import Items from './contexts/Items'
+import ItemsSlice from './contexts/ItemsSlice'
 import { PagingContext, PagingProvider } from './contexts/Paging'
 import { SearchContext, SearchProvider } from './contexts/Search'
 import useEffect from './hooks/useEffect'
@@ -13,5 +14,5 @@ import useReducerModal from './hooks/useReducerModal'
 import useReducerRequest from './hooks/useReducerRequest'
 import useReducerTab from './hooks/useReducerTab'
 import useSearch from './hooks/useSearch'
-export {Util, FormProvider, FormContext, Items, PagingContext, PagingProvider, SearchContext, SearchProvider,
+export {Util, FormProvider, FormContext, Items, ItemsSlice, PagingContext, PagingProvider, SearchContext, SearchProvider,
   useEffect, useFetch, useReducer, useReducerFetch, useReducerForm, useReducerItem, useReducerModal, useReducerRequest, useReducerTab, useSearch}
