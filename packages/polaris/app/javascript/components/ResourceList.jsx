@@ -69,6 +69,7 @@ export default function ResourceList(props) {
   return (
     <Stack vertical={true}>
       { props.fetchItemsState && props.fetchItemsState.error ? <InlineError message={props.fetchItemsState && props.fetchItemsState.error} fieldID="resourceListError" /> : null }
+      { props.fetchItemsError ? <InlineError message={props.fetchItemsError} fieldID="resourceListError" /> : null }
       <ResourceListShopify
       selectedItems={props.selectable && form.field && form.field(props.name)}
       onSelectionChange={props.selectable && form.onData && form.onData(props.name)}
@@ -80,7 +81,7 @@ export default function ResourceList(props) {
       sortValue={order}
       sortOptions={sortOptions}
       onSortChange={handleSortChange}
-      loading={props.fetchItemsState && props.fetchItemsState.loading}
+      loading={props.fetchItemsState && props.fetchItemsState.loading || props.fetchItemsLoading}
       />
       {paginationMarkup}
     </Stack>
