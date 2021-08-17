@@ -78,6 +78,16 @@ describe('components/Form', () => {
           expect(getByText('someerror')).toBeInTheDocument()
         });
       });
+
+      describe('and error with response.data.errors', () => {
+        beforeEach(() => {
+          mockAxios.mockError({response: {data: {errors: {end_at: ["is not after start_at"]}}}});
+        });
+
+        it('should show submit error', () => {
+          expect(getByText('end_at is not after start_at')).toBeInTheDocument()
+        });
+      });
     });
   });
 

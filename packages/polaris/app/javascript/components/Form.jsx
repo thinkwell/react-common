@@ -3,6 +3,7 @@ import {FormLayout, InlineError, Link, Button} from '@shopify/polaris';
 import Spinner from './Spinner'
 import {Util, FormContext, useEffect} from '@thinkwell/react.common';
 import axios from 'axios';
+import map from 'lodash/map';
 
 
 export default function Form(props) {
@@ -40,10 +41,15 @@ export default function Form(props) {
     }
   }
 
+  const formatErrors = (errors) => {
+    return map(errors, (value, key) => key + ' ' + value)
+  }
+
   const onError = (error) => {
     error.stack && console.error(error.stack)
-    const errorMessage = error.response && error.response.data && error.response.data.message || error.message;
-    onSubmitting(false)
+    const data = error.response && error.response.data
+    const errorMessage = data && data.errors && formatErrors(data.errors) || data && data.message || error.message;
+
     // if error is handled from parent delegate else set state
     if (props.onError) {
       props.onError(errorMessage)
