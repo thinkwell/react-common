@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
-import axios from 'axios';
 import {Card, Stack, ResourceList as ResourceListShopify, Pagination, InlineError, EmptyState} from '@shopify/polaris';
 import {SearchContext, PagingContext, FormContext, useReducerForm, useReducerRequest} from '@thinkwell/react.common';
 
