@@ -15,7 +15,7 @@ export default function useFetchState (props) {
     return data
   }
 
-  if (props.url) {
+  if (props && props.url) {
     useEffect(() => {
       fetch(props.url)
     }, [props.url])
