@@ -48,6 +48,7 @@ export default function Form(props) {
     const data = error.response && error.response.data
     const errorMessage = data && data.errors && formatErrors(data.errors) || data && data.message || error.message;
 
+    onSubmitting(false)
     // if error is handled from parent delegate else set state
     if (props.onError) {
       props.onError(errorMessage)
