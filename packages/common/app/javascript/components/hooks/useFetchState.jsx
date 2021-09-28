@@ -15,11 +15,11 @@ export default function useFetchState (props) {
     return data
   }
 
-  if (props && props.url) {
-    useEffect(() => {
+  useEffect(() => {
+    if (props && props.url) {
       fetch(props.url)
-    }, [props.url])
-  }
+    }
+  }, [props && props.url])
 
   return [state, loading, fetch]
 }
