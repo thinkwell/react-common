@@ -8,4 +8,5 @@ import TextField from './TextField'
 import Spinner from './Spinner'
 import Form from './Form'
 import Select from './Select'
-export {AppProvider, MainFrame, ResourceList, Form, EditModal, EditSheet, EditForm, TextField, Spinner, Select}
+import Checkbox from './Checkbox'
+export {AppProvider, MainFrame, ResourceList, Form, EditModal, EditSheet, EditForm, TextField, Spinner, Select, Checkbox}
