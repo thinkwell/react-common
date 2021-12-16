@@ -15,9 +15,12 @@ export default function Checkbox(props) {
     props.onChange && props.onChange(value, form)
   }
 
+  const value = form.field(props.name)
+  const checked = value === 'true' || value === true
+
   return (<CheckboxPolaris
     label={props.label}
-    checked={form.field(props.name)}
+    checked={checked}
     onChange={onChange}
     value={props.value}
     onBlur={props.onBlur}
