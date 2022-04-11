@@ -1,6 +1,6 @@
 import React from 'react';
 import useReducer from './useReducer'
-import axios from 'axios'
+import api from '../services/api';
 
 export default function useReducerRequest (method, props) {
   function reducer(state, action) {
@@ -31,12 +31,12 @@ export default function useReducerRequest (method, props) {
 
     try {
       onRequesting()
-      axios.defaults.headers.common['X-CSRF-Token'] = document.querySelector("meta[name=csrf-token]").content
+      api.defaults.headers.common['X-CSRF-Token'] = document.querySelector("meta[name=csrf-token]").content
       const config = {method: method, url: url}
       if(data) {
         config.data = data
       }
-      const response = await axios(config)
+      const response = await api(config)
       onSuccess(response)
     } catch(error) {
       onError(error)

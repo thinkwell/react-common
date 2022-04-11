@@ -51,6 +51,7 @@ export default function TextField(props) {
     value={form.field(props.name)}
     onChange={onChange}
     onBlur={props.onBlur}
+    onFocus={props.onFocus}
     name={nameHtml}
     id={id}
     pattern={props.pattern}

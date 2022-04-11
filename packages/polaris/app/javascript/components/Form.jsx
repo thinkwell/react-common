@@ -1,9 +1,8 @@
 import React, { useState, useRef, useContext } from 'react';
 import {FormLayout, InlineError, Link, Button} from '@shopify/polaris';
 import Spinner from './Spinner'
-import {Util, FormContext, useEffect} from '@thinkwell/react.common';
-import axios from 'axios';
-
+import {Util, FormContext, useEffect, api} from '@thinkwell/react.common';
+import map from 'lodash/map';
 
 export default function Form(props) {
   const form = useContext(FormContext)
@@ -40,9 +39,15 @@ export default function Form(props) {
     }
   }
 
+  const formatErrors = (errors) => {
+    return map(errors, (value, key) => key + ' ' + value)
+  }
+
   const onError = (error) => {
     error.stack && console.error(error.stack)
-    const errorMessage = error.response && error.response.data && error.response.data.message || error.message;
+    const data = error.response && error.response.data
+    const errorMessage = data && data.errors && formatErrors(data.errors) || data && data.message || error.message;
+
     onSubmitting(false)
     // if error is handled from parent delegate else set state
     if (props.onError) {
@@ -55,13 +60,13 @@ export default function Form(props) {
   const submit = (extraData) => {
     onSubmitting(true)
     if (!props.useHtml) {
-      axios.defaults.headers.common['X-CSRF-Token'] = document.querySelector("meta[name=csrf-token]").content
+      api.defaults.headers.common['X-CSRF-Token'] = document.querySelector("meta[name=csrf-token]").content
       const formData = Object.assign({}, form.data, extraData || {})
       const method = props.method ? (typeof props.method == 'function' ? props.method() : props.method) : 'put';
       const url = typeof props.url == 'function' ? props.url(form) : props.url;
       const data = {};
       data[form.rootName || "item"] = formData
-      return axios({method: method, url: url, data: data})
+      return api({method: method, url: url, data: data})
       .then(onSuccess)
       .catch(onError)
     } else {

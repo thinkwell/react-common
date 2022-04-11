@@ -10,7 +10,7 @@ export default function useFetch (props) {
   const initialState = {loading: false, error: null}
   const [state, onFetch, onSuccess, onError] = useReducerFetch(props, initialState);
 
-  const fetch = async (url, params) => {
+  const fetch = async (url, params, config) => {
     if (!url) {
       return
     }
@@ -19,6 +19,8 @@ export default function useFetch (props) {
       let response;
       if (params) {
         response = await axios.get(url, {params});
+      } else if (config) {
+        response = await axios.get(url, config);
       } else {
         response = await axios.get(url);
       }

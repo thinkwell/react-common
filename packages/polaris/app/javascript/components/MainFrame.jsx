@@ -32,7 +32,12 @@ export default function MainFrame(props) {
           path = Util.setParam(path, 'query', encodeURIComponent(searchValue))
         }
       }
-      window.location.assign(path)
+      if (props.navigate) {
+        props.navigate(path)
+        setMobileNavigationActive(false)
+      } else {
+        window.location.assign(path)
+      }
     }
   };
 
