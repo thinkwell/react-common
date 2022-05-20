@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import {Spinner as SpinnerPolaris} from '@shopify/polaris';
 
 export default function Spinner(props) {
-  const size = "small"
+  const size = props.size || "small"
 
   return (
     <span className={`spinner ${size} ${!props.children ? 'no-content' : ''}`} >
