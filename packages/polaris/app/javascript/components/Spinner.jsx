@@ -5,7 +5,7 @@ export default function Spinner(props) {
   const size = props.size || "small"
 
   return (
-    <span className={`spinner ${size} ${!props.children ? 'no-content' : ''}`} >
+    <span className={`spinner spinner-${size} ${!props.children ? 'no-content' : ''}`} >
       <span className={`${props.active ? 'active' : ''}`}>
         {props.children}
       </span>
