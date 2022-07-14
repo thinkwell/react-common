@@ -47,6 +47,7 @@ export default function TextField(props) {
     <TextFieldPolaris
     multiline={props.multiline}
     label={props.label}
+    labelHidden={props.labelHidden}
     type={props.type || 'text'}
     value={form.field(props.name)}
     onChange={onChange}
