@@ -55,6 +55,7 @@ export default function TextField(props) {
     onFocus={props.onFocus}
     name={nameHtml}
     id={id}
+    disabled={props.disabled}
     pattern={props.pattern}
     maxLength={props.maxLength}
     placeholder={props.placeholder}
