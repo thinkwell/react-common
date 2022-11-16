@@ -45,6 +45,7 @@ export default function TextField(props) {
 
   return (<div onKeyDown={handleKeyPress}>
     <TextFieldPolaris
+    key={props.key || nameHtml}
     multiline={props.multiline}
     label={props.label}
     labelHidden={props.labelHidden}
