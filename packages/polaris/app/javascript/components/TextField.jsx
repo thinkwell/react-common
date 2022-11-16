@@ -9,6 +9,7 @@ export default function TextField(props) {
   const form = useContext(FormContext)
   const nameHtml = Array.isArray(props.name) ? props.name.join('_') : props.name
   const id = props.id || nameHtml
+  const value = form.field(props.name)
 
   const isInvalid = (value) => {
     return !new RegExp("^" + props.pattern + "$").test(value);
@@ -49,7 +50,7 @@ export default function TextField(props) {
     label={props.label}
     labelHidden={props.labelHidden}
     type={props.type || 'text'}
-    value={form.field(props.name)}
+    value={value && value.toString()}
     onChange={onChange}
     onBlur={props.onBlur}
     onFocus={props.onFocus}
