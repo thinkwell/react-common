@@ -9,4 +9,5 @@ import Spinner from './Spinner'
 import Form from './Form'
 import Select from './Select'
 import Checkbox from './Checkbox'
-export {AppProvider, MainFrame, ResourceList, Form, EditModal, EditSheet, EditForm, TextField, Spinner, Select, Checkbox}
+import Autocomplete from './Autocomplete'
+export {AppProvider, MainFrame, ResourceList, Form, EditModal, EditSheet, EditForm, TextField, Spinner, Select, Checkbox, Autocomplete}
