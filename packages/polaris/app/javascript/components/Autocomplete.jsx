@@ -6,7 +6,7 @@ import axios from 'axios'
 
 export default function Autocomplete(props) {
   const [selectedOptions, setSelectedOptions] = useState([]);
-  const [inputValue, setInputValue] = useState(props.item && props.item[props.valueProp]);
+  const [inputValue, setInputValue] = useState(props.value);
   const [options, setOptions] = useState([]);
   const [loading, setLoading] = useState(false);
 
