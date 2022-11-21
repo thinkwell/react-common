@@ -52,7 +52,7 @@ export default function Autocomplete(props) {
 
     setLoading(true);
     const url = new URL(props.url)
-    url.add('q', encodeURIComponent(value))
+    url.searchParams.add('q', encodeURIComponent(value))
     const response = await axios({method: 'get', url: url.toString()})
     // Format data into JSON
     const data = response.data;
