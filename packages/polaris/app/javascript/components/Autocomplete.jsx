@@ -51,8 +51,9 @@ export default function Autocomplete(props) {
     }
 
     setLoading(true);
-    const url = `${props.url}?q=${encodeURIComponent(value)}`
-    const response = await axios({method: 'get', url: url})
+    const url = new URL(props.url)
+    url.add('q', encodeURIComponent(value))
+    const response = await axios({method: 'get', url: url.toString()})
     // Format data into JSON
     const data = response.data;
     const resultOptions = data.items.map((result) => {
