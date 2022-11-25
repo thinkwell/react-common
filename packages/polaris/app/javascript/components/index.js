@@ -10,4 +10,5 @@ import Form from './Form'
 import Select from './Select'
 import Checkbox from './Checkbox'
 import Autocomplete from './Autocomplete'
-export {AppProvider, MainFrame, ResourceList, Form, EditModal, EditSheet, EditForm, TextField, Spinner, Select, Checkbox, Autocomplete}
+import IFrameModal from './IFrameModal'
+export {AppProvider, MainFrame, ResourceList, Form, EditModal, EditSheet, EditForm, TextField, Spinner, Select, Checkbox, Autocomplete, IFrameModal}
