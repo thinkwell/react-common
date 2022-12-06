@@ -9,16 +9,20 @@ export default function EditForm(props) {
   const form = useContext(FormContext)
 
   const onActiveProp = props.onActive
+  const ckEditorInstances = typeof CKEDITOR !== 'undefined' ? CKEDITOR.instances : {}
+
   const [state, onActive, onSaveClicked, onSaveSubmitted, onSaveError, onSaving, onClear] = useReducerModal({...props, onActive: (active) => {
     if(!active) {
       setTimeout(() => {
-        MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+        if (typeof MathJax !== 'undefined') {
+          MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+        }
       }, 100)
     } else {
       // trigger when editor loads for autogrow
       setTimeout(() => {
-        for (var key in CKEDITOR.instances) {
-          CKEDITOR.instances[key].commands.autogrow.exec()
+        for (var key in ckEditorInstances) {
+          ckEditorInstances[key].commands.autogrow.exec()
         }
       }, 100)
     }
@@ -34,8 +38,8 @@ export default function EditForm(props) {
   const save = () => {
     // hippo#76 : trigger blur on CKEditor instances on save
     // TODO : remove after moving to ckeditor v5
-    for (var key in CKEDITOR.instances) {
-      CKEDITOR.instances[key].focusManager.blur(true)
+    for (var key in ckEditorInstances) {
+      ckEditorInstances[key].focusManager.blur(true)
     }
     onSaveClicked()
     if (form.errors.length) {
@@ -44,7 +48,7 @@ export default function EditForm(props) {
       // hippo#76 : setTimeout to allow CKTextArea#blur handler to fire
       // TODO : remove after moving to ckeditor v5
       while(true) {
-        const isDirty = Object.keys(CKEDITOR.instances).find((key) => CKEDITOR.instances[key].checkDirty())
+        const isDirty = Object.keys(ckEditorInstances).find((key) => ckEditorInstances[key].checkDirty())
         if (!isDirty) {
           submitRef.current()
           onSaveSubmitted()
