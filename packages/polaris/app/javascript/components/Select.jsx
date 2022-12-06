@@ -30,7 +30,7 @@ export default function Select(props) {
       { props.options && props.options.length || props.fetchState && props.fetchState.error ?
         <Stack.Item fill><SelectPolaris
           label={startCase(props.label.plural)}
-          labelInline
+          labelInline={typeof props.labelInline !== 'undefined' ? props.labelInline : true}
           options={props.options}
           onChange={onChange}
           value={form.field(props.name)}
