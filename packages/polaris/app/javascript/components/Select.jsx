@@ -25,20 +25,22 @@ export default function Select(props) {
 
   form.register(props.name, validate)
 
-  return (
+  const selectEl = <SelectPolaris
+    label={startCase(props.label.plural)}
+    labelInline={typeof props.labelInline !== 'undefined' ? props.labelInline : true}
+    options={props.options}
+    onChange={onChange}
+    value={form.field(props.name)}
+    error={props.fetchState && props.fetchState.error}
+  />
+
+  return typeof props.labelInline !== 'undefined' && !props.labelInline ? selectEl : (
     <Stack>
       { props.options && props.options.length || props.fetchState && props.fetchState.error ?
-        <Stack.Item fill><SelectPolaris
-          label={startCase(props.label.plural)}
-          labelInline={typeof props.labelInline !== 'undefined' ? props.labelInline : true}
-          options={props.options}
-          onChange={onChange}
-          value={form.field(props.name)}
-          error={props.fetchState && props.fetchState.error}
-        /></Stack.Item> :
+        <Stack.Item fill>{selectEl}</Stack.Item> :
         props.fetchState && !props.fetchState.loading ? <div>{props.notFoundMessage || `No ${props.label.plural} found`}</div> : null
       }
       { props.fetchState && props.fetchState.loading ? <Spinner active={props.fetchState.loading} /> : null }
     </Stack>
-  );
+  )
 }
