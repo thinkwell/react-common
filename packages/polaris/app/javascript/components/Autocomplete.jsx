@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import {Autocomplete as AutocompletePolaris, Icon} from '@shopify/polaris';
 import {SearchMinor, DeleteMajor} from '@shopify/polaris-icons';
 import {FormContext} from '@thinkwell/react.common';
@@ -9,6 +9,7 @@ export default function Autocomplete(props) {
   const [inputValue, setInputValue] = useState(props.value);
   const [options, setOptions] = useState([]);
   const [loading, setLoading] = useState(false);
+  const timeout = useRef(null);
 
   if (!props.name) {
     throw `Property name is required for Autocomplete ${props.label}`
@@ -43,27 +44,35 @@ export default function Autocomplete(props) {
 
   form.register(props.name, validate)
 
-  const updateText = async(value) => {
+  const updateText = (value) => {
     setInputValue(value);
 
     if (value.length < 2) {
       return
     }
 
-    setLoading(true);
-    const url = new URL(props.url)
-    url.searchParams.set('q', encodeURIComponent(value))
-    const response = await axios({method: 'get', url: url.toString()})
-    // Format data into JSON
-    const data = response.data;
-    const resultOptions = data.items.map((result) => {
-      return {
-        value: result,
-        label: result[props.valueProp]
-      }
-    })
-    setOptions(resultOptions);
-    setLoading(false);
+    if (timeout.current) {
+      clearTimeout(timeout.current)
+      timeout.current = null
+    }
+
+    timeout.current = setTimeout(async() => {
+      timeout.current = null
+      setLoading(true);
+      const url = new URL(props.url)
+      url.searchParams.set('q', encodeURIComponent(value))
+      const response = await axios({method: 'get', url: url.toString()})
+      // Format data into JSON
+      const data = response.data;
+      const resultOptions = data.items.map((result) => {
+        return {
+          value: result,
+          label: result[props.valueProp]
+        }
+      })
+      setOptions(resultOptions);
+      setLoading(false);
+    }, 500)
   }
 
   const updateSelection = (selectedItems) => {
