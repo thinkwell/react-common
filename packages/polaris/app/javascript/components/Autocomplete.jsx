@@ -44,6 +44,10 @@ export default function Autocomplete(props) {
 
   form.register(props.name, validate)
 
+  const formatLabel = props.formatLabel || (value) => {
+    return value[props.valueProp]
+  }
+
   const updateText = (value) => {
     setInputValue(value);
 
@@ -67,7 +71,7 @@ export default function Autocomplete(props) {
       const resultOptions = data.items.map((result) => {
         return {
           value: result,
-          label: result[props.valueProp]
+          label: formatLabel(result)
         }
       })
       setOptions(resultOptions);
@@ -81,7 +85,7 @@ export default function Autocomplete(props) {
       return options.find((option) => option.value[idProp] == selectedItem[idProp])
     }).pop()
     form.onData(props.name)(selected && selected.value[idProp])
-    setInputValue(selected.value[props.valueProp]);
+    setInputValue(formatLabel(selected.value));
     setSelectedOptions([selected]);
   }
 
