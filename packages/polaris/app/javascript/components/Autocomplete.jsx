@@ -44,9 +44,9 @@ export default function Autocomplete(props) {
 
   form.register(props.name, validate)
 
-  const formatLabel = props.formatLabel || (value) => {
+  const formatLabel = props.formatLabel || ((value) => {
     return value[props.valueProp]
-  }
+  })
 
   const updateText = (value) => {
     setInputValue(value);
