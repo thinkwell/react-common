@@ -68,7 +68,7 @@ export default function Autocomplete(props) {
       const response = await axios({method: 'get', url: url.toString()})
       // Format data into JSON
       const data = response.data;
-      const resultOptions = data.items.map((result) => {
+      const resultOptions = (data.items || data).map((result) => {
         return {
           value: result,
           label: formatLabel(result)
