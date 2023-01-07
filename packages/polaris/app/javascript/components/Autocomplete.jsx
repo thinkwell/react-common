@@ -89,11 +89,18 @@ export default function Autocomplete(props) {
     setSelectedOptions([selected]);
   }
 
+  const onClearButtonClick = () => {
+    setInputValue('')
+    form.onData(props.name)(null)
+  }
+
   const textField = (
     <AutocompletePolaris.TextField
       onChange={updateText}
       value={inputValue}
       label={props.label}
+      clearButton
+      onClearButtonClick={onClearButtonClick}
       prefix={<Icon source={SearchMinor} color="base" />}
       placeholder={props.placeholder || `Search ${props.label}`}
     />
