@@ -91,6 +91,8 @@ export default function Autocomplete(props) {
 
   const onClearButtonClick = () => {
     setInputValue('')
+    setOptions([])
+    setSelectedOptions([])
     form.onData(props.name)(null)
   }
 
