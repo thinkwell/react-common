@@ -64,7 +64,10 @@ export default function Autocomplete(props) {
       timeout.current = null
       setLoading(true);
       const url = new URL(props.url)
-      url.searchParams.set('q', encodeURIComponent(value))
+      url.searchParams.set('query', encodeURIComponent(value))
+      if (props.limit) {
+        url.searchParams.set('limit', props.limit)
+      }
       const response = await axios({method: 'get', url: url.toString()})
       // Format data into JSON
       const data = response.data;
