@@ -11,8 +11,8 @@ export default function RadioButton(props) {
   const id = props.id || nameHtml
 
   const onChange = (value) => {
-    form.onData(props.name)(value)
-    props.onChange && props.onChange(value, form)
+    form.onData(props.name)(props.value)
+    props.onChange && props.onChange(props.value, form)
   }
 
   return (<RadioButtonPolaris
