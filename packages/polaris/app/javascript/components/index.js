@@ -12,4 +12,5 @@ import Checkbox from './Checkbox'
 import Autocomplete from './Autocomplete'
 import IFrameModal from './IFrameModal'
 import Table from './Table'
-export {AppProvider, MainFrame, ResourceList, Form, EditModal, EditSheet, EditForm, TextField, Spinner, Select, Checkbox, Autocomplete, IFrameModal, Table}
+import RadioButton from './RadioButton'
+export {AppProvider, MainFrame, ResourceList, Form, EditModal, EditSheet, EditForm, TextField, Spinner, Select, Checkbox, Autocomplete, IFrameModal, Table, RadioButton}
