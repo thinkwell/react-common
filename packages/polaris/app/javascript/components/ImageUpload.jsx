@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useContext } from 'react';
 import {DropZone, Banner, List, Thumbnail, Stack} from '@shopify/polaris';
 import { CancelSmallMinor } from '@shopify/polaris-icons'
+import {FormContext} from '@thinkwell/react.common';
 
 export default function ImageUpload(props) {
   const [acceptedFile, setAcceptedFile] = useState(props.value);
   const [rejectedFiles, setRejectedFiles] = useState([]);
 
   const hasError = rejectedFiles.length > 0;
+  const form = useContext(FormContext)
 
   const clearAcceptedFile = () => {
     setAcceptedFile(null)
