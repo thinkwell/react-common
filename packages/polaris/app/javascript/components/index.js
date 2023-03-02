@@ -13,4 +13,5 @@ import Autocomplete from './Autocomplete'
 import IFrameModal from './IFrameModal'
 import Table from './Table'
 import RadioButton from './RadioButton'
-export {AppProvider, MainFrame, ResourceList, Form, EditModal, EditSheet, EditForm, TextField, Spinner, Select, Checkbox, Autocomplete, IFrameModal, Table, RadioButton}
+import ImageUpload from './ImageUpload'
+export {AppProvider, MainFrame, ResourceList, Form, EditModal, EditSheet, EditForm, TextField, Spinner, Select, Checkbox, Autocomplete, IFrameModal, Table, RadioButton, ImageUpload}
