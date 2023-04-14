@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import useReducerForm from '../hooks/useReducerForm'
 import Util from '../Util'
 import values from 'lodash/values'
@@ -9,7 +9,7 @@ import unset from 'lodash/unset'
 
 export default function Form (props) {
   const scope = props.scope || 'data'
-  const initialData = props.data && props.data[scope] || props.data || {}
+  const [initialData] = useState(props.data && props.data[scope] || props.data || {})
   const [formState, onAction] = useReducerForm({}, initialData)
   const validations = {}
   const children = {}
