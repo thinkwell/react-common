@@ -2,7 +2,7 @@ import React, { useReducer as useReducerReact, useRef } from 'react';
 import lowerFirst from 'lodash/lowerFirst'
 
 export default function useReducer (props, initialArg, reducer, init) {
-  const stateRef = useRef();
+  const stateRef = useRef({});
 
   function reducerCommon(state, action) {
     const attribute = lowerFirst(action.type.replace(/^on/, ''))
