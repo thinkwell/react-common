@@ -7,7 +7,7 @@ const SearchContext = React.createContext<SearchContextType>(["", (string) => {}
 
 const SearchProvider = (props) => {
   const value = props && props.search || Util.getParam(window.location.href, 'query') || ''
-  const [search, setSearch] = useState(value)
+  const [search, setSearch] = useState<string>(value)
 
   return (
     <SearchContext.Provider value={[search, setSearch]}>
