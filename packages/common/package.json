@@ -7,15 +7,20 @@
     "test:watch": "npm run test -- --watch",
     "build": "./node_modules/.bin/tsc"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn run build"
+    }
+  },
   "main": "dist/index.js",
   "peerDependencies": {
+    "@shopify/polaris": "^6.1.0",
     "axios": "^0.19.0",
     "lodash": "^4.17.21",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-html-parser": "^2.0.2",
-    "react_ujs": "^2.6.1",
-    "@shopify/polaris": "^6.1.0"
+    "react_ujs": "^2.6.1"
   },
   "devDependencies": {
     "@babel/plugin-transform-runtime": "^7.13.9",
@@ -27,6 +32,7 @@
     "@testing-library/user-event": "^10.0.1",
     "axios": "^0.19.0",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
+    "husky": "^8.0.3",
     "jest": "^25.2.6",
     "jest-mock-axios": "^3.1.2",
     "lodash": "^4.17.21",
