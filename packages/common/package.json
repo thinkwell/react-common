@@ -5,8 +5,7 @@
   "scripts": {
     "test": "jest --coverage",
     "test:watch": "npm run test -- --watch",
-    "build": "./node_modules/.bin/tsc",
-    "postinstall": "yarn run build"
+    "build": "./node_modules/.bin/tsc"
   },
   "main": "dist/index.ts",
   "peerDependencies": {
