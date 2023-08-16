@@ -4,11 +4,12 @@
   "private": true,
   "scripts": {
     "test": "jest --coverage",
-    "test:watch": "npm run test -- --watch"
+    "test:watch": "npm run test -- --watch",
+    "build": "./node_modules/.bin/tsc"
   },
-  "main": "app/javascript/components/index.js",
+  "main": "dist/index.ts",
   "files": [
-    "app/javascript"
+    "dist/"
   ],
   "peerDependencies": {
     "axios": "^0.19.0",
@@ -16,7 +17,8 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-html-parser": "^2.0.2",
-    "react_ujs": "^2.6.1"
+    "react_ujs": "^2.6.1",
+    "@shopify/polaris": "^6.1.0"
   },
   "devDependencies": {
     "@babel/plugin-transform-runtime": "^7.13.9",
@@ -35,6 +37,7 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react_ujs": "^2.6.1",
+    "typescript": "^5.1.6",
     "webpack-dev-server": "^3.11.2"
   }
 }

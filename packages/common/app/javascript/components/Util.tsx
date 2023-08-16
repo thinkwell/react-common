@@ -17,7 +17,7 @@ import flattenDeep from 'lodash/flattenDeep'
 import compact from 'lodash/compact'
 
 export default {
-  hideLoader: (selector) => {
+  hideLoader: (selector?: string) => {
     selector = selector || ''
     const loader = document.querySelector(`.thinkwell-content${selector} .loader`)
     if (loader) {

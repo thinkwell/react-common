@@ -1,7 +1,7 @@
 import React from 'react';
 import useReducer from './useReducer'
 
-export default function useReducerTab (props, tabs, tabSelected) {
+export default function useReducerTab (props, tabs, tabSelected?: string) {
   function reducer(state, action, attribute) {
     const payload = action.payload
     switch (action.type) {

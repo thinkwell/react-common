@@ -1,9 +1,9 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import Util from '../Util'
 
 type SearchContextType = [search: string, setSearch: (string) => void]
 
-const SearchContext = React.createContext<SearchContextType>(["", (string) => {}]);
+const SearchContext = React.createContext<SearchContextType>(["", () => {}]);
 
 const SearchProvider = (props) => {
   const value = props && props.search || Util.getParam(window.location.href, 'query') || ''
