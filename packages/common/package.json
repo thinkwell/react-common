@@ -7,7 +7,7 @@
     "test:watch": "npm run test -- --watch",
     "build": "./node_modules/.bin/tsc"
   },
-  "main": "dist/index.ts",
+  "main": "dist/index.js",
   "peerDependencies": {
     "axios": "^0.19.0",
     "lodash": "^4.17.21",
