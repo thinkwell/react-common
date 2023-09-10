@@ -8,7 +8,7 @@ export default function useFetchState (props) {
 
   const fetch = async(url) => {
     setLoading(true)
-    setState(null)
+    setState({})
     const result = await api({method: 'get', url: url, headers: {'Content-Type': 'application/json',  'Accept': 'application/json'}, data: {}})
     setLoading(false)
     const data = result && result.data
