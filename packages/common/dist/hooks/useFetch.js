@@ -7,7 +7,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import useReducerFetch from './useReducerFetch';
 import axios from 'axios';
 import { PagingContext } from '../contexts/Paging';

@@ -1,4 +1,3 @@
-import React from 'react';
 import useReducer from './useReducer';
 export default function useReducerFetch(props, value) {
     function reducer(state, action, attribute) {

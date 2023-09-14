@@ -7,12 +7,12 @@ export default function useReducerRequest (method, props) {
     const payload = action.payload
     switch (action.type) {
       case 'onSuccess':
-        return {...state, requesting: false};
+        return {...state, requesting: false} as RequestStateProps;
       case 'onRequesting':
-        return {...state, requesting: true};
+        return {...state, requesting: true} as RequestStateProps;
       case 'onError':
         const errorMessage = payload.response && payload.response.data && payload.response.data.message || payload.message;
-        return {...state, requesting: false, error: errorMessage};
+        return {...state, requesting: false, error: errorMessage} as RequestStateProps;
     }
   }
 
@@ -31,8 +31,8 @@ export default function useReducerRequest (method, props) {
 
     try {
       onRequesting()
-      api.defaults.headers.common['X-CSRF-Token'] = document.querySelector("meta[name=csrf-token]").content
-      const config = {method: method, url: url}
+      api.defaults.headers.common['X-CSRF-Token'] = (document.querySelector("meta[name=csrf-token]") as HTMLMetaElement).content
+      const config = {method: method, url: url, data: null}
       if(data) {
         config.data = data
       }
@@ -45,4 +45,9 @@ export default function useReducerRequest (method, props) {
   }
 
   return [state, onRequest]
+}
+
+export interface RequestStateProps {
+  requesting: boolean,
+  error: string
 }

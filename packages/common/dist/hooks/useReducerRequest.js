@@ -7,7 +7,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import React from 'react';
 import useReducer from './useReducer';
 import api from '../services/api';
 export default function useReducerRequest(method, props) {
@@ -35,7 +34,7 @@ export default function useReducerRequest(method, props) {
         try {
             onRequesting();
             api.defaults.headers.common['X-CSRF-Token'] = document.querySelector("meta[name=csrf-token]").content;
-            const config = { method: method, url: url };
+            const config = { method: method, url: url, data: null };
             if (data) {
                 config.data = data;
             }

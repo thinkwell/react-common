@@ -6,12 +6,12 @@ export default function useReducerFetch (props, value) {
     const payload = action.payload
     switch (action.type) {
       case 'onFetch':
-        return {...state, loading: true, error: null};
+        return {...state, loading: true, error: null} as FetchStateProps;
       case 'onSuccess':
-        return {...state, loading: false, items: payload};
+        return {...state, loading: false, items: payload} as FetchStateProps;
       case 'onError':
         const errorMessage = payload.response && payload.response.data && payload.response.data.message || payload.message;
-        return {...state, loading:false, error: errorMessage};
+        return {...state, loading:false, error: errorMessage} as FetchStateProps;
     }
   }
 
@@ -23,4 +23,9 @@ export default function useReducerFetch (props, value) {
   const onError = onAction('onError')
 
   return [state, onFetch, onSuccess, onError]
+}
+
+export interface FetchStateProps {
+  loading: boolean,
+  error: string
 }

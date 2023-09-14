@@ -1,6 +1,6 @@
 import { jsx as _jsx } from "react/jsx-runtime";
 import React, { useState } from 'react';
-const PagingContext = React.createContext([{}, false, false, () => { }, () => { }, () => { }]);
+const PagingContext = React.createContext([{}, false, false, (pageInfoProps) => { }, (previousPageInfo) => { }, (nextPageInfo) => { }]);
 const PagingProvider = (props) => {
     const [page_info, setPageInfo] = useState(props.page || props.page_info);
     const [previous_page_info, setPreviousPageInfo] = useState(props.previous_page_info);

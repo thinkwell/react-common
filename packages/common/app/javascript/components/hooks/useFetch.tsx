@@ -10,7 +10,7 @@ export default function useFetch (props) {
   const initialState = {loading: false, error: null}
   const [state, onFetch, onSuccess, onError] = useReducerFetch(props, initialState);
 
-  const fetch = async (url, params) => {
+  const fetch = async (url, params?) => {
     if (!url) {
       return
     }
