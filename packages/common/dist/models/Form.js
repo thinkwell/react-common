@@ -1,11 +1,10 @@
-import React, { useContext, useState } from 'react';
+import { useState } from 'react';
 import useReducerForm from '../hooks/useReducerForm';
 import Util from '../Util';
 import values from 'lodash/values';
 import omit from 'lodash/omit';
 import get from 'lodash/get';
 import mergeWith from 'lodash/mergeWith';
-import unset from 'lodash/unset';
 export default function Form(props) {
     const scope = props.scope || 'data';
     const [initialData] = useState(props.data && props.data[scope] || props.data || {});
@@ -28,7 +27,7 @@ export default function Form(props) {
     };
     const isInt = (value) => {
         return !isNaN(value) &&
-            parseInt(Number(value)) == value &&
+            parseInt(value) == value &&
             !isNaN(parseInt(value, 10));
     };
     const obj = {

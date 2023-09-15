@@ -7,7 +7,29 @@ import get from 'lodash/get'
 import mergeWith from 'lodash/mergeWith'
 import unset from 'lodash/unset'
 
-export default function Form (props) {
+export interface FormProps {
+  rootName: string,
+  data: string,
+  errors: string[],
+  field: (name) => string,
+  onData: (name) => Function,
+  setChild: (name, form) => void,
+  register: (name, validator) => void
+}
+type ParentProps = {
+  setChild: (name, object) => void
+}
+type Props = {
+  parent: ParentProps;
+  name: string;
+  rootName: string;
+  omit: string[];
+  format: (name) => string;
+  scope?: string,
+  data?: Record<string, string>
+}
+
+export default function Form (props:Props) {
   const scope = props.scope || 'data'
   const [initialData] = useState(props.data && props.data[scope] || props.data || {})
   const [formState, onAction] = useReducerForm({}, initialData)
@@ -33,7 +55,7 @@ export default function Form (props) {
 
   const isInt = (value) => {
     return !isNaN(value) &&
-      parseInt(Number(value)) == value &&
+      parseInt(value) == value &&
       !isNaN(parseInt(value, 10));
   }
 

@@ -1,10 +1,11 @@
 import React, { useState, useRef } from 'react';
-import Form from '../models/Form'
+import Form, {FormProps} from '../models/Form'
 
-const FormContext = React.createContext([{}]);
+type FormContextType = FormProps
+const FormContext = React.createContext<FormContextType>({} as FormProps);
 
 const FormProvider = (props) => {
-  const form = new Form(props)
+  const form = Form(props)
 
   return (
     <FormContext.Provider value={form}>
