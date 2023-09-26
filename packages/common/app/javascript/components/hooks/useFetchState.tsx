@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import api from '../services/api';
 
-// load props if not initialized
-export default function useFetchState (props) {
-  const [loading, setLoading] = useState(false);
-  const [state, setState] = useState(props);
+type Props = {
+  url?: string
+}
+type UseFetchStateProps<T> = [T, boolean, (string) => Promise<Awaited<T>>]
 
-  const fetch = async(url) => {
+export default function useFetchState<T>(props?:Props):UseFetchStateProps<T> {
+  const [loading, setLoading] = useState(false);
+  const [state, setState] = useState<T>({} as T);
+
+  const fetch = async(url):Promise<Awaited<T>> => {
     setLoading(true)
     const result = await api({method: 'get', url: url, headers: {'Content-Type': 'application/json',  'Accept': 'application/json'}, data: {}})
     setLoading(false)
@@ -21,5 +25,5 @@ export default function useFetchState (props) {
     }
   }, [props && props.url])
 
-  return [state, loading, fetch]
+  return [state, loading, fetch] as UseFetchStateProps<T>
 }

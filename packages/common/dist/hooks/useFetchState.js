@@ -7,12 +7,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import api from '../services/api';
-// load props if not initialized
 export default function useFetchState(props) {
     const [loading, setLoading] = useState(false);
-    const [state, setState] = useState(props);
+    const [state, setState] = useState({});
     const fetch = (url) => __awaiter(this, void 0, void 0, function* () {
         setLoading(true);
         const result = yield api({ method: 'get', url: url, headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, data: {} });
