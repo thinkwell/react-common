@@ -1,4 +1,8 @@
-export default function ItemsContext(props) {
+import { Dispatch, SetStateAction } from 'react';
+export interface ItemProps {
+  id: string
+}  
+export default function ItemsContext<T extends ItemProps>(props:[T[], Dispatch<SetStateAction<T[]>>]):[T[], Dispatch<SetStateAction<T[]>>, (T, idToReplace?) => void, (id) => T, (T) => void] {
   const [items, setItems] = props;
 
   const getItem = (id) => items.find((p) => p.id == id)
@@ -8,7 +12,7 @@ export default function ItemsContext(props) {
     return item && items.indexOf(item)
   }
 
-  const updateItems = (items, item, idToReplace) => {
+  const updateItems = (items, item, idToReplace?) => {
     if(!item.id) {
       throw Error(`Item without id : ${JSON.stringify(item)}`)
     }
@@ -30,7 +34,7 @@ export default function ItemsContext(props) {
     id = id.id || id
     const index = getItemIndex(id)
     if(index >= 0) {
-      const itemsDupe = [].concat(items)
+      const itemsDupe = ([] as T[]).concat(items)
       itemsDupe.splice(index, 1)
       console.log(`${id} : removed item at ${index}`)
       setItems(itemsDupe)
@@ -38,7 +42,7 @@ export default function ItemsContext(props) {
   }
 
   const upsertItem = (item, idToReplace) => {
-    const itemsDupe = [].concat(items)
+    const itemsDupe = ([] as T[]).concat(items)
     if (Array.isArray(item)) {
       item.forEach((i) => { updateItems(itemsDupe, i) })
     } else {

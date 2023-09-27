@@ -9,9 +9,9 @@ import unset from 'lodash/unset'
 
 export interface FormProps {
   rootName: string,
-  data: string,
+  data: any,
   errors: string[],
-  field: (name) => string,
+  field: (name) => any,
   onData: (name) => Function,
   setChild: (name, form) => void,
   register: (name, validator) => void
@@ -24,9 +24,9 @@ type Props = {
   name: string;
   rootName: string;
   omit: string[];
-  format: (name) => string;
+  format: (name) => any;
   scope?: string,
-  data?: Record<string, string>
+  data?: Record<string, any>
 }
 
 export default function Form (props:Props) {

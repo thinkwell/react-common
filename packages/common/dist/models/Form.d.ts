@@ -1,8 +1,8 @@
 export interface FormProps {
     rootName: string;
-    data: string;
+    data: any;
     errors: string[];
-    field: (name: any) => string;
+    field: (name: any) => any;
     onData: (name: any) => Function;
     setChild: (name: any, form: any) => void;
     register: (name: any, validator: any) => void;
@@ -15,9 +15,9 @@ type Props = {
     name: string;
     rootName: string;
     omit: string[];
-    format: (name: any) => string;
+    format: (name: any) => any;
     scope?: string;
-    data?: Record<string, string>;
+    data?: Record<string, any>;
 };
 export default function Form(props: Props): {
     field: (name: any) => any;
