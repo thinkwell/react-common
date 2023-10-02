@@ -21,7 +21,7 @@ export interface IEditModal {
   url?: string;
   children?: any;
   onActive?: (active, form?) => void,
-  onSave?: (T, form) => void,
+  onSave?: (T, form?) => void,
   onSaving?: (boolean) => void,
   active?: boolean
 }
