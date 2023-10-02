@@ -1,10 +1,32 @@
-import React, { useState, useRef, useContext } from 'react';
+import React, { useState, useRef, useContext, RefObject, ReactElement, JSXElementConstructor, MutableRefObject } from 'react';
 import {FormLayout, Modal, InlineError, Link, TextStyle} from '@shopify/polaris';
 import Form from './Form';
 import Spinner from './Spinner';
 import {Util, FormContext, useReducerModal, useEffect} from '@thinkwell/react.common';
 
-export default function EditModal(props) {
+export interface IEditModal {
+  saveRef?: MutableRefObject<() => void>;
+  clearRef?: MutableRefObject<() => void>;
+  setActiveRef?: MutableRefObject<(boolean) => void>;
+  setSavingRef?: MutableRefObject<() => void>;
+  linkText?: string | ((string) => string);
+  saveText?: string | ((string) => string);
+  title?: string | ((string) => string);
+  className?: string | undefined;
+  linkClass?: string;
+  activator?: RefObject<HTMLElement> | ReactElement<any, string | JSXElementConstructor<any>> | undefined;
+  onTransitionEnd?: (() => void) | undefined;
+  method?: string;
+  headers?: string;
+  url?: string;
+  children?: any;
+  onActive?: (active, form?) => void,
+  onSave?: (T, form) => void,
+  onSaving?: (boolean) => void,
+  active?: boolean
+}
+
+export default function EditModal<S extends IEditModal>(props:S) {
   const form = useContext(FormContext)
 
   const onActiveProp = props.onActive
@@ -12,7 +34,7 @@ export default function EditModal(props) {
     onActiveProp && onActiveProp(active, form)
   }}, props.active)
 
-  const submitRef = useRef(null);
+  const submitRef = useRef() as MutableRefObject<() => void>;
 
   if(typeof props.active != 'undefined') {
     useEffect(() => { onActive(props.active) }, [props.active]);
@@ -68,7 +90,7 @@ export default function EditModal(props) {
         onTransitionEnd={props.onTransitionEnd}
         onClose={() => onActive(false)}
         title={title}
-        primaryAction={typeof saveText != 'undefined' && !saveText ? null : {
+        primaryAction={typeof saveText != 'undefined' && !saveText ? undefined : {
           content: saveText || 'Save',
           onAction: save,
           loading: state.saving
