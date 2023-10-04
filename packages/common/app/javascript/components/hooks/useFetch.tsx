@@ -1,16 +1,16 @@
 import React, { useContext } from 'react';
-import useReducerFetch from './useReducerFetch'
+import useReducerFetch, { FetchStateProps } from './useReducerFetch'
 import axios from 'axios';
 import { PagingContext } from '../contexts/Paging'
 import useEffect from './useEffect'
 
-export default function useFetch (props) {
+export default function useFetch<T>(props):[FetchStateProps, (url, params?) => Promise<T[]>] {
   const [page_info, previous_page_info, next_page_info, setPageInfo, setPreviousPageInfo, setNextPageInfo] = useContext(PagingContext)
 
   const initialState = {loading: false, error: null}
   const [state, onFetch, onSuccess, onError] = useReducerFetch(props, initialState);
 
-  const fetch = async (url, params?) => {
+  const fetch = async (url, params?):Promise<T[]> => {
     if (!url) {
       return
     }
@@ -22,7 +22,7 @@ export default function useFetch (props) {
       } else {
         response = await axios.get(url);
       }
-      let newItems = response.data && response.data.items || response.data
+      let newItems:T[] = response.data && response.data.items || response.data
       console.debug(`${url} : fetched ${newItems.length}`)
       setPreviousPageInfo(response.data.previous_page_info)
       setNextPageInfo(response.data.next_page_info)

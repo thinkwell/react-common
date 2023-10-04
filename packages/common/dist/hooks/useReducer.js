@@ -1,4 +1,4 @@
-import React, { useReducer as useReducerReact, useRef } from 'react';
+import { useReducer as useReducerReact, useRef } from 'react';
 import lowerFirst from 'lodash/lowerFirst';
 export default function useReducer(props, initialArg, reducer, init) {
     const stateRef = useRef({});

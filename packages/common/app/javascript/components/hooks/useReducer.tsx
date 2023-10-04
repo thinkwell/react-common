@@ -1,7 +1,7 @@
 import React, { useReducer as useReducerReact, useRef } from 'react';
 import lowerFirst from 'lodash/lowerFirst'
 
-export default function useReducer (props, initialArg, reducer, init) {
+export default function useReducer (props, initialArg, reducer, init?):[any, React.Dispatch<any>, (type, field?) => (payload?: any) => void] {
   const stateRef = useRef({});
 
   function reducerCommon(state, action) {
@@ -11,7 +11,7 @@ export default function useReducer (props, initialArg, reducer, init) {
     return newState
   }
 
-  const onAction = (type, field) => {
+  const onAction = (type, field?) => {
     return (payload) => {
       const attribute = lowerFirst(type.replace(/^on/, ''))
       const action = {type, payload, field}
