@@ -7,9 +7,9 @@ type Props = {
     onSubmitting?: (boolean: any) => void;
     onError?: (string: any) => void;
     useHtml?: boolean;
-    method: string | (() => string);
+    method?: string | (() => string);
     headers?: any;
-    submitRef: MutableRefObject<(extraData?: any) => void>;
+    submitRef?: MutableRefObject<(extraData?: any) => void>;
     children?: any;
     submitText?: string;
     submitButton?: string;
