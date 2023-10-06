@@ -1,5 +1,6 @@
 import { TextFieldProps } from '@shopify/polaris';
-export type Props = TextFieldProps & {
+export type Props = Omit<TextFieldProps, "autoComplete"> & {
+    autoComplete?: string;
     format?: (value: any) => string;
     onChange?: (value: any, form: any) => void;
     onEnterPressed?: () => void;

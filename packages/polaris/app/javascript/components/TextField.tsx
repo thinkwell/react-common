@@ -2,7 +2,8 @@ import React, { useState, useEffect, useContext } from 'react';
 import {TextField as TextFieldPolaris, TextFieldProps} from '@shopify/polaris';
 import {FormContext} from '@thinkwell/react.common';
 
-export type Props = TextFieldProps & {
+export type Props = Omit<TextFieldProps, "autoComplete"> & {
+  autoComplete?: string,
   format?: (value) => string,
   onChange?: (value, form) => void,
   onEnterPressed?: () => void,
