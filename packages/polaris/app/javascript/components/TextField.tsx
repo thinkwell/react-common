@@ -7,7 +7,7 @@ export type Props = Omit<TextFieldProps, "autoComplete"> & {
   format?: (value) => string,
   onChange?: (value, form) => void,
   onEnterPressed?: () => void,
-  required: boolean
+  required?: boolean
 }
 
 export default function TextField(props:Props) {

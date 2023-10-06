@@ -4,6 +4,6 @@ export type Props = Omit<TextFieldProps, "autoComplete"> & {
     format?: (value: any) => string;
     onChange?: (value: any, form: any) => void;
     onEnterPressed?: () => void;
-    required: boolean;
+    required?: boolean;
 };
 export default function TextField(props: Props): import("react/jsx-runtime").JSX.Element;
