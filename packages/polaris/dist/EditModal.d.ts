@@ -3,7 +3,7 @@ export interface IEditModal {
     saveRef?: MutableRefObject<() => void>;
     clearRef?: MutableRefObject<() => void>;
     setActiveRef?: MutableRefObject<(boolean: any) => void>;
-    setSavingRef?: MutableRefObject<() => void>;
+    setSavingRef?: MutableRefObject<(boolean: any) => void>;
     linkText?: string | ((string: any) => string);
     saveText?: string | ((string: any) => string);
     title?: string | ((string: any) => string);

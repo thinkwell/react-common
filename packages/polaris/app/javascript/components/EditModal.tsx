@@ -8,7 +8,7 @@ export interface IEditModal {
   saveRef?: MutableRefObject<() => void>;
   clearRef?: MutableRefObject<() => void>;
   setActiveRef?: MutableRefObject<(boolean) => void>;
-  setSavingRef?: MutableRefObject<() => void>;
+  setSavingRef?: MutableRefObject<(boolean) => void>;
   linkText?: string | ((string) => string);
   saveText?: string | ((string) => string);
   title?: string | ((string) => string);
