@@ -13,11 +13,11 @@ export interface IEditModal {
     onTransitionEnd?: (() => void) | undefined;
     method?: string;
     headers?: string;
-    url?: string;
+    url?: string | ((form: any) => string);
     children?: any;
     onActive?: (active: any, form?: any) => void;
     onSave?: (T: any, form?: any) => void;
     onSaving?: (boolean: any) => void;
     active?: boolean;
 }
-export default function EditModal<S extends IEditModal>(props: S): JSX.Element;
+export default function EditModal<S extends IEditModal>(props: S): import("react/jsx-runtime").JSX.Element;

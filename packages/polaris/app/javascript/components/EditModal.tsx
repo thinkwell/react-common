@@ -18,12 +18,12 @@ export interface IEditModal {
   onTransitionEnd?: (() => void) | undefined;
   method?: string;
   headers?: string;
-  url?: string;
+  url?: string | ((form) => string);
   children?: any;
-  onActive?: (active, form?) => void,
-  onSave?: (T, form?) => void,
-  onSaving?: (boolean) => void,
-  active?: boolean
+  onActive?: (active, form?) => void;
+  onSave?: (T, form?) => void;
+  onSaving?: (boolean) => void;
+  active?: boolean;
 }
 
 export default function EditModal<S extends IEditModal>(props:S) {

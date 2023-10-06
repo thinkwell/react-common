@@ -1,1 +1,1 @@
-export default function Spinner(props: any): JSX.Element;
+export default function Spinner(props: any): import("react/jsx-runtime").JSX.Element;

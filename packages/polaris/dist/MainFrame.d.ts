@@ -1,1 +1,1 @@
-export default function MainFrame(props: any): JSX.Element;
+export default function MainFrame(props: any): import("react/jsx-runtime").JSX.Element;

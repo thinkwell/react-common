@@ -1,8 +1,15 @@
 import React, { useState, useEffect, useContext } from 'react';
-import {TextField as TextFieldPolaris} from '@shopify/polaris';
+import {TextField as TextFieldPolaris, TextFieldProps} from '@shopify/polaris';
 import {FormContext} from '@thinkwell/react.common';
 
-export default function TextField(props) {
+export type Props = TextFieldProps & {
+  format?: (value) => string,
+  onChange?: (value, form) => void,
+  onEnterPressed?: () => void,
+  required: boolean
+}
+
+export default function TextField(props:Props) {
   if (!props.name) {
     throw `Property name is required for TextField ${props.label}`
   }
@@ -51,6 +58,7 @@ export default function TextField(props) {
 
   return (<div onKeyDown={handleKeyPress}>
     <TextFieldPolaris
+    autoComplete={props.autoComplete || ""}
     multiline={props.multiline}
     label={props.label}
     labelHidden={props.labelHidden}

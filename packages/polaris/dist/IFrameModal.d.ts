@@ -1,1 +1,1 @@
-export default function IFrameModal(props: any): JSX.Element;
+export default function IFrameModal(props: any): import("react/jsx-runtime").JSX.Element;

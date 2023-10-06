@@ -1,14 +1,32 @@
-import React, { useState, useRef, useContext } from 'react';
+import React, { useState, useRef, useContext, MutableRefObject, CSSProperties } from 'react';
 import {FormLayout, InlineError, Link, Button} from '@shopify/polaris';
 import Spinner from './Spinner'
 import {Util, FormContext, useEffect, api} from '@thinkwell/react.common';
 import map from 'lodash/map';
+import {AxiosRequestConfig} from 'axios';
 
-export default function Form(props) {
+type Props = {
+  url: string | ((form) => string)
+  submitError?: string,
+  submitting?: boolean,
+  onSuccess?: (data) => void,
+  onSubmitting?: (boolean) => void,
+  onError?: (string) => void,
+  useHtml?: boolean,
+  method: string | (() => string),
+  headers?: any,
+  submitRef: MutableRefObject<(extraData?) => void>,
+  children?: any,
+  submitText?: string,
+  submitButton?: string,
+  style?: CSSProperties
+}
+
+export default function Form(props:Props) {
   const form = useContext(FormContext)
-  const formRef = useRef();
+  const formRef = useRef() as MutableRefObject<HTMLFormElement>;
   const [fileDownloadToken, setFileDownloadToken] = useState(Math.random().toString(36).substring(7))
-  const [submitting, setSubmitting] = useState()
+  const [submitting, setSubmitting] = useState(false)
   const [submitClicked, setSubmitClicked] = useState(false)
   const [submitError, setSubmitError] = useState(props.submitError)
 
@@ -57,16 +75,16 @@ export default function Form(props) {
     }
   }
 
-  const submit = (extraData) => {
+  const submit = (extraData?) => {
     onSubmitting(true)
     if (!props.useHtml) {
-      api.defaults.headers.common['X-CSRF-Token'] = document.querySelector("meta[name=csrf-token]").content
+      api.defaults.headers.common['X-CSRF-Token'] = (document.querySelector("meta[name=csrf-token]") as HTMLMetaElement).content
       const formData = Object.assign({}, form.data, extraData || {})
       const method = props.method ? (typeof props.method == 'function' ? props.method() : props.method) : 'put';
       const url = typeof props.url == 'function' ? props.url(form) : props.url;
       const data = {};
       data[form.rootName || "item"] = formData
-      const config = {method: method, url: url, data: data}
+      const config = {method: method, url: url, data: data} as AxiosRequestConfig
       if(props.headers) {
         config.headers = props.headers
       }
@@ -86,7 +104,7 @@ export default function Form(props) {
       interval = setInterval(() => {
         attempts--;
         const cookie = getCookie('fileDownloadToken')
-        let cookieValueObj = {}
+        let cookieValueObj = {value: undefined, result: undefined}
         try {
           cookieValueObj = cookie && JSON.parse(decodeURIComponent(cookie))
         } catch (error) {
@@ -111,7 +129,7 @@ export default function Form(props) {
     props.submitRef.current = submit
   }
 
-  const onClick = (event) => {
+  const onClick = (event?) => {
     event.preventDefault();
     setSubmitClicked(true);
     if(!form.errors.length) {
@@ -144,7 +162,7 @@ export default function Form(props) {
       : null }
       { !props.useHtml ?
         formLayout :
-        <form method="post" action={props.url} acceptCharset="UTF-8" ref={formRef} className="form">
+        <form method="post" action={typeof props.url == 'function' ? props.url(form) : props.url} acceptCharset="UTF-8" ref={formRef} className="form">
           {formLayout}
           <input type="hidden" name="fileDownloadToken" value={fileDownloadToken} />
         </form>

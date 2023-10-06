@@ -1,1 +1,1 @@
-export default function EditForm(props: any): JSX.Element;
+export default function EditForm(props: any): import("react/jsx-runtime").JSX.Element;

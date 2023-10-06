@@ -1,6 +1,6 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import React, { useState, useRef, useContext } from 'react';
-import { FormLayout, InlineError, Link, Button } from '@shopify/polaris';
+import { useState, useRef, useContext } from 'react';
+import { FormLayout, InlineError, Button } from '@shopify/polaris';
 import Spinner from './Spinner';
 import { Util, FormContext, useEffect, api } from '@thinkwell/react.common';
 import map from 'lodash/map';
@@ -8,7 +8,7 @@ export default function Form(props) {
     const form = useContext(FormContext);
     const formRef = useRef();
     const [fileDownloadToken, setFileDownloadToken] = useState(Math.random().toString(36).substring(7));
-    const [submitting, setSubmitting] = useState();
+    const [submitting, setSubmitting] = useState(false);
     const [submitClicked, setSubmitClicked] = useState(false);
     const [submitError, setSubmitError] = useState(props.submitError);
     useEffect(() => setSubmitting(props.submitting), [props.submitting]);
@@ -83,7 +83,7 @@ export default function Form(props) {
             interval = setInterval(() => {
                 attempts--;
                 const cookie = getCookie('fileDownloadToken');
-                let cookieValueObj = {};
+                let cookieValueObj = { value: undefined, result: undefined };
                 try {
                     cookieValueObj = cookie && JSON.parse(decodeURIComponent(cookie));
                 }
@@ -126,5 +126,5 @@ export default function Form(props) {
                 _jsx(InlineError, { message: (_jsxs("div", { children: [" ", form.errors.map((error, index) => (_jsx("div", { children: error }, index))), " "] })), fieldID: "validationErrorFieldID" })
                 : null, !props.useHtml ?
                 formLayout :
-                _jsxs("form", { method: "post", action: props.url, acceptCharset: "UTF-8", ref: formRef, className: "form", children: [formLayout, _jsx("input", { type: "hidden", name: "fileDownloadToken", value: fileDownloadToken })] })] }));
+                _jsxs("form", { method: "post", action: typeof props.url == 'function' ? props.url(form) : props.url, acceptCharset: "UTF-8", ref: formRef, className: "form", children: [formLayout, _jsx("input", { type: "hidden", name: "fileDownloadToken", value: fileDownloadToken })] })] }));
 }

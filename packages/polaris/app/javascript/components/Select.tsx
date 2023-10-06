@@ -1,10 +1,20 @@
 import React, { useContext } from 'react';
-import {Select as SelectPolaris, Stack} from '@shopify/polaris';
+import {Select as SelectPolaris, SelectProps, LegacyStack} from '@shopify/polaris';
 import Spinner from './Spinner'
 import {FormContext} from '@thinkwell/react.common';
 import startCase from 'lodash/startCase';
+import { FetchStateProps } from '@thinkwell/react.common/dist/hooks/useReducerFetch';
 
-export default function Select(props) {
+export type Props = Omit<SelectProps, "label" | "name" | "onChange"> & {
+  name: string,
+  required?: boolean,
+  label: {singular: string, plural: string},
+  onChange?: (value, form) => void,
+  fetchState?: FetchStateProps,
+  notFoundMessage?: string
+}
+
+export default function Select(props:Props) {
   if (!props.name) {
     throw `Property name is required for Select ${props.label.singular || props.label}`
   }
@@ -35,12 +45,12 @@ export default function Select(props) {
   />
 
   return typeof props.labelInline !== 'undefined' && !props.labelInline ? selectEl : (
-    <Stack>
+    <LegacyStack>
       { props.options && props.options.length || props.fetchState && props.fetchState.error ?
-        <Stack.Item fill>{selectEl}</Stack.Item> :
+        <LegacyStack.Item fill>{selectEl}</LegacyStack.Item> :
         props.fetchState && !props.fetchState.loading ? <div>{props.notFoundMessage || `No ${props.label.plural || props.label} found`}</div> : null
       }
       { props.fetchState && props.fetchState.loading ? <Spinner active={props.fetchState.loading} /> : null }
-    </Stack>
+    </LegacyStack>
   )
 }

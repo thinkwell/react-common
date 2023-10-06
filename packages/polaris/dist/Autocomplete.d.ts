@@ -1,1 +1,1 @@
-export default function Autocomplete(props: any): JSX.Element;
+export default function Autocomplete(props: any): import("react/jsx-runtime").JSX.Element;
