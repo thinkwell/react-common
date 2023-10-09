@@ -1,4 +1,3 @@
-import React from 'react';
 import useReducer from './useReducer';
 import set from 'lodash/set';
 export default function useReducerForm(props, data) {

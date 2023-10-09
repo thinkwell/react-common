@@ -12,7 +12,7 @@ export interface FormProps {
   data: any,
   errors: string[],
   field: (name) => any,
-  onData: (name) => Function,
+  onData: (name) => (payload:any) => void,
   setChild: (name, form) => void,
   register: (name, validator) => void
 }
@@ -124,7 +124,7 @@ export default function Form (props:Props) {
       children[name] = form
     },
     rootName: props.rootName
-  }
+  } as FormProps
 
   if (props.parent) {
     if (!props.name) {

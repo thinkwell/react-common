@@ -9,7 +9,7 @@ export interface IEditModal {
   clearRef?: MutableRefObject<() => void>;
   setActiveRef?: MutableRefObject<(boolean) => void>;
   setSavingRef?: MutableRefObject<(boolean) => void>;
-  linkText?: string | ((string) => string);
+  linkText?: string | ReactElement | ((string) => string);
   saveText?: string | ((string) => string);
   title?: string | ((string) => string);
   className?: string | undefined;

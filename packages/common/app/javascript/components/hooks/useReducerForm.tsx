@@ -2,7 +2,7 @@ import React from 'react';
 import useReducer from './useReducer'
 import set from 'lodash/set'
 
-export default function useReducerForm (props, data) {
+export default function useReducerForm (props, data):[any, (scope:string, name?:string) => (payload?: any) => void] {
   function reducer(state, action, attribute) {
     const payload = action.payload
     switch (action.type) {

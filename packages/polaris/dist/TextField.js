@@ -39,5 +39,5 @@ export default function TextField(props) {
         return errors;
     };
     form.register(props.name, validate);
-    return (_jsx("div", { onKeyDown: handleKeyPress, children: _jsx(TextFieldPolaris, { autoComplete: props.autoComplete || "", multiline: props.multiline, label: props.label, labelHidden: props.labelHidden, type: props.type || 'text', value: valueAsString, onChange: onChange, onBlur: props.onBlur, onFocus: props.onFocus, name: nameHtml, id: id, disabled: props.disabled, pattern: props.pattern, maxLength: props.maxLength, placeholder: props.placeholder }) }));
+    return (_jsx("div", { onKeyDown: handleKeyPress, children: _jsx(TextFieldPolaris, { autoComplete: props.autoComplete || "", multiline: props.multiline, label: props.label || "", labelHidden: props.labelHidden, type: props.type || 'text', value: valueAsString, onChange: onChange, onBlur: props.onBlur, onFocus: props.onFocus, name: nameHtml, id: id, disabled: props.disabled, pattern: props.pattern, maxLength: props.maxLength, placeholder: props.placeholder }) }));
 }

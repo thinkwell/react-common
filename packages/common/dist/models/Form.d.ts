@@ -3,7 +3,7 @@ export interface FormProps {
     data: any;
     errors: string[];
     field: (name: any) => any;
-    onData: (name: any) => Function;
+    onData: (name: any) => (payload: any) => void;
     setChild: (name: any, form: any) => void;
     register: (name: any, validator: any) => void;
 }
@@ -19,13 +19,5 @@ type Props = {
     scope?: string;
     data?: Record<string, any>;
 };
-export default function Form(props: Props): {
-    field: (name: any) => any;
-    readonly data: any;
-    readonly errors: any;
-    onData: (name: any) => any;
-    register: (name: any, validator: any) => void;
-    setChild: (name: any, form: any) => void;
-    rootName: string;
-};
+export default function Form(props: Props): FormProps;
 export {};

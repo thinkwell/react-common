@@ -2,7 +2,9 @@ import React, { useState, useEffect, useContext } from 'react';
 import {TextField as TextFieldPolaris, TextFieldProps} from '@shopify/polaris';
 import {FormContext} from '@thinkwell/react.common';
 
-export type Props = Omit<TextFieldProps, "autoComplete"> & {
+export type Props = Omit<TextFieldProps, "autoComplete" | "name" | "label"> & {
+  name: string | string[],
+  label?: string,
   autoComplete?: string,
   format?: (value) => string,
   onChange?: (value, form) => void,
@@ -61,7 +63,7 @@ export default function TextField(props:Props) {
     <TextFieldPolaris
     autoComplete={props.autoComplete || ""}
     multiline={props.multiline}
-    label={props.label}
+    label={props.label || ""}
     labelHidden={props.labelHidden}
     type={props.type || 'text'}
     value={valueAsString}
