@@ -11,13 +11,13 @@ export interface FormProps {
   rootName: string,
   data: any,
   errors: string[],
-  field: (name) => any,
-  onData: (name) => (payload:any) => void,
-  setChild: (name, form) => void,
-  register: (name, validator) => void
+  field: (name:string) => any,
+  onData: (name:string) => (payload:any) => void,
+  setChild: (name:string, form:FormProps) => void,
+  register: (name:string, validator) => void
 }
 type ParentProps = {
-  setChild: (name, object) => void
+  setChild: (name:string, object) => void
 }
 type Props = {
   parent: ParentProps;

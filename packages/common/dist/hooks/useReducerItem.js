@@ -1,4 +1,3 @@
-import React from 'react';
 import useReducer from './useReducer';
 export default function useReducerItem(props, fieldsToEdit) {
     function reducer(state, action, attribute) {

@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from 'react';
+import { useContext, useRef } from 'react';
 import { SearchContext } from '../contexts/Search';
 import debounce from 'lodash/debounce';
 export default function useSearch(fetch) {

@@ -1,4 +1,4 @@
-import React, { useEffect as useEffectReact } from 'react';
+import { useEffect as useEffectReact } from 'react';
 export default function useEffect(callback, props) {
     const callbackOnMounted = () => {
         let isMounted = true;

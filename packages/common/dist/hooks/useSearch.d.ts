@@ -1,1 +1,1 @@
-export default function useSearch(fetch: any): ((value: any) => void)[];
+export default function useSearch(fetch: any): [(value: string) => void];
