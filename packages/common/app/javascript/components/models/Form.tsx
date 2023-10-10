@@ -11,10 +11,10 @@ export interface FormProps {
   rootName: string,
   data: any,
   errors: string[],
-  field: (name:string) => any,
-  onData: (name:string) => (payload:any) => void,
+  field: (name:string | string[]) => any,
+  onData: (name:string | string[]) => (payload:any) => void,
   setChild: (name:string, form:FormProps) => void,
-  register: (name:string, validator) => void
+  register: (name:string | string[], validator) => void
 }
 type ParentProps = {
   setChild: (name:string, object) => void
@@ -116,7 +116,7 @@ export default function Form (props:Props) {
       const childrenErrors = values(children).map((form) => form.errors)
       return Util.flattenDeep(Object.assign({}, errorsObj, ...childrenErrors));
     },
-    onData: (name) => {
+    onData: (name:(string | string[])) => {
       return onAction(scope, name)
     },
     register: register,

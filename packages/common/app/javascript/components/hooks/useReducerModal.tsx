@@ -1,7 +1,7 @@
 import React from 'react';
 import useReducer from './useReducer'
 
-export default function useReducerModal (props, active):[any, (active: boolean) => void, (saveClicked: boolean) => void, (saveSubmitted: boolean) => void, (saveError: string) => void, (saving: boolean) => void, (clear: boolean) => void] {
+export default function useReducerModal (props, active):[any, (active: boolean) => void, () => void, () => void, (saveError: string) => void, (saving: boolean) => void, () => void] {
   function reducer(state, action, attribute) {
     const payload = action.payload
     switch (action.type) {
