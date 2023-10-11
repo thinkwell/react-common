@@ -1,5 +1,5 @@
 import { jsx as _jsx } from "react/jsx-runtime";
-import React, { useState, useEffect, useContext } from 'react';
+import { useContext } from 'react';
 import { Checkbox as CheckboxPolaris } from '@shopify/polaris';
 import { FormContext } from '@thinkwell/react.common';
 export default function Checkbox(props) {

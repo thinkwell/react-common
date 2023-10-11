@@ -1,8 +1,14 @@
 import React, { useState, useEffect, useContext } from 'react';
 import {Checkbox as CheckboxPolaris} from '@shopify/polaris';
 import {FormContext} from '@thinkwell/react.common';
+import { CheckboxProps } from '@shopify/polaris/build/ts/latest/src/components/Checkbox';
 
-export default function Checkbox(props) {
+type Props = Omit<CheckboxProps, "name" | "onChange"> & {
+  name: string | string[],
+  onChange?: (value, FormProps?) => void
+}
+
+export default function Checkbox(props:Props) {
   if (!props.name) {
     throw `Property name is required for Checkbox ${props.label}`
   }

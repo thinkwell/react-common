@@ -8,9 +8,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import { jsx as _jsx } from "react/jsx-runtime";
-import React, { useState, useEffect, useContext, useRef } from 'react';
+import { useState, useContext, useRef } from 'react';
 import { Autocomplete as AutocompletePolaris, Icon } from '@shopify/polaris';
-import { SearchMinor, DeleteMajor } from '@shopify/polaris-icons';
+import { SearchMinor } from '@shopify/polaris-icons';
 import { FormContext } from '@thinkwell/react.common';
 import axios from 'axios';
 export default function Autocomplete(props) {
@@ -94,6 +94,6 @@ export default function Autocomplete(props) {
         setSelectedOptions([]);
         form.onData(props.name)(null);
     };
-    const textField = (_jsx(AutocompletePolaris.TextField, { onChange: updateText, value: inputValue, label: props.label, clearButton: true, onClearButtonClick: onClearButtonClick, prefix: _jsx(Icon, { source: SearchMinor, color: "base" }), placeholder: props.placeholder || `Search ${props.label}` }));
+    const textField = (_jsx(AutocompletePolaris.TextField, { autoComplete: '', onChange: updateText, value: inputValue, label: props.label, clearButton: true, onClearButtonClick: onClearButtonClick, prefix: _jsx(Icon, { source: SearchMinor, color: "base" }), placeholder: props.placeholder || `Search ${props.label}` }));
     return (_jsx("div", { onKeyDown: handleKeyPress, children: _jsx(AutocompletePolaris, { allowMultiple: false, options: options, selected: selectedOptions, onSelect: updateSelection, loading: loading, textField: textField }) }));
 }

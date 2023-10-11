@@ -3,8 +3,17 @@ import {Autocomplete as AutocompletePolaris, Icon} from '@shopify/polaris';
 import {SearchMinor, DeleteMajor} from '@shopify/polaris-icons';
 import {FormContext} from '@thinkwell/react.common';
 import axios from 'axios'
+import { TextFieldProps } from '.';
 
-export default function Autocomplete(props) {
+type Props = TextFieldProps & {
+  formatLabel?: (string) => string,
+  valueProp?: string,
+  url: string,
+  limit?: string,
+  idProp?: string
+}
+
+export default function Autocomplete(props:Props) {
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [inputValue, setInputValue] = useState(props.value);
   const [options, setOptions] = useState([]);
@@ -101,6 +110,7 @@ export default function Autocomplete(props) {
 
   const textField = (
     <AutocompletePolaris.TextField
+      autoComplete=''
       onChange={updateText}
       value={inputValue}
       label={props.label}
