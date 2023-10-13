@@ -1,7 +1,13 @@
 import React from 'react';
 import useReducer from './useReducer'
+import {TabsProps} from '@shopify/polaris'
 
-export default function useReducerTab (props, tabs, tabSelected?: string):[any, (tabSelected: number) => void] {
+type TabState = {
+  tabIndexSelected: number,
+  tabSelected: string
+}
+
+export default function useReducerTab (props, tabs:TabsProps['tabs'], tabSelected?: string):[TabState, (tabSelected: number) => void] {
   function reducer(state, action, attribute) {
     const payload = action.payload
     switch (action.type) {

@@ -1,8 +1,14 @@
 import React from 'react';
 import useReducer from './useReducer'
 import api from '../services/api';
+import {AxiosRequestConfig} from 'axios'
 
-export default function useReducerRequest (method, props) {
+type RequestState = {
+  requesting: boolean,
+  error: string
+}
+
+export default function useReducerRequest (method:string, props):[RequestState, (url:string, data?, confirmMsg?:string) => Promise<any>] {
   function reducer(state, action) {
     const payload = action.payload
     switch (action.type) {
@@ -24,7 +30,7 @@ export default function useReducerRequest (method, props) {
   const onRequesting = onAction('onRequesting')
   const onError = onAction('onError')
 
-  const onRequest = async (url, data, confirmMsg) => {
+  const onRequest = async (url, data?, confirmMsg?) => {
     if(confirmMsg && !confirm(confirmMsg)) {
       return
     }
@@ -32,7 +38,7 @@ export default function useReducerRequest (method, props) {
     try {
       onRequesting()
       api.defaults.headers.common['X-CSRF-Token'] = (document.querySelector("meta[name=csrf-token]") as HTMLMetaElement).content
-      const config = {method: method, url: url, data: null}
+      const config = {method: method, url: url, data: null} as AxiosRequestConfig
       if(data) {
         config.data = data
       }
