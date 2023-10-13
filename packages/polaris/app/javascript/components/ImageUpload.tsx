@@ -3,7 +3,19 @@ import {DropZone, Banner, List, Thumbnail, Stack, Button} from '@shopify/polaris
 import { CancelSmallMinor } from '@shopify/polaris-icons'
 import {FormContext} from '@thinkwell/react.common';
 
-export default function ImageUpload(props) {
+type FileProps = (Blob | MediaSource) & {
+  name: string,
+  url: string,
+  size: string
+}
+
+type Props = {
+  name: string | string[],
+  label: string,
+  value?: FileProps
+}
+
+export default function ImageUpload(props:Props) {
   const [acceptedFile, setAcceptedFile] = useState(props.value);
   const [rejectedFiles, setRejectedFiles] = useState([]);
 

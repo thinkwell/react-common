@@ -4,7 +4,11 @@ import {MobileCancelMajor} from '@shopify/polaris-icons';
 import Form from './Form';
 import Spinner from './Spinner';
 import {Util, FormContext, useReducerModal, useEffect} from '@thinkwell/react.common';
+import { IEditModal } from './EditModal';
 
+type Props = IEditModal & {
+
+}
 
 export default function EditSheet(props) {
   const form = useContext(FormContext)
@@ -65,6 +69,7 @@ export default function EditSheet(props) {
         }
       </Spinner>
       <Sheet
+        accessibilityLabel=''
         open={state.active}
         onEntered={props.onTransitionEnd}
         onClose={() => onActive(false)}

@@ -8,9 +8,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import React, { useState, useEffect, useRef, useContext } from 'react';
-import { Card, Stack, ResourceList as ResourceListShopify, Pagination, InlineError, EmptyState } from '@shopify/polaris';
-import { SearchContext, PagingContext, FormContext, useReducerForm, useReducerRequest } from '@thinkwell/react.common';
+import { useState, useContext } from 'react';
+import { Stack, ResourceList as ResourceListShopify, Pagination, InlineError, EmptyState } from '@shopify/polaris';
+import { SearchContext, PagingContext, FormContext } from '@thinkwell/react.common';
 export default function ResourceList(props) {
     const form = useContext(FormContext);
     const [page_info, previous_page_info, next_page_info, setPageInfo] = useContext(PagingContext);
@@ -23,10 +23,10 @@ export default function ResourceList(props) {
         const [field, type] = order.split(' ');
         itemsSorted.sort((a, b) => {
             if (type == 'desc') {
-                return new Date(b[field]) - new Date(a[field]);
+                return new Date(b[field]).valueOf() - new Date(a[field]).valueOf();
             }
             else {
-                return new Date(a[field]) - new Date(b[field]);
+                return new Date(a[field]).valueOf() - new Date(b[field]).valueOf();
             }
         });
     }
@@ -59,6 +59,6 @@ export default function ResourceList(props) {
         { label: 'Newest update', value: `${orderProp} desc` },
         { label: 'Oldest update', value: `${orderProp} asc` },
     ] : null;
-    const emptyStateMarkup = !props.items || !props.items.length ? _jsx(EmptyState, { heading: `No ${resourceName.plural} found` }) : null;
+    const emptyStateMarkup = !props.items || !props.items.length ? _jsx(EmptyState, { image: "", heading: `No ${resourceName.plural} found` }) : null;
     return (_jsxs(Stack, { vertical: true, children: [props.fetchItemsState && props.fetchItemsState.error ? _jsx(InlineError, { message: props.fetchItemsState && props.fetchItemsState.error, fieldID: "resourceListError" }) : null, props.fetchItemsError ? _jsx(InlineError, { message: props.fetchItemsError, fieldID: "resourceListError" }) : null, _jsx(ResourceListShopify, { selectedItems: props.selectable && form.field && form.field(props.name), onSelectionChange: props.selectable && form.onData && form.onData(props.name), selectable: props.selectable, resourceName: resourceName, emptyState: emptyStateMarkup, items: itemsSorted, renderItem: props.renderItem, sortValue: order, sortOptions: sortOptions, onSortChange: handleSortChange, loading: props.fetchItemsState && props.fetchItemsState.loading || props.fetchItemsLoading }), paginationMarkup] }));
 }

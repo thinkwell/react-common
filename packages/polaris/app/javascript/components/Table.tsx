@@ -1,7 +1,17 @@
 import React, { useState } from 'react';
 import {Spinner as SpinnerPolaris} from '@shopify/polaris';
 
-export default function Table(props) {
+type Row = {
+  valueLabel?: string,
+  value?: string,
+  label?: string,
+  image?: boolean
+}
+type Props = {
+  rows: Row[]
+}
+
+export default function Table(props:Props) {
 
   return (<table><tbody>
     {

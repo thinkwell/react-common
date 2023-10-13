@@ -1,9 +1,26 @@
-import React, { useState, useEffect as useEffectReact, useCallback, useContext } from 'react'
-import {Frame, TopBar, Card, ActionList, Loading, Navigation} from '@shopify/polaris';
+import React, { useState, useEffect as useEffectReact, useCallback, useContext, MutableRefObject, KeyboardEvent } from 'react'
+import {Frame, TopBar, Card, ActionList, Loading, Navigation, TopBarProps} from '@shopify/polaris';
 import {ProductsMajor, CustomersMajor, AffiliateMajor, ClockMajor, ReportsMajor} from '@shopify/polaris-icons';
 import {SearchContext, PagingContext, Util, useEffect} from '@thinkwell/react.common';
 
-export default function MainFrame(props) {
+type Props = {
+  loading?: boolean,
+  navigate?: (path:string) => void,
+  navigateToRef?: MutableRefObject<(href:string, opts:any) => void>,
+  onSearchChange?: (search:string) => void,
+  withoutSearch?: boolean,
+  onSearchKeyPress?: (event:KeyboardEvent<HTMLDivElement>) => void,
+  searchPlaceHolder?: string,
+  userMenu?: TopBarProps['userMenu'],
+  searchResultsVisible?: TopBarProps['searchResultsVisible'],
+  searchResults?: TopBarProps['searchResults'],
+  onSearchResultsDismiss?:  TopBarProps['onSearchResultsDismiss'],
+  href?: string,
+  navigation?: React.ReactNode,
+  children: any
+}
+
+export default function MainFrame(props:Props) {
   const [searchValue, setSearchValue] = useContext(SearchContext);
   const [page_info, previous_page_info, next_page_info, setPageInfo] = useContext(PagingContext);
   const [loading, setLoading] = useState(props.loading);

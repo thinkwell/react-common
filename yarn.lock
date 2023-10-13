@@ -4897,6 +4897,13 @@ raw-body@2.4.0:
     iconv-lite "0.4.24"
     unpipe "1.0.0"
 
+react-device-detect@^2.2.2:
+  version "2.2.3"
+  resolved "https://registry.yarnpkg.com/react-device-detect/-/react-device-detect-2.2.3.tgz#97a7ae767cdd004e7c3578260f48cf70c036e7ca"
+  integrity sha512-buYY3qrCnQVlIFHrC5UcUoAj7iANs/+srdkwsnNjI7anr3Tt7UY6MqNxtMLlr0tMBied0O49UZVK8XKs3ZIiPw==
+  dependencies:
+    ua-parser-js "^1.0.33"
+
 react-dom@^17.0.1:
   version "17.0.2"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-17.0.2.tgz#ecffb6845e3ad8dbfcdc498f0d0a939736502c23"
@@ -4910,6 +4917,13 @@ react-fast-compare@^3.2.0:
   version "3.2.2"
   resolved "https://registry.yarnpkg.com/react-fast-compare/-/react-fast-compare-3.2.2.tgz#929a97a532304ce9fee4bcae44234f1ce2c21d49"
   integrity sha512-nsO+KSNgo1SbJqJEYRE9ERzo7YtYbou/OqjSQKxV7jcKox7+usiUVZOAC+XnDOABXggQTno0Y1CpVnuWEc1boQ==
+
+react-iframe@^1.8.5:
+  version "1.8.5"
+  resolved "https://registry.yarnpkg.com/react-iframe/-/react-iframe-1.8.5.tgz#33dc091147c3f2371d0826797f1b5767ff28a56f"
+  integrity sha512-F4cQJGs3ydaG6fJWfuz9yLwOU0Trzl6kttXuUG+vYwosH8enOOFxZWEDQCSbNVO8ayjfYZeqLxEvdvcsSy4GvA==
+  dependencies:
+    object-assign "^4.1.1"
 
 react-is@^16.12.0, react-is@^16.8.1:
   version "16.13.1"
@@ -5904,6 +5918,11 @@ typescript@^5.1.6:
   version "5.1.6"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-5.1.6.tgz#02f8ac202b6dad2c0dd5e0913745b47a37998274"
   integrity sha512-zaWCozRZ6DLEWAWFrVDz1H6FVXzUSfTy5FUMWsQlU8Ym5JP9eO4xkTIROFCQvhQf61z6O/G6ugw3SgAnvvm+HA==
+
+ua-parser-js@^1.0.33:
+  version "1.0.36"
+  resolved "https://registry.yarnpkg.com/ua-parser-js/-/ua-parser-js-1.0.36.tgz#a9ab6b9bd3a8efb90bb0816674b412717b7c428c"
+  integrity sha512-znuyCIXzl8ciS3+y3fHJI/2OhQIXbXw9MWC/o3qwyR+RGppjZHrM27CGFSKCJXi2Kctiz537iOu2KnXs1lMQhw==
 
 unicode-canonical-property-names-ecmascript@^1.0.4:
   version "1.0.4"

@@ -1,8 +1,24 @@
-import React, { useState, useEffect, useRef, useContext } from 'react';
+import React, { useState, useEffect, useRef, useContext, ReactNode } from 'react';
 import {Card, Stack, ResourceList as ResourceListShopify, Pagination, InlineError, EmptyState} from '@shopify/polaris';
-import {SearchContext, PagingContext, FormContext, useReducerForm, useReducerRequest} from '@thinkwell/react.common';
+import {SearchContext, PagingContext, FormContext, useReducerForm, useReducerRequest, FetchStateProps} from '@thinkwell/react.common';
 
-export default function ResourceList(props) {
+type Props = {
+  fetchItemsLoading?: boolean;
+  renderItem: (item: any, id: string, index: number) => ReactNode;
+  name?: string | string[],
+  order?: string,
+  limit?: number,
+  items: any[],
+  withoutSort?: boolean,
+  url?: string,
+  fetchItems?: ((url:string, params?) => void),
+  resourceName?: {singular: string, plural: string},
+  selectable?: boolean,
+  fetchItemsState?: FetchStateProps,
+  fetchItemsError?: string
+}
+
+export default function ResourceList(props:Props) {
   const form = useContext(FormContext)
   const [page_info, previous_page_info, next_page_info, setPageInfo] = useContext(PagingContext)
   const [search] = useContext(SearchContext)
@@ -15,9 +31,9 @@ export default function ResourceList(props) {
     const [field, type] = order.split(' ')
     itemsSorted.sort((a, b) => {
       if (type == 'desc') {
-        return new Date(b[field]) - new Date(a[field])
+        return new Date(b[field]).valueOf() - new Date(a[field]).valueOf()
       } else {
-        return new Date(a[field]) - new Date(b[field])
+        return new Date(a[field]).valueOf() - new Date(b[field]).valueOf()
       }
     })
   }
@@ -63,7 +79,7 @@ export default function ResourceList(props) {
       {label: 'Oldest update', value: `${orderProp} asc`},
     ] : null;
 
-  const emptyStateMarkup = !props.items || !props.items.length ?  <EmptyState heading={`No ${resourceName.plural} found`}></EmptyState> : null
+  const emptyStateMarkup = !props.items || !props.items.length ?  <EmptyState image="" heading={`No ${resourceName.plural} found`}></EmptyState> : null
 
   return (
     <Stack vertical={true}>

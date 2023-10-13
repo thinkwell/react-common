@@ -1,5 +1,5 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import React, { useState, useCallback, useContext } from 'react';
+import { useState, useCallback, useContext } from 'react';
 import { DropZone, Banner, List, Thumbnail, Stack, Button } from '@shopify/polaris';
 import { CancelSmallMinor } from '@shopify/polaris-icons';
 import { FormContext } from '@thinkwell/react.common';

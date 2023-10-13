@@ -1,6 +1,4 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import React, { useState } from 'react';
-import { Spinner as SpinnerPolaris } from '@shopify/polaris';
 export default function Table(props) {
     return (_jsx("table", { children: _jsx("tbody", { children: props.rows.map((row, index) => {
                 const value = row.valueLabel || row.value;

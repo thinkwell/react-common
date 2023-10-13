@@ -1,7 +1,6 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import React, { useState, useContext } from 'react';
+import { useState } from 'react';
 import { Modal, Link } from '@shopify/polaris';
-import Spinner from './Spinner';
 import Iframe from 'react-iframe';
 import { isSafari } from 'react-device-detect';
 export default function IFrameModal(props) {

@@ -1,7 +1,6 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import React, { useState, useEffect as useEffectReact, useCallback, useContext } from 'react';
-import { Frame, TopBar, Card, ActionList, Loading, Navigation } from '@shopify/polaris';
-import { ProductsMajor, CustomersMajor, AffiliateMajor, ClockMajor, ReportsMajor } from '@shopify/polaris-icons';
+import { useState, useCallback, useContext } from 'react';
+import { Frame, TopBar, Loading } from '@shopify/polaris';
 import { SearchContext, PagingContext, Util, useEffect } from '@thinkwell/react.common';
 export default function MainFrame(props) {
     const [searchValue, setSearchValue] = useContext(SearchContext);

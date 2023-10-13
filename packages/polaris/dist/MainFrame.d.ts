@@ -1,1 +1,20 @@
-export default function MainFrame(props: any): import("react/jsx-runtime").JSX.Element;
+import React, { MutableRefObject, KeyboardEvent } from 'react';
+import { TopBarProps } from '@shopify/polaris';
+type Props = {
+    loading?: boolean;
+    navigate?: (path: string) => void;
+    navigateToRef?: MutableRefObject<(href: string, opts: any) => void>;
+    onSearchChange?: (search: string) => void;
+    withoutSearch?: boolean;
+    onSearchKeyPress?: (event: KeyboardEvent<HTMLDivElement>) => void;
+    searchPlaceHolder?: string;
+    userMenu?: TopBarProps['userMenu'];
+    searchResultsVisible?: TopBarProps['searchResultsVisible'];
+    searchResults?: TopBarProps['searchResults'];
+    onSearchResultsDismiss?: TopBarProps['onSearchResultsDismiss'];
+    href?: string;
+    navigation?: React.ReactNode;
+    children: any;
+};
+export default function MainFrame(props: Props): import("react/jsx-runtime").JSX.Element;
+export {};

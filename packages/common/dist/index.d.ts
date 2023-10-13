@@ -1,6 +1,8 @@
 import Util from './Util';
 import { FormProvider } from './contexts/Form';
 import { FormContext } from './contexts/Form';
+import { FormProps } from './models/Form';
+import { FetchStateProps } from './hooks/useReducerFetch';
 import Items from './contexts/Items';
 import { PagingContext } from './contexts/Paging';
 import { PagingProvider } from './contexts/Paging';
@@ -18,4 +20,4 @@ import useReducerRequest from './hooks/useReducerRequest';
 import useReducerTab from './hooks/useReducerTab';
 import useSearch from './hooks/useSearch';
 import api from './services/api';
-export { Util, FormProvider, FormContext, Items, PagingContext, PagingProvider, SearchContext, SearchProvider, useEffect, useFetch, useFetchState, useReducer, useReducerFetch, useReducerForm, useReducerItem, useReducerModal, useReducerRequest, useReducerTab, useSearch, api };
+export { Util, FormProvider, FormContext, FormProps, FetchStateProps, Items, PagingContext, PagingProvider, SearchContext, SearchProvider, useEffect, useFetch, useFetchState, useReducer, useReducerFetch, useReducerForm, useReducerItem, useReducerModal, useReducerRequest, useReducerTab, useSearch, api };

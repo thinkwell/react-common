@@ -1,10 +1,10 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import React, { useState, useRef, useContext } from 'react';
-import { FormLayout, Sheet, InlineError, Heading, Scrollable, Button } from '@shopify/polaris';
+import { useRef, useContext } from 'react';
+import { Sheet, InlineError, Heading, Scrollable, Button } from '@shopify/polaris';
 import { MobileCancelMajor } from '@shopify/polaris-icons';
 import Form from './Form';
 import Spinner from './Spinner';
-import { Util, FormContext, useReducerModal, useEffect } from '@thinkwell/react.common';
+import { FormContext, useReducerModal, useEffect } from '@thinkwell/react.common';
 export default function EditSheet(props) {
     const form = useContext(FormContext);
     const onActiveProp = props.onActive;
@@ -47,7 +47,7 @@ export default function EditSheet(props) {
     const title = props.title && (typeof props.title == 'function' ? props.title(form) : props.title);
     return (_jsxs("div", { className: props.className, children: [_jsx(Spinner, { active: state.saving, children: typeof props.active != 'undefined' ?
                     _jsx("span", { className: "link-text", children: linkText || title }) :
-                    _jsx("button", { className: props.linkClass || 'Polaris-Link', onClick: () => onActive(true), children: linkText || title }) }), _jsx(Sheet, { open: state.active, onEntered: props.onTransitionEnd, onClose: () => onActive(false), children: _jsxs("div", { style: {
+                    _jsx("button", { className: props.linkClass || 'Polaris-Link', onClick: () => onActive(true), children: linkText || title }) }), _jsx(Sheet, { accessibilityLabel: '', open: state.active, onEntered: props.onTransitionEnd, onClose: () => onActive(false), children: _jsxs("div", { style: {
                         display: 'flex',
                         flexDirection: 'column',
                         height: '100%',

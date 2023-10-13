@@ -1,8 +1,16 @@
 import React, { useState, useEffect, useContext } from 'react';
 import {RadioButton as RadioButtonPolaris} from '@shopify/polaris';
-import {FormContext} from '@thinkwell/react.common';
+import {FormContext, FormProps} from '@thinkwell/react.common';
 
-export default function RadioButton(props) {
+type Props = {
+  name: string | string[],
+  label?: string,
+  id?: string,
+  value?: string,
+  onChange(value:string, form:FormProps)
+}
+
+export default function RadioButton(props:Props) {
   if (!props.name) {
     throw `Property name is required for RadioButton ${props.label}`
   }

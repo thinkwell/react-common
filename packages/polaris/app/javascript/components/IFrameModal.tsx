@@ -4,7 +4,14 @@ import Spinner from './Spinner'
 import Iframe from 'react-iframe'
 import { isSafari } from 'react-device-detect';
 
-export default function IFrameModal(props) {
+type Props = {
+  url: string,
+  linkTitle: string,
+  title: string,
+  large: boolean
+}
+
+export default function IFrameModal(props:Props) {
   const [active, setActive] = useState(false)
   const [loading, setLoading] = useState(false)
 
