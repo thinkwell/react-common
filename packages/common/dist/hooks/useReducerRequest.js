@@ -34,7 +34,7 @@ export default function useReducerRequest(method, props) {
         try {
             onRequesting();
             api.defaults.headers.common['X-CSRF-Token'] = document.querySelector("meta[name=csrf-token]").content;
-            const config = { method: method, url: url, data: null };
+            const config = { method: method, url: url };
             if (data) {
                 config.data = data;
             }

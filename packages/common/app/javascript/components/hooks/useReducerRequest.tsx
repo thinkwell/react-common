@@ -38,7 +38,7 @@ export default function useReducerRequest (method:string, props):[RequestState, 
     try {
       onRequesting()
       api.defaults.headers.common['X-CSRF-Token'] = (document.querySelector("meta[name=csrf-token]") as HTMLMetaElement).content
-      const config = {method: method, url: url, data: null} as AxiosRequestConfig
+      const config = {method: method, url: url} as AxiosRequestConfig
       if(data) {
         config.data = data
       }
