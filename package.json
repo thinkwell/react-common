@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "engines": {
-    "node": "18.x",
+    "node": "21.4.x",
     "yarn": "3.6.x"
   },
   "workspaces": [
