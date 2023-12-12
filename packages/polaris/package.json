@@ -7,6 +7,9 @@
     "test:watch": "npm run test -- --watch"
   },
   "main": "app/javascript/components/index.js",
+  "files": [
+    "app/javascript/**/*"
+  ],
   "peerDependencies": {
     "@shopify/polaris": "^6.1.0",
     "axios": "^0.19.0",
