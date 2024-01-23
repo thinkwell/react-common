@@ -12,13 +12,14 @@ export default function useFetchState<T>(props?:Props):UseFetchStateProps<T> {
 
   const fetch = async(url):Promise<Awaited<T>> => {
     setLoading(true)
+    setState({})
     const result = await api({method: 'get', url: url, headers: {'Content-Type': 'application/json',  'Accept': 'application/json'}, data: {}})
     setLoading(false)
     const data = result && result.data
     setState(data)
     return data
   }
-
+  
   useEffect(() => {
     if (props && props.url) {
       fetch(props.url)
