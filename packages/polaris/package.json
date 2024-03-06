@@ -2,6 +2,7 @@
   "name": "@thinkwell/react.polaris",
   "version": "1.0.25",
   "private": true,
+  "type": "module",
   "scripts": {
     "test": "jest --coverage",
     "test:watch": "npm run test -- --watch",
