@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useContext } from 'react';
-import {DropZone, Banner, List, Thumbnail, Stack, Button} from '@shopify/polaris';
+import {DropZone, Banner, List, Thumbnail, LegacyStack, Button} from '@shopify/polaris';
 import { CancelSmallMinor } from '@shopify/polaris-icons'
 import {FormContext} from '@thinkwell/react.common';
 
@@ -43,7 +43,7 @@ export default function ImageUpload(props:Props) {
   );
 
   const uploadedFile = acceptedFile && (
-    <Stack>
+    <LegacyStack>
       <Thumbnail
         size="small"
         alt={acceptedFile.name}
@@ -56,7 +56,7 @@ export default function ImageUpload(props:Props) {
       <div>
         <Button onClick={clearAcceptedFile} icon={CancelSmallMinor}>Clear</Button>
       </div>
-    </Stack>
+    </LegacyStack>
   );
 
   const errorMessage = hasError && (

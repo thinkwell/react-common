@@ -1,6 +1,6 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import React, { useState, useRef, useContext } from 'react';
-import { FormLayout, InlineError, Heading, Scrollable, Button, Card, Stack } from '@shopify/polaris';
+import { FormLayout, InlineError, Text, Scrollable, Button, Card, LegacyStack } from '@shopify/polaris';
 import { MobileCancelMajor } from '@shopify/polaris-icons';
 import Form from './Form';
 import Spinner from './Spinner';
@@ -77,7 +77,7 @@ export default function EditForm(props) {
     const linkText = props.linkText && (typeof props.linkText == 'function' ? props.linkText(form) : props.linkText);
     const saveText = props.saveText && (typeof props.saveText == 'function' ? props.saveText(form) : props.saveText);
     const title = props.title && (typeof props.title == 'function' ? props.title(form) : props.title);
-    return (_jsx(Card, { children: _jsx("div", { className: props.className, children: _jsxs("div", { style: { display: state.active ? 'block' : 'none' }, children: [_jsx(Card.Section, { children: _jsxs(Stack, { children: [_jsx(Stack.Item, { fill: true, children: _jsx(Heading, { children: title }) }), _jsx(Button, { accessibilityLabel: "Cancel", icon: MobileCancelMajor, onClick: () => onActive(false), plain: true })] }) }), _jsx(Card.Section, { children: _jsxs(Scrollable, { style: { padding: '1.6rem', height: '100%' }, children: [state.saveClicked && form.errors.length ?
+    return (_jsx(Card, { children: _jsx("div", { className: props.className, children: _jsxs("div", { style: { display: state.active ? 'block' : 'none' }, children: [_jsx(Card.Section, { children: _jsxs(LegacyStack, { children: [_jsx(LegacyStack.Item, { fill: true, children: _jsx(Text, { variant: "headingMd", as: "h2", children: title }) }), _jsx(Button, { accessibilityLabel: "Cancel", icon: MobileCancelMajor, onClick: () => onActive(false), plain: true })] }) }), _jsx(Card.Section, { children: _jsxs(Scrollable, { style: { padding: '1.6rem', height: '100%' }, children: [state.saveClicked && form.errors.length ?
                                     _jsx(InlineError, { message: (_jsxs("div", { children: [" ", form.errors.map((error) => (_jsx("div", { children: error }, error))), " "] })), fieldID: "validationErrorFieldID" })
                                     : null, state.saveError ?
                                     _jsx(InlineError, { message: (_jsx("div", { className: "submit-error", children: state.saveError })), fieldID: "submitErrorFieldID" })

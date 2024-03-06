@@ -1,6 +1,6 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { useRef, useContext } from 'react';
-import { Sheet, InlineError, Heading, Scrollable, Button } from '@shopify/polaris';
+import { Sheet, InlineError, Text, Scrollable, Button } from '@shopify/polaris';
 import { MobileCancelMajor } from '@shopify/polaris-icons';
 import Form from './Form';
 import Spinner from './Spinner';
@@ -58,7 +58,7 @@ export default function EditSheet(props) {
                                 justifyContent: 'space-between',
                                 padding: '1.6rem',
                                 width: '100%',
-                            }, children: [_jsx(Heading, { children: title }), _jsx(Button, { accessibilityLabel: "Cancel", icon: MobileCancelMajor, onClick: () => onActive(false), plain: true })] }), _jsxs(Scrollable, { style: { padding: '1.6rem', height: '100%' }, children: [state.saveClicked && form.errors.length ?
+                            }, children: [_jsx(Text, { variant: "headingMd", as: "h2", children: title }), _jsx(Button, { accessibilityLabel: "Cancel", icon: MobileCancelMajor, onClick: () => onActive(false), plain: true })] }), _jsxs(Scrollable, { style: { padding: '1.6rem', height: '100%' }, children: [state.saveClicked && form.errors.length ?
                                     _jsx(InlineError, { message: (_jsxs("div", { children: [" ", form.errors.map((error) => (_jsx("div", { children: error }, error))), " "] })), fieldID: "validationErrorFieldID" })
                                     : null, state.saveError ?
                                     _jsx(InlineError, { message: (_jsx("div", { className: "submit-error", children: state.saveError })), fieldID: "submitErrorFieldID" })

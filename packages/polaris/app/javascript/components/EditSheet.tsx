@@ -1,5 +1,5 @@
 import React, { useState, useRef, useContext } from 'react';
-import {FormLayout, Sheet, InlineError, Heading, Scrollable, Button} from '@shopify/polaris';
+import {FormLayout, Sheet, InlineError, Text, Scrollable, Button} from '@shopify/polaris';
 import {MobileCancelMajor} from '@shopify/polaris-icons';
 import Form from './Form';
 import Spinner from './Spinner';
@@ -91,7 +91,7 @@ export default function EditSheet(props) {
               width: '100%',
             }}
           >
-            <Heading>{title}</Heading>
+            <Text variant="headingMd" as="h2">{title}</Text>
             <Button
               accessibilityLabel="Cancel"
               icon={MobileCancelMajor}

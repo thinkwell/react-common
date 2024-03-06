@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useContext, ReactNode } from 'react';
-import {Card, Stack, ResourceList as ResourceListShopify, Pagination, InlineError, EmptyState} from '@shopify/polaris';
+import {LegacyStack, ResourceList as ResourceListShopify, Pagination, InlineError, EmptyState} from '@shopify/polaris';
 import {SearchContext, PagingContext, FormContext, useReducerForm, useReducerRequest, FetchStateProps} from '@thinkwell/react.common';
 
 type Props = {
@@ -82,7 +82,7 @@ export default function ResourceList(props:Props) {
   const emptyStateMarkup = !props.items || !props.items.length ?  <EmptyState image="" heading={`No ${resourceName.plural} found`}></EmptyState> : null
 
   return (
-    <Stack vertical={true}>
+    <LegacyStack vertical={true}>
       { props.fetchItemsState && props.fetchItemsState.error ? <InlineError message={props.fetchItemsState && props.fetchItemsState.error} fieldID="resourceListError" /> : null }
       { props.fetchItemsError ? <InlineError message={props.fetchItemsError} fieldID="resourceListError" /> : null }
       <ResourceListShopify
@@ -99,6 +99,6 @@ export default function ResourceList(props:Props) {
       loading={props.fetchItemsState && props.fetchItemsState.loading || props.fetchItemsLoading}
       />
       {paginationMarkup}
-    </Stack>
+    </LegacyStack>
   );
 }

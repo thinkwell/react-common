@@ -1,5 +1,5 @@
 import React, { useState, useRef, useContext } from 'react';
-import {FormLayout, InlineError, Heading, Scrollable, Button, Card, Stack} from '@shopify/polaris';
+import {FormLayout, InlineError, Text, Scrollable, Button, Card, LegacyStack} from '@shopify/polaris';
 import {MobileCancelMajor} from '@shopify/polaris-icons';
 import Form from './Form';
 import Spinner from './Spinner';
@@ -90,15 +90,15 @@ export default function EditForm(props) {
     <Card>
     <div className={props.className}>
       <div style={{display: state.active ? 'block' : 'none'}}><Card.Section>
-        <Stack>
-          <Stack.Item fill><Heading>{title}</Heading></Stack.Item>
+        <LegacyStack>
+          <LegacyStack.Item fill><Text variant="headingMd" as="h2">{title}</Text></LegacyStack.Item>
           <Button
             accessibilityLabel="Cancel"
             icon={MobileCancelMajor}
             onClick={() => onActive(false)}
             plain
           />
-        </Stack>
+        </LegacyStack>
       </Card.Section>
       <Card.Section>
         <Scrollable style={{padding: '1.6rem', height: '100%'}}>
