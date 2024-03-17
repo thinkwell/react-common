@@ -14,6 +14,7 @@ export default function useFetchState(props) {
     const [state, setState] = useState({});
     const fetch = (url) => __awaiter(this, void 0, void 0, function* () {
         setLoading(true);
+        setState({});
         const result = yield api({ method: 'get', url: url, headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, data: {} });
         setLoading(false);
         const data = result && result.data;

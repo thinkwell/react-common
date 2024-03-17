@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext, useRef } from 'react';
 import {Autocomplete as AutocompletePolaris, Icon} from '@shopify/polaris';
-import {SearchMinor, DeleteMajor} from '@shopify/polaris-icons';
+import {SearchIcon} from '@shopify/polaris-icons';
 import {FormContext} from '@thinkwell/react.common';
 import axios from 'axios'
 import { TextFieldProps } from '.';
@@ -116,7 +116,7 @@ export default function Autocomplete(props:Props) {
       label={props.label}
       clearButton
       onClearButtonClick={onClearButtonClick}
-      prefix={<Icon source={SearchMinor} color="base" />}
+      prefix={<Icon source={SearchIcon} tone="base" />}
       placeholder={props.placeholder || `Search ${props.label}`}
     />
   );

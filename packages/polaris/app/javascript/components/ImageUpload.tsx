@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useContext } from 'react';
 import {DropZone, Banner, List, Thumbnail, LegacyStack, Button} from '@shopify/polaris';
-import { CancelSmallMinor } from '@shopify/polaris-icons'
+import { XSmallIcon } from '@shopify/polaris-icons'
 import {FormContext} from '@thinkwell/react.common';
 
 type FileProps = (Blob | MediaSource) & {
@@ -54,7 +54,7 @@ export default function ImageUpload(props:Props) {
         {acceptedFile.size ? <p>{acceptedFile.size} bytes</p> : null }
       </div>
       <div>
-        <Button onClick={clearAcceptedFile} icon={CancelSmallMinor}>Clear</Button>
+        <Button onClick={clearAcceptedFile} icon={XSmallIcon}>Clear</Button>
       </div>
     </LegacyStack>
   );
@@ -62,7 +62,7 @@ export default function ImageUpload(props:Props) {
   const errorMessage = hasError && (
     <Banner
       title="The following images couldn’t be uploaded:"
-      status="critical"
+      tone="critical"
     >
       <List type="bullet">
         {rejectedFiles.map((file, index) => (

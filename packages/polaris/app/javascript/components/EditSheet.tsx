@@ -1,6 +1,6 @@
 import React, { useState, useRef, useContext } from 'react';
 import {FormLayout, Sheet, InlineError, Text, Scrollable, Button} from '@shopify/polaris';
-import {MobileCancelMajor} from '@shopify/polaris-icons';
+import {XIcon} from '@shopify/polaris-icons';
 import Form from './Form';
 import Spinner from './Spinner';
 import {Util, FormContext, useReducerModal, useEffect} from '@thinkwell/react.common';
@@ -94,9 +94,9 @@ export default function EditSheet(props) {
             <Text variant="headingMd" as="h2">{title}</Text>
             <Button
               accessibilityLabel="Cancel"
-              icon={MobileCancelMajor}
+              icon={XIcon}
               onClick={() => onActive(false)}
-              plain
+              variant="plain"
             />
           </div>
           <Scrollable style={{padding: '1.6rem', height: '100%'}}>
@@ -132,7 +132,7 @@ export default function EditSheet(props) {
             <Button onClick={() => onActive(false)}>Cancel</Button>
             {
               typeof saveText != 'undefined' && !saveText ? null :
-                <Button primary loading={state.saving} onClick={save}>{saveText || 'Save'}</Button>
+                <Button variant="primary" loading={state.saving} onClick={save}>{saveText || 'Save'}</Button>
             }
           </div>
         </div>

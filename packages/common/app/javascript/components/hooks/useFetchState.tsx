@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, SetStateAction } from 'react';
 import api from '../services/api';
 
 type Props = {
@@ -12,7 +12,7 @@ export default function useFetchState<T>(props?:Props):UseFetchStateProps<T> {
 
   const fetch = async(url):Promise<Awaited<T>> => {
     setLoading(true)
-    setState({})
+    setState({} as SetStateAction<T>)
     const result = await api({method: 'get', url: url, headers: {'Content-Type': 'application/json',  'Accept': 'application/json'}, data: {}})
     setLoading(false)
     const data = result && result.data
