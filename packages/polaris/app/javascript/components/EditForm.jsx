@@ -1,6 +1,6 @@
 import React, { useState, useRef, useContext } from 'react';
 import {FormLayout, InlineError, Text, Scrollable, Button, Card, LegacyStack} from '@shopify/polaris';
-import {MobileCancelMajor} from '@shopify/polaris-icons';
+import {XIcon} from '@shopify/polaris-icons';
 import Form from './Form';
 import Spinner from './Spinner';
 import {Util, FormContext, useReducerModal, useEffect} from '@thinkwell/react.common';
@@ -94,7 +94,7 @@ export default function EditForm(props) {
           <LegacyStack.Item fill><Text variant="headingMd" as="h2">{title}</Text></LegacyStack.Item>
           <Button
             accessibilityLabel="Cancel"
-            icon={MobileCancelMajor}
+            icon={XIcon}
             onClick={() => onActive(false)}
             plain
           />
