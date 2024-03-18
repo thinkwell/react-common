@@ -1,4 +1,4 @@
-import { LinkLikeComponent } from '@shopify/polaris/build/ts/latest/src/utilities/link';
+import { LinkLikeComponent } from '@shopify/polaris/build/ts/src/utilities/link';
 type Props = {
     children: any;
     linkComponent?: LinkLikeComponent;

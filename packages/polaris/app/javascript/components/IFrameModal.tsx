@@ -26,7 +26,7 @@ export default function IFrameModal(props:Props) {
       activator={activator}
       open={active}
       onClose={handleChange}
-      large={props.large}
+      size={props.large ? "large" : "small"}
       secondaryActions={[{
         content: 'Close',
         onAction: handleChange

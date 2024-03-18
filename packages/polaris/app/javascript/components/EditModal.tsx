@@ -1,5 +1,5 @@
 import React, { useState, useRef, useContext, RefObject, ReactElement, JSXElementConstructor, MutableRefObject } from 'react';
-import {FormLayout, Modal, InlineError, Link, TextStyle} from '@shopify/polaris';
+import {FormLayout, Modal, InlineError} from '@shopify/polaris';
 import Form from './Form';
 import Spinner from './Spinner';
 import {Util, FormContext, useReducerModal, useEffect} from '@thinkwell/react.common';

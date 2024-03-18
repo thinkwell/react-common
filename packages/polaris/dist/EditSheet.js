@@ -1,7 +1,7 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { useRef, useContext } from 'react';
 import { Sheet, InlineError, Text, Scrollable, Button } from '@shopify/polaris';
-import { MobileCancelMajor } from '@shopify/polaris-icons';
+import { XIcon } from '@shopify/polaris-icons';
 import Form from './Form';
 import Spinner from './Spinner';
 import { FormContext, useReducerModal, useEffect } from '@thinkwell/react.common';
@@ -58,7 +58,7 @@ export default function EditSheet(props) {
                                 justifyContent: 'space-between',
                                 padding: '1.6rem',
                                 width: '100%',
-                            }, children: [_jsx(Text, { variant: "headingMd", as: "h2", children: title }), _jsx(Button, { accessibilityLabel: "Cancel", icon: MobileCancelMajor, onClick: () => onActive(false), plain: true })] }), _jsxs(Scrollable, { style: { padding: '1.6rem', height: '100%' }, children: [state.saveClicked && form.errors.length ?
+                            }, children: [_jsx(Text, { variant: "headingMd", as: "h2", children: title }), _jsx(Button, { accessibilityLabel: "Cancel", icon: XIcon, onClick: () => onActive(false), variant: "plain" })] }), _jsxs(Scrollable, { style: { padding: '1.6rem', height: '100%' }, children: [state.saveClicked && form.errors.length ?
                                     _jsx(InlineError, { message: (_jsxs("div", { children: [" ", form.errors.map((error) => (_jsx("div", { children: error }, error))), " "] })), fieldID: "validationErrorFieldID" })
                                     : null, state.saveError ?
                                     _jsx(InlineError, { message: (_jsx("div", { className: "submit-error", children: state.saveError })), fieldID: "submitErrorFieldID" })
@@ -70,5 +70,5 @@ export default function EditSheet(props) {
                                 padding: '1.6rem',
                                 width: '100%',
                             }, children: [_jsx(Button, { onClick: () => onActive(false), children: "Cancel" }), typeof saveText != 'undefined' && !saveText ? null :
-                                    _jsx(Button, { primary: true, loading: state.saving, onClick: save, children: saveText || 'Save' })] })] }) })] }));
+                                    _jsx(Button, { variant: "primary", loading: state.saving, onClick: save, children: saveText || 'Save' })] })] }) })] }));
 }

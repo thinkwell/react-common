@@ -1,6 +1,5 @@
 import React, { useState, useEffect as useEffectReact, useCallback, useContext, MutableRefObject, KeyboardEvent } from 'react'
 import {Frame, TopBar, Card, ActionList, Loading, Navigation, TopBarProps} from '@shopify/polaris';
-import {ProductsMajor, CustomersMajor, AffiliateMajor, ClockMajor, ReportsMajor} from '@shopify/polaris-icons';
 import {SearchContext, PagingContext, Util, useEffect} from '@thinkwell/react.common';
 
 type Props = {

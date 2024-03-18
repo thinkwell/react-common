@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import {Checkbox as CheckboxPolaris} from '@shopify/polaris';
 import {FormContext} from '@thinkwell/react.common';
-import { CheckboxProps } from '@shopify/polaris/build/ts/latest/src/components/Checkbox';
+import { CheckboxProps } from '@shopify/polaris/build/ts/src/components/Checkbox';
 
 type Props = Omit<CheckboxProps, "name" | "onChange"> & {
   name: string | string[],
