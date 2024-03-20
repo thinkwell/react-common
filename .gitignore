@@ -4,3 +4,10 @@
 /polaris/node_modules
 yarn-error.log
 /coverage
+.yarn/*
+.yarn/cache
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+.yarn-integrity
