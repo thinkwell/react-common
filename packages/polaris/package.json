@@ -7,6 +7,7 @@
     "test:watch": "npm run test -- --watch",
     "build": "../../node_modules/.bin/tsc"
   },
+  "type": "module",
   "main": "dist/index.js",
   "files": [
     "dist/**"
