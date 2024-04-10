@@ -1,10 +1,10 @@
 import React, { useState, useRef, useContext } from 'react';
 import {FormLayout, Sheet, InlineError, Text, Scrollable, Button} from '@shopify/polaris';
 import {XIcon} from '@shopify/polaris-icons';
-import Form from './Form';
-import Spinner from './Spinner';
+import Form from './Form.js';
+import Spinner from './Spinner.js';
 import {Util, FormContext, useReducerModal, useEffect} from '@thinkwell/react.common';
-import { IEditModal } from './EditModal';
+import { IEditModal } from './EditModal.js';
 
 type Props = IEditModal & {
 

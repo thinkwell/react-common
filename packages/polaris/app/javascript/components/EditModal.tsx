@@ -1,7 +1,7 @@
 import React, { useState, useRef, useContext, RefObject, ReactElement, JSXElementConstructor, MutableRefObject } from 'react';
 import {FormLayout, Modal, InlineError} from '@shopify/polaris';
-import Form from './Form';
-import Spinner from './Spinner';
+import Form from './Form.js';
+import Spinner from './Spinner.js';
 import {Util, FormContext, useReducerModal, useEffect} from '@thinkwell/react.common';
 
 export interface IEditModal {
