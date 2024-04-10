@@ -2,7 +2,7 @@ import React, { useState, useRef, useContext, MutableRefObject, CSSProperties } 
 import {FormLayout, InlineError, Link, Button} from '@shopify/polaris';
 import Spinner from './Spinner.js'
 import {Util, FormContext, useEffect, api} from '@thinkwell/react.common';
-import map from 'lodash/map';
+import map from 'lodash/map.js';
 import {AxiosRequestConfig} from 'axios';
 
 type Props = {

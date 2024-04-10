@@ -3,7 +3,7 @@ import { useState, useRef, useContext } from 'react';
 import { FormLayout, InlineError, Button } from '@shopify/polaris';
 import Spinner from './Spinner.js';
 import { Util, FormContext, useEffect, api } from '@thinkwell/react.common';
-import map from 'lodash/map';
+import map from 'lodash/map.js';
 export default function Form(props) {
     const form = useContext(FormContext);
     const formRef = useRef();
