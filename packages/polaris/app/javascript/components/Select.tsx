@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import {Select as SelectPolaris, SelectProps, LegacyStack} from '@shopify/polaris';
 import Spinner from './Spinner.js'
 import {FormContext} from '@thinkwell/react.common';
-import startCase from 'lodash/startCase';
+import startCase from 'lodash/startCase.js';
 import { FetchStateProps } from '@thinkwell/react.common/dist/hooks/useReducerFetch';
 
 export type Props = Omit<SelectProps, "label" | "name" | "onChange"> & {

@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import { Select as SelectPolaris, LegacyStack } from '@shopify/polaris';
 import Spinner from './Spinner.js';
 import { FormContext } from '@thinkwell/react.common';
-import startCase from 'lodash/startCase';
+import startCase from 'lodash/startCase.js';
 export default function Select(props) {
     if (!props.name) {
         throw `Property name is required for Select ${props.label.singular || props.label}`;
