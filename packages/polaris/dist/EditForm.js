@@ -2,7 +2,7 @@ import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import React, { useState, useRef, useContext } from 'react';
 import { FormLayout, InlineError, Text, Scrollable, Button, Card, LegacyStack } from '@shopify/polaris';
 import { XIcon } from '@shopify/polaris-icons';
-import Form from './Form';
+import Form from './Form.js';
 import Spinner from './Spinner';
 import { Util, FormContext, useReducerModal, useEffect } from '@thinkwell/react.common';
 export default function EditForm(props) {

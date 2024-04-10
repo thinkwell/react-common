@@ -1,8 +1,8 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { useRef, useContext } from 'react';
 import { Modal, InlineError } from '@shopify/polaris';
-import Form from './Form';
-import Spinner from './Spinner';
+import Form from './Form.js';
+import Spinner from './Spinner.js';
 import { FormContext, useReducerModal, useEffect } from '@thinkwell/react.common';
 export default function EditModal(props) {
     const form = useContext(FormContext);
