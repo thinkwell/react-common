@@ -1,7 +1,7 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { useState, useRef, useContext } from 'react';
 import { FormLayout, InlineError, Button } from '@shopify/polaris';
-import Spinner from './Spinner';
+import Spinner from './Spinner.js';
 import { Util, FormContext, useEffect, api } from '@thinkwell/react.common';
 import map from 'lodash/map';
 export default function Form(props) {

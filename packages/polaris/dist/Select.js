@@ -1,7 +1,7 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { useContext } from 'react';
 import { Select as SelectPolaris, LegacyStack } from '@shopify/polaris';
-import Spinner from './Spinner';
+import Spinner from './Spinner.js';
 import { FormContext } from '@thinkwell/react.common';
 import startCase from 'lodash/startCase';
 export default function Select(props) {

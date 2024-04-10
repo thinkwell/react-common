@@ -1,6 +1,6 @@
 import React, { useState, useRef, useContext, MutableRefObject, CSSProperties } from 'react';
 import {FormLayout, InlineError, Link, Button} from '@shopify/polaris';
-import Spinner from './Spinner'
+import Spinner from './Spinner.js'
 import {Util, FormContext, useEffect, api} from '@thinkwell/react.common';
 import map from 'lodash/map';
 import {AxiosRequestConfig} from 'axios';

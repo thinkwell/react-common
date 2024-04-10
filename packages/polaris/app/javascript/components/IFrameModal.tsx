@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Modal, Link } from '@shopify/polaris'
-import Spinner from './Spinner'
+import Spinner from './Spinner.js'
 import Iframe from 'react-iframe'
 import { isSafari } from 'react-device-detect';
 

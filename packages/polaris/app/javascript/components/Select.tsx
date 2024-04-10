@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import {Select as SelectPolaris, SelectProps, LegacyStack} from '@shopify/polaris';
-import Spinner from './Spinner'
+import Spinner from './Spinner.js'
 import {FormContext} from '@thinkwell/react.common';
 import startCase from 'lodash/startCase';
 import { FetchStateProps } from '@thinkwell/react.common/dist/hooks/useReducerFetch';
