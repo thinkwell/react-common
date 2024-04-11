@@ -1,15 +1,15 @@
 import AppProvider from './AppProvider.js';
 import MainFrame from './MainFrame.js';
 import ResourceList from './ResourceList.js';
-import Form from './Form.js';
 import EditModal from './EditModal.js';
 import EditSheet from './EditSheet.js';
 import EditForm from './EditForm.js';
 import TextField from './TextField.js';
-import { Props as TextFieldProps } from './TextField.js';
+import type { Props as TextFieldProps } from './TextField.js';
 import Spinner from './Spinner.js';
+import Form from './Form.js';
 import Select from './Select.js';
-import { Props as SelectProps } from './Select.js';
+import type { Props as SelectProps } from './Select.js';
 import Checkbox from './Checkbox.js';
 import Autocomplete from './Autocomplete.js';
 import IFrameModal from './IFrameModal.js';
