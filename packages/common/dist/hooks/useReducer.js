@@ -1,5 +1,5 @@
 import { useReducer as useReducerReact, useRef } from 'react';
-import lowerFirst from 'lodash/lowerFirst';
+import lowerFirst from 'lodash/lowerFirst.js';
 export default function useReducer(props, initialArg, reducer, init) {
     const stateRef = useRef({});
     function reducerCommon(state, action) {
