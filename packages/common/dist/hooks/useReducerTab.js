@@ -1,4 +1,4 @@
-import useReducer from './useReducer';
+import useReducer from './useReducer.js';
 export default function useReducerTab(props, tabs, tabSelected) {
     function reducer(state, action, attribute) {
         const payload = action.payload;

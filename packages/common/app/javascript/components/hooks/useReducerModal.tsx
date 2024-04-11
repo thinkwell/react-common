@@ -1,5 +1,5 @@
 import React from 'react';
-import useReducer from './useReducer'
+import useReducer from './useReducer.js'
 
 type ModalState = {
   active: boolean,

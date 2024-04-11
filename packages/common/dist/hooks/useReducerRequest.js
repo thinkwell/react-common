@@ -7,8 +7,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import useReducer from './useReducer';
-import api from '../services/api';
+import useReducer from './useReducer.js';
+import api from '../services/api.js';
 export default function useReducerRequest(method, props) {
     function reducer(state, action) {
         const payload = action.payload;

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Util from '../Util'
+import Util from '../Util.js'
 
 type SearchContextType = [search: string, setSearch: (string) => void]
 

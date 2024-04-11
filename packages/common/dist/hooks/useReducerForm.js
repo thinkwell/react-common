@@ -1,5 +1,5 @@
-import useReducer from './useReducer';
-import set from 'lodash/set';
+import useReducer from './useReducer.js';
+import set from 'lodash/set.js';
 export default function useReducerForm(props, data) {
     function reducer(state, action, attribute) {
         const payload = action.payload;

@@ -1,5 +1,5 @@
 import React from 'react';
-import useReducer from './useReducer'
+import useReducer from './useReducer.js'
 import {TabsProps} from '@shopify/polaris'
 
 type TabState = {

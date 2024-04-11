@@ -1,5 +1,5 @@
 import React, { useEffect, useState, SetStateAction } from 'react';
-import api from '../services/api';
+import api from '../services/api.js';
 
 type Props = {
   url?: string

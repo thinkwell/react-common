@@ -1,6 +1,6 @@
 import { jsx as _jsx } from "react/jsx-runtime";
 import React from 'react';
-import Form from '../models/Form';
+import Form from '../models/Form.js';
 const FormContext = React.createContext({});
 const FormProvider = (props) => {
     const form = Form(props);

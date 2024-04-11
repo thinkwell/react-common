@@ -1,6 +1,6 @@
 import React from 'react';
-import useReducer from './useReducer'
-import set from 'lodash/set'
+import useReducer from './useReducer.js'
+import set from 'lodash/set.js'
 
 export default function useReducerForm (props, data):[any, (scope:string, name?:(string | string[])) => (payload?: any) => void] {
   function reducer(state, action, attribute) {

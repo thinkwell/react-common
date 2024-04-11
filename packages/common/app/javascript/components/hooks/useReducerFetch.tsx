@@ -1,5 +1,5 @@
 import React from 'react';
-import useReducer from './useReducer'
+import useReducer from './useReducer.js'
 
 export default function useReducerFetch (props, value):[FetchStateProps, (payload?: any) => void, (payload?: any) => void, (payload?: any) => void] {
   function reducer(state, action, attribute) {

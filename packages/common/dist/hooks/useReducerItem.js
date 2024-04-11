@@ -1,4 +1,4 @@
-import useReducer from './useReducer';
+import useReducer from './useReducer.js';
 export default function useReducerItem(props, fieldsToEdit) {
     function reducer(state, action, attribute) {
         const payload = action.payload;

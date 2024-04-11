@@ -8,10 +8,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import { useContext } from 'react';
-import useReducerFetch from './useReducerFetch';
+import useReducerFetch from './useReducerFetch.js';
 import axios from 'axios';
-import { PagingContext } from '../contexts/Paging';
-import useEffect from './useEffect';
+import { PagingContext } from '../contexts/Paging.js';
+import useEffect from './useEffect.js';
 export default function useFetch(props) {
     const [page_info, previous_page_info, next_page_info, setPageInfo, setPreviousPageInfo, setNextPageInfo] = useContext(PagingContext);
     const initialState = { loading: false, error: null };

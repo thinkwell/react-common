@@ -1,6 +1,6 @@
 import React from 'react';
-import useReducer from './useReducer'
-import api from '../services/api';
+import useReducer from './useReducer.js'
+import api from '../services/api.js';
 import {AxiosRequestConfig} from 'axios'
 
 type RequestState = {

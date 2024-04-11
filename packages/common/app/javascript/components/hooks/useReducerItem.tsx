@@ -1,5 +1,5 @@
 import React from 'react';
-import useReducer from './useReducer'
+import useReducer from './useReducer.js'
 
 export default function useReducerItem (props, fieldsToEdit):[any, (field:string) => (payload: boolean) => void] {
   function reducer(state, action, attribute) {

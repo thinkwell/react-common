@@ -13,8 +13,8 @@ const setParam = (uri, key, value) => {
   }
 }
 
-import flattenDeep from 'lodash/flattenDeep'
-import compact from 'lodash/compact'
+import flattenDeep from 'lodash/flattenDeep.js'
+import compact from 'lodash/compact.js'
 
 export default {
   hideLoader: (selector?: string) => {

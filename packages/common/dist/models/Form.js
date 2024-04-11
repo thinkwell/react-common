@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import useReducerForm from '../hooks/useReducerForm';
-import Util from '../Util';
-import values from 'lodash/values';
-import omit from 'lodash/omit';
-import get from 'lodash/get';
-import mergeWith from 'lodash/mergeWith';
+import useReducerForm from '../hooks/useReducerForm.js';
+import Util from '../Util.js';
+import values from 'lodash/values.js';
+import omit from 'lodash/omit.js';
+import get from 'lodash/get.js';
+import mergeWith from 'lodash/mergeWith.js';
 export default function Form(props) {
     const scope = props.scope || 'data';
     const [initialData] = useState(props.data && props.data[scope] || props.data || {});
