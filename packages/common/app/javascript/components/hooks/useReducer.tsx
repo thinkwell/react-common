@@ -1,5 +1,5 @@
 import React, { useReducer as useReducerReact, useRef } from 'react';
-import lowerFirst from 'lodash/lowerFirst'
+import lowerFirst from 'lodash/lowerFirst.js'
 
 export default function useReducer (props, initialArg, reducer, init?):[any, React.Dispatch<any>, (type, field?) => (payload?: any) => void] {
   const stateRef = useRef({});
