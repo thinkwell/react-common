@@ -1913,10 +1913,10 @@ __metadata:
     "@shopify/polaris": ^10.47.1
     axios: ^0.19.0
     lodash: ^4.17.21
-    react: ^17.0.1
-    react-dom: ^17.0.1
+    react: ^18.2.0
+    react-dom: ^18.2.0
     react-html-parser: ^2.0.2
-    react_ujs: ^2.6.1
+    react_ujs: ^3.2.0
   languageName: unknown
   linkType: soft
 
@@ -1932,8 +1932,8 @@ __metadata:
     "@testing-library/user-event": "npm:^10.0.1"
     "@types/jest": "npm:^29.5.3"
     "@types/node": "npm:^20.4.6"
-    "@types/react": "npm:^17.0.3"
-    "@types/react-dom": "npm:^17.0.3"
+    "@types/react": "npm:^18.2.31"
+    "@types/react-dom": "npm:^18.2.14"
     axios: "npm:^0.19.0"
     babel-plugin-transform-react-remove-prop-types: "npm:^0.4.24"
     jest: "npm:^25.2.6"
@@ -1951,12 +1951,12 @@ __metadata:
     "@shopify/polaris": ^12.0.0
     axios: ^0.19.0
     lodash: ^4.17.21
-    react: ^17.0.1
-    react-device-detect: ^2.2.2
-    react-dom: ^17.0.1
+    react: ^18.2.0
+    react-device-detect: ^2.2.3
+    react-dom: ^18.2.0
     react-html-parser: ^2.0.2
     react-iframe: ^1.8.5
-    react_ujs: ^2.6.1
+    react_ujs: ^3.2.0
   languageName: unknown
   linkType: soft
 
