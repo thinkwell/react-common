@@ -9,13 +9,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import { useContext } from 'react';
 import useReducerFetch from './useReducerFetch.js';
-import axios from 'axios';
+import { useFetcher } from "@remix-run/react";
 import { PagingContext } from '../contexts/Paging.js';
 import useEffect from './useEffect.js';
 export default function useFetch(props) {
     const [page_info, previous_page_info, next_page_info, setPageInfo, setPreviousPageInfo, setNextPageInfo] = useContext(PagingContext);
     const initialState = { loading: false, error: null };
     const [state, onFetch, onSuccess, onError] = useReducerFetch(props, initialState);
+    const fetcher = useFetcher();
     const fetch = (url, params) => __awaiter(this, void 0, void 0, function* () {
         if (!url) {
             return;
@@ -24,10 +25,14 @@ export default function useFetch(props) {
         try {
             let response;
             if (params) {
-                response = yield axios.get(url, { params });
+                const urlObj = new URL(url);
+                for (var key in params) {
+                    url.searchParams.set(key, params[key]);
+                }
+                response = yield fetcher.load(urlObj.toString());
             }
             else {
-                response = yield axios.get(url);
+                response = yield fetcher.load(url);
             }
             let newItems = response.data && response.data.items || response.data;
             console.debug(`${url} : fetched ${newItems.length}`);
