@@ -29,7 +29,7 @@ export default function useFetch<T>(props):[FetchStateProps, (url, params?) =>Pr
         data = await fetcher.load(url);
       }
 
-      let newItems:T[] = data.items
+      let newItems:T[] = data.items || data
       console.debug(`${url} : fetched ${newItems.length}`)
       setPreviousPageInfo(data.previous_page_info)
       setNextPageInfo(data.next_page_info)

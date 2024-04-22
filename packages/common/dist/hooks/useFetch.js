@@ -34,7 +34,7 @@ export default function useFetch(props) {
             else {
                 data = yield fetcher.load(url);
             }
-            let newItems = data.items;
+            let newItems = data.items || data;
             console.debug(`${url} : fetched ${newItems.length}`);
             setPreviousPageInfo(data.previous_page_info);
             setNextPageInfo(data.next_page_info);
