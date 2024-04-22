@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import useReducerFetch, { FetchStateProps } from './useReducerFetch.js'
 import axios from 'axios';
-import { useFetcherWithPromise } from "./useFetcherWithPromise.js";
+import useFetcherWithPromise from "./useFetcherWithPromise.js";
 import { PagingContext } from '../contexts/Paging.js'
 import useEffect from './useEffect.js'
 

@@ -5,6 +5,7 @@ import Items from './contexts/Items.js'
 import { PagingContext, PagingProvider } from './contexts/Paging.js'
 import { SearchContext, SearchProvider } from './contexts/Search.js'
 import useEffect from './hooks/useEffect.js'
+import useFetcherWithPromise from './hooks/useFetcherWithPromise.js'
 import useFetch from './hooks/useFetch.js'
 import useFetchState from './hooks/useFetchState.js'
 import useReducer from './hooks/useReducer.js'
@@ -18,5 +19,5 @@ import useReducerTab from './hooks/useReducerTab.js'
 import useSearch from './hooks/useSearch.js'
 import api from './services/api.js'
 export {Util, FormProvider, FormContext, FormProps, FetchStateProps, Items, PagingContext, PagingProvider, SearchContext, SearchProvider,
-  useEffect, useFetch, useFetchState, useReducer, useReducerFetch, useReducerForm, useReducerItem, useReducerModal,
+  useEffect, useFetcherWithPromise, useFetch, useFetchState, useReducer, useReducerFetch, useReducerForm, useReducerItem, useReducerModal,
   useReducerRequest, useReducerTab, useSearch, api}

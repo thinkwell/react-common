@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import { useContext } from 'react';
 import useReducerFetch from './useReducerFetch.js';
-import { useFetcherWithPromise } from "./useFetcherWithPromise.js";
+import useFetcherWithPromise from "./useFetcherWithPromise.js";
 import { PagingContext } from '../contexts/Paging.js';
 import useEffect from './useEffect.js';
 export default function useFetch(props) {
