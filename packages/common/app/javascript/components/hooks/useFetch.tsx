@@ -1,37 +1,35 @@
 import React, { useContext } from 'react';
 import useReducerFetch, { FetchStateProps } from './useReducerFetch.js'
 import axios from 'axios';
-import { useFetcher } from "@remix-run/react";
+import { useFetcherWithPromise } from "./useFetcherWithPromise.js";
 import { PagingContext } from '../contexts/Paging.js'
 import useEffect from './useEffect.js'
 
-export default function useFetch<T>(props):[FetchStateProps, (url, params?) =>T[]] {
+export default function useFetch<T>(props):[FetchStateProps, (url, params?) =>Promise<T[]>] {
   const [page_info, previous_page_info, next_page_info, setPageInfo, setPreviousPageInfo, setNextPageInfo] = useContext(PagingContext)
 
   const initialState = {loading: false, error: null}
   const [state, onFetch, onSuccess, onError] = useReducerFetch(props, initialState);
-  const fetcher = useFetcher()
+  const fetcher = useFetcherWithPromise()
 
-  const fetch = (url, params?):T[] => {
+  const fetch = async(url, params?):Promise<T[]> => {
     if (!url) {
       return
     }
     onFetch();
     try {
+      let data;
       if (params) {
         const urlObj = new URL(url)
         for (var key in params){
           url.searchParams.set(key, params[key]);
         }
-        fetcher.load(urlObj.toString());
+        data = await fetcher.load(urlObj.toString());
       } else {
-        fetcher.load(url);
+        data = await fetcher.load(url);
       }
 
-      while(!fetcher.data) { }
-
-      const data = fetcher.data as any
-      let newItems:T[] = data.items as T[]
+      let newItems:T[] = data.items
       console.debug(`${url} : fetched ${newItems.length}`)
       setPreviousPageInfo(data.previous_page_info)
       setNextPageInfo(data.next_page_info)
