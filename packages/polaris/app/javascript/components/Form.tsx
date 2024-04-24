@@ -85,7 +85,8 @@ export default function Form(props:Props) {
       const url = typeof props.url == 'function' ? props.url(form) : props.url;
       const data = {};
       data[form.rootName || "item"] = formData
-      const config = {method: method, action: url, data: data, headers: {}}
+      const encType = "application/json" as any
+      const config = {method: method, action: url, data: data, headers: {}, encType: encType}
       if(props.headers) {
         config.headers = props.headers
       }
