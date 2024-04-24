@@ -1,7 +1,7 @@
 import React, { useState, useRef, useContext, MutableRefObject, CSSProperties } from 'react';
 import {FormLayout, InlineError, Link, Button} from '@shopify/polaris';
 import Spinner from './Spinner.js'
-import {Util, FormContext, useEffect, api} from '@thinkwell/react.common';
+import {Util, FormContext, useEffect, useFetcherWithPromise} from '@thinkwell/react.common';
 import map from 'lodash/map.js';
 import {AxiosRequestConfig} from 'axios';
 
@@ -23,6 +23,7 @@ type Props = {
 }
 
 export default function Form(props:Props) {
+  const fetcher = useFetcherWithPromise()
   const form = useContext(FormContext)
   const formRef = useRef() as MutableRefObject<HTMLFormElement>;
   const [fileDownloadToken, setFileDownloadToken] = useState(Math.random().toString(36).substring(7))
@@ -78,17 +79,17 @@ export default function Form(props:Props) {
   const submit = (extraData?) => {
     onSubmitting(true)
     if (!props.useHtml) {
-      api.defaults.headers.common['X-CSRF-Token'] = (document.querySelector("meta[name=csrf-token]") as HTMLMetaElement).content
+      // api.defaults.headers.common['X-CSRF-Token'] = (document.querySelector("meta[name=csrf-token]") as HTMLMetaElement).content
       const formData = Object.assign({}, form.data, extraData || {})
-      const method = props.method ? (typeof props.method == 'function' ? props.method() : props.method) : 'put';
+      const method = props.method ? (typeof props.method == 'function' ? props.method() : props.method) : 'put' as any;
       const url = typeof props.url == 'function' ? props.url(form) : props.url;
       const data = {};
       data[form.rootName || "item"] = formData
-      const config = {method: method, url: url, data: data} as AxiosRequestConfig
+      const config = {method: method, action: url, data: data, headers: {}}
       if(props.headers) {
         config.headers = props.headers
       }
-      return api(config)
+      return fetcher.submit(data, config)
       .then(onSuccess)
       .catch(onError)
     } else {

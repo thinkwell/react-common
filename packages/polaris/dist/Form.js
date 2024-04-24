@@ -2,9 +2,10 @@ import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { useState, useRef, useContext } from 'react';
 import { FormLayout, InlineError, Button } from '@shopify/polaris';
 import Spinner from './Spinner.js';
-import { Util, FormContext, useEffect, api } from '@thinkwell/react.common';
+import { Util, FormContext, useEffect, useFetcherWithPromise } from '@thinkwell/react.common';
 import map from 'lodash/map.js';
 export default function Form(props) {
+    const fetcher = useFetcherWithPromise();
     const form = useContext(FormContext);
     const formRef = useRef();
     const [fileDownloadToken, setFileDownloadToken] = useState(Math.random().toString(36).substring(7));
@@ -55,17 +56,17 @@ export default function Form(props) {
     const submit = (extraData) => {
         onSubmitting(true);
         if (!props.useHtml) {
-            api.defaults.headers.common['X-CSRF-Token'] = document.querySelector("meta[name=csrf-token]").content;
+            // api.defaults.headers.common['X-CSRF-Token'] = (document.querySelector("meta[name=csrf-token]") as HTMLMetaElement).content
             const formData = Object.assign({}, form.data, extraData || {});
             const method = props.method ? (typeof props.method == 'function' ? props.method() : props.method) : 'put';
             const url = typeof props.url == 'function' ? props.url(form) : props.url;
             const data = {};
             data[form.rootName || "item"] = formData;
-            const config = { method: method, url: url, data: data };
+            const config = { method: method, action: url, data: data, headers: {} };
             if (props.headers) {
                 config.headers = props.headers;
             }
-            return api(config)
+            return fetcher.submit(data, config)
                 .then(onSuccess)
                 .catch(onError);
         }
