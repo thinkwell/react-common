@@ -15,17 +15,18 @@ export default function Form(props) {
     useEffect(() => setSubmitting(props.submitting), [props.submitting]);
     useEffect(() => setSubmitError(props.submitError), [props.submitError]);
     const onSuccess = (res) => {
-        if (res.data && res.data.status && res.data.status == 'error') {
-            onError(res.data);
+        const data = res.data || res;
+        if (data.status && data.status == 'error') {
+            onError(data);
             return;
         }
-        // redirect if res.data.redirect_url or res.data.location is set
-        if (res.data && (res.data.redirect_url || res.data.location)) {
-            return Util.redirect(res.data);
+        // redirect if data.redirect_url or data.location is set
+        if (data && (data.redirect_url || data.location)) {
+            return Util.redirect(data);
         }
         else {
             onSubmitting(false);
-            props.onSuccess && props.onSuccess(res.data);
+            props.onSuccess && props.onSuccess(data);
         }
     };
     const onSubmitting = (value) => {
