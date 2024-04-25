@@ -8,7 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import useReducer from './useReducer.js';
-import api from '../services/api.js';
+import useFetcherWithPromise from './useFetcherWithPromise.js';
 export default function useReducerRequest(method, props) {
     function reducer(state, action) {
         const payload = action.payload;
@@ -24,6 +24,7 @@ export default function useReducerRequest(method, props) {
     }
     const initialArg = {};
     const [state, dispatch, onAction] = useReducer(props, initialArg, reducer);
+    const fetcher = useFetcherWithPromise();
     const onSuccess = onAction('onSuccess');
     const onRequesting = onAction('onRequesting');
     const onError = onAction('onError');
@@ -33,12 +34,10 @@ export default function useReducerRequest(method, props) {
         }
         try {
             onRequesting();
-            api.defaults.headers.common['X-CSRF-Token'] = document.querySelector("meta[name=csrf-token]").content;
-            const config = { method: method, url: url };
-            if (data) {
-                config.data = data;
-            }
-            const response = yield api(config);
+            const encType = "application/json";
+            const methodArg = method;
+            const config = { method: methodArg, action: url, encType: encType };
+            const response = fetcher.submit(data, config);
             onSuccess(response);
             return response;
         }

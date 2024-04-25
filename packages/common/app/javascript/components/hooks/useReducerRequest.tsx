@@ -1,7 +1,6 @@
 import React from 'react';
 import useReducer from './useReducer.js'
-import api from '../services/api.js';
-import {AxiosRequestConfig} from 'axios'
+import useFetcherWithPromise from './useFetcherWithPromise.js';
 
 type RequestState = {
   requesting: boolean,
@@ -26,6 +25,7 @@ export default function useReducerRequest (method:string, props):[RequestState, 
   const initialArg = {}
   const [state, dispatch, onAction] = useReducer(props, initialArg, reducer)
 
+  const fetcher = useFetcherWithPromise()
   const onSuccess = onAction('onSuccess')
   const onRequesting = onAction('onRequesting')
   const onError = onAction('onError')
@@ -37,12 +37,10 @@ export default function useReducerRequest (method:string, props):[RequestState, 
 
     try {
       onRequesting()
-      api.defaults.headers.common['X-CSRF-Token'] = (document.querySelector("meta[name=csrf-token]") as HTMLMetaElement).content
-      const config = {method: method, url: url} as AxiosRequestConfig
-      if(data) {
-        config.data = data
-      }
-      const response = await api(config)
+      const encType = "application/json" as any
+      const methodArg = method as any
+      const config = {method: methodArg, action: url, encType: encType}
+      const response = fetcher.submit(data, config)
       onSuccess(response)
       return response
     } catch(error) {
