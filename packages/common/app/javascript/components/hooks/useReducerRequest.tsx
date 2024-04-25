@@ -40,7 +40,7 @@ export default function useReducerRequest (method:string, props):[RequestState, 
       const encType = "application/json" as any
       const methodArg = method as any
       const config = {method: methodArg, action: url, encType: encType}
-      const response = fetcher.submit(data, config)
+      const response = await fetcher.submit(data, config)
       onSuccess(response)
       return response
     } catch(error) {
