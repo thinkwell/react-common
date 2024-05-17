@@ -56,7 +56,12 @@ export default function useFetcherWithPromise<
 		// See fetcher states here:
 		// https://remix.run/docs/en/v1/hooks/use-fetcher#fetchertype
 		if (fetcher.state === "idle" && fetcher.data != null) {
-			deferredRef.current?.resolve(fetcher.data);
+			const data = fetcher.data as any
+			if (data.ok !== null && data.ok === false) {
+				deferredRef.current?.reject(data);
+			} else {
+				deferredRef.current?.resolve(data);
+			}
 			deferredRef.current = undefined;
 		}
 	}, [fetcher.state, fetcher.data]);

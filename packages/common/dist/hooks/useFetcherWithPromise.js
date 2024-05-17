@@ -36,11 +36,17 @@ export default function useFetcherWithPromise() {
         }
     };
     React.useEffect(() => {
-        var _a;
+        var _a, _b;
         // See fetcher states here:
         // https://remix.run/docs/en/v1/hooks/use-fetcher#fetchertype
         if (fetcher.state === "idle" && fetcher.data != null) {
-            (_a = deferredRef.current) === null || _a === void 0 ? void 0 : _a.resolve(fetcher.data);
+            const data = fetcher.data;
+            if (data.ok !== null && data.ok === false) {
+                (_a = deferredRef.current) === null || _a === void 0 ? void 0 : _a.reject(data);
+            }
+            else {
+                (_b = deferredRef.current) === null || _b === void 0 ? void 0 : _b.resolve(data);
+            }
             deferredRef.current = undefined;
         }
     }, [fetcher.state, fetcher.data]);
