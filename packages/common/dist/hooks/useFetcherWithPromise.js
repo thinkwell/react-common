@@ -12,14 +12,28 @@ export default function useFetcherWithPromise() {
     const fetcher = useFetcher();
     const deferredRef = React.useRef();
     const submit = (...args) => {
+        var _a;
         deferredRef.current = new Deferred();
-        fetcher.submit(...args);
-        return deferredRef.current.promise;
+        try {
+            fetcher.submit(...args);
+            return deferredRef.current.promise;
+        }
+        catch (error) {
+            (_a = deferredRef.current) === null || _a === void 0 ? void 0 : _a.reject(error);
+            deferredRef.current = undefined;
+        }
     };
     const load = (...args) => {
+        var _a;
         deferredRef.current = new Deferred();
-        fetcher.load(...args);
-        return deferredRef.current.promise;
+        try {
+            fetcher.load(...args);
+            return deferredRef.current.promise;
+        }
+        catch (error) {
+            (_a = deferredRef.current) === null || _a === void 0 ? void 0 : _a.reject(error);
+            deferredRef.current = undefined;
+        }
     };
     React.useEffect(() => {
         var _a;
