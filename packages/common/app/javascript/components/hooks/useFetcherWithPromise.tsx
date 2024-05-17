@@ -30,16 +30,26 @@ export default function useFetcherWithPromise<
 		...args
 	) => {
 		deferredRef.current = new Deferred();
-		fetcher.submit(...args);
-		return deferredRef.current.promise;
+		try {
+			fetcher.submit(...args);
+			return deferredRef.current.promise;
+		} catch (error) {
+			deferredRef.current?.reject(error);
+			deferredRef.current = undefined;
+		}
 	};
 
 	const load: FetcherWithPromisifiedSubmit<SerializeFrom<TData>>["load"] = (
 		...args
 	) => {
 		deferredRef.current = new Deferred();
-		fetcher.load(...args);
-		return deferredRef.current.promise;
+		try {
+			fetcher.load(...args);
+			return deferredRef.current.promise;
+		} catch (error) {
+			deferredRef.current?.reject(error);
+			deferredRef.current = undefined;
+		}
 	};
 
 	React.useEffect(() => {
