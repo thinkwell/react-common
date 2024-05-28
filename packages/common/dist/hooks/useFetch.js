@@ -25,15 +25,10 @@ export default function useFetch(props) {
         try {
             let data;
             if (params) {
-                const urlObj = new URL(url);
-                for (var key in params) {
-                    url.searchParams.set(key, params[key]);
-                }
-                data = yield fetcher.load(urlObj.toString());
+                const searchParams = new URLSearchParams(params);
+                url = `${url}?${searchParams.toString()}`;
             }
-            else {
-                data = yield fetcher.load(url);
-            }
+            data = yield fetcher.load(url);
             let newItems = data.items || data;
             console.debug(`${url} : fetched ${newItems.length}`);
             setPreviousPageInfo(data.previous_page_info);
