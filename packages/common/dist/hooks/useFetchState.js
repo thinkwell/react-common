@@ -8,18 +8,21 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import { useEffect, useState } from 'react';
-import api from '../services/api.js';
+import useFetcherWithPromise from './useFetcherWithPromise.js';
 export default function useFetchState(props) {
     const [loading, setLoading] = useState(false);
     const [state, setState] = useState({});
+    const fetcher = useFetcherWithPromise();
     const fetch = (url) => __awaiter(this, void 0, void 0, function* () {
         setLoading(true);
         setState({});
-        const result = yield api({ method: 'get', url: url, headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, data: {} });
+        const encType = "application/json";
+        const methodArg = 'get';
+        const config = { method: methodArg, action: url, encType: encType };
+        const result = yield fetcher.submit({}, config);
         setLoading(false);
-        const data = result && result.data;
-        setState(data);
-        return data;
+        setState(result);
+        return result;
     });
     useEffect(() => {
         if (props && props.url) {
