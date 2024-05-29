@@ -20,7 +20,14 @@ export default function useFetch<T>(props):[FetchStateProps, (url, params?) =>Pr
     try {
       let data;
       if (params) {
-        const searchParams = new URLSearchParams(params)
+        const searchParams = new URLSearchParams()
+        for (const key in params) {
+          let value = params[key]
+          if (typeof value != 'string') {
+            value = JSON.stringify(value)
+          }
+          searchParams.set(key, value)
+        }
         url = `${url}?${searchParams.toString()}`
       }
       data = await fetcher.load(url);
