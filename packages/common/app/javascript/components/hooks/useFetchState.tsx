@@ -14,10 +14,7 @@ export default function useFetchState<T>(props?:Props):UseFetchStateProps<T> {
   const fetch = async(url):Promise<Awaited<T>> => {
     setLoading(true)
     setState({} as SetStateAction<T>)
-    const encType = "application/json" as any
-    const methodArg = 'get' as any
-    const config = {method: methodArg, action: url, encType: encType}
-    const result:any = await fetcher.submit({}, config)
+    const result:any = await fetcher.load(url)
     setLoading(false)
     setState(result)
     return result

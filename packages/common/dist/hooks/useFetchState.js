@@ -16,10 +16,7 @@ export default function useFetchState(props) {
     const fetch = (url) => __awaiter(this, void 0, void 0, function* () {
         setLoading(true);
         setState({});
-        const encType = "application/json";
-        const methodArg = 'get';
-        const config = { method: methodArg, action: url, encType: encType };
-        const result = yield fetcher.submit({}, config);
+        const result = yield fetcher.load(url);
         setLoading(false);
         setState(result);
         return result;
