@@ -1,7 +1,7 @@
 import React, { useState, useRef, useContext, MutableRefObject, CSSProperties } from 'react';
 import {FormLayout, InlineError, Link, Button} from '@shopify/polaris';
 import Spinner from './Spinner.js'
-import {Util, FormContext, useEffect, useFetcherWithPromise} from '@thinkwell/react.common';
+import {Util, FormContext, useEffect, useFetcherWithPromise, api} from '@thinkwell/react.common';
 import map from 'lodash/map.js';
 import {AxiosRequestConfig} from 'axios';
 
@@ -13,6 +13,7 @@ type Props = {
   onSubmitting?: (boolean) => void,
   onError?: (string) => void,
   useHtml?: boolean,
+  useFetcher?: boolean,
   method?: string | (() => string),
   headers?: any,
   submitRef?: MutableRefObject<(extraData?) => void>,
@@ -80,7 +81,6 @@ export default function Form(props:Props) {
   const submit = (extraData?) => {
     onSubmitting(true)
     if (!props.useHtml) {
-      // api.defaults.headers.common['X-CSRF-Token'] = (document.querySelector("meta[name=csrf-token]") as HTMLMetaElement).content
       const formData = Object.assign({}, form.data, extraData || {})
       const method = props.method ? (typeof props.method == 'function' ? props.method() : props.method) : 'put' as any;
       const url = typeof props.url == 'function' ? props.url(form) : props.url;
@@ -91,9 +91,16 @@ export default function Form(props:Props) {
       if(props.headers) {
         config.headers = props.headers
       }
-      return fetcher.submit(data, config)
-      .then(onSuccess)
-      .catch(onError)
+      if (props.useFetcher) {
+        return fetcher.submit(data, config)
+        .then(onSuccess)
+        .catch(onError)
+      } else {
+        api.defaults.headers.common['X-CSRF-Token'] = (document.querySelector("meta[name=csrf-token]") as HTMLMetaElement).content
+        return api(config)
+        .then(onSuccess)
+        .catch(onError)
+      }
     } else {
       let attempts = 30;
       const getCookie = ( name ) => {

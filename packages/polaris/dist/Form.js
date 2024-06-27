@@ -2,7 +2,7 @@ import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { useState, useRef, useContext } from 'react';
 import { FormLayout, InlineError, Button } from '@shopify/polaris';
 import Spinner from './Spinner.js';
-import { Util, FormContext, useEffect, useFetcherWithPromise } from '@thinkwell/react.common';
+import { Util, FormContext, useEffect, useFetcherWithPromise, api } from '@thinkwell/react.common';
 import map from 'lodash/map.js';
 export default function Form(props) {
     const fetcher = useFetcherWithPromise();
@@ -57,7 +57,6 @@ export default function Form(props) {
     const submit = (extraData) => {
         onSubmitting(true);
         if (!props.useHtml) {
-            // api.defaults.headers.common['X-CSRF-Token'] = (document.querySelector("meta[name=csrf-token]") as HTMLMetaElement).content
             const formData = Object.assign({}, form.data, extraData || {});
             const method = props.method ? (typeof props.method == 'function' ? props.method() : props.method) : 'put';
             const url = typeof props.url == 'function' ? props.url(form) : props.url;
@@ -68,9 +67,17 @@ export default function Form(props) {
             if (props.headers) {
                 config.headers = props.headers;
             }
-            return fetcher.submit(data, config)
-                .then(onSuccess)
-                .catch(onError);
+            if (props.useFetcher) {
+                return fetcher.submit(data, config)
+                    .then(onSuccess)
+                    .catch(onError);
+            }
+            else {
+                api.defaults.headers.common['X-CSRF-Token'] = document.querySelector("meta[name=csrf-token]").content;
+                return api(config)
+                    .then(onSuccess)
+                    .catch(onError);
+            }
         }
         else {
             let attempts = 30;
