@@ -73,7 +73,10 @@ export default function Form(props) {
                     .catch(onError);
             }
             else {
-                api.defaults.headers.common['X-CSRF-Token'] = document.querySelector("meta[name=csrf-token]").content;
+                const csrfTokenEl = document.querySelector("meta[name=csrf-token]");
+                if (csrfTokenEl) {
+                    api.defaults.headers.common['X-CSRF-Token'] = csrfTokenEl.content;
+                }
                 return api(config)
                     .then(onSuccess)
                     .catch(onError);

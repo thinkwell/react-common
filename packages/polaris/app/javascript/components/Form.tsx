@@ -96,7 +96,10 @@ export default function Form(props:Props) {
         .then(onSuccess)
         .catch(onError)
       } else {
-        api.defaults.headers.common['X-CSRF-Token'] = (document.querySelector("meta[name=csrf-token]") as HTMLMetaElement).content
+        const csrfTokenEl:HTMLMetaElement = document.querySelector("meta[name=csrf-token]")
+        if (csrfTokenEl) {
+          api.defaults.headers.common['X-CSRF-Token'] = csrfTokenEl.content
+        }
         return api(config)
         .then(onSuccess)
         .catch(onError)
