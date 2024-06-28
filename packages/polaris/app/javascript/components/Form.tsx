@@ -87,7 +87,7 @@ export default function Form(props:Props) {
       const data = {};
       data[form.rootName || "item"] = formData
       const encType = "application/json" as any
-      const config = {method: method, action: url, data: data, headers: {}, encType: encType}
+      const config = {method: method, action: url, url: url, data: data, headers: {}, encType: encType}
       if(props.headers) {
         config.headers = props.headers
       }
