@@ -1,6 +1,6 @@
 import React from 'react';
 import useReducer from './useReducer.js'
-import api from '../services/api.js';
+import useApi from './useApi.js';
 
 type RequestState = {
   requesting: boolean,
@@ -24,7 +24,8 @@ export default function useReducerRequest (method:string, props):[RequestState, 
 
   const initialArg = {}
   const [state, dispatch, onAction] = useReducer(props, initialArg, reducer)
-
+  const api = useApi()
+  
   const onSuccess = onAction('onSuccess')
   const onRequesting = onAction('onRequesting')
   const onError = onAction('onError')

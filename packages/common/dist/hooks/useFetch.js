@@ -10,12 +10,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 import { useContext } from 'react';
 import useReducerFetch from './useReducerFetch.js';
 import { PagingContext } from '../contexts/Paging.js';
-import api from '../services/api.js';
+import useApi from './useApi.js';
 import useEffect from './useEffect.js';
 export default function useFetch(props) {
     const [page_info, previous_page_info, next_page_info, setPageInfo, setPreviousPageInfo, setNextPageInfo] = useContext(PagingContext);
     const initialState = { loading: false, error: null };
     const [state, onFetch, onSuccess, onError] = useReducerFetch(props, initialState);
+    const api = useApi();
     const fetch = (url, params) => __awaiter(this, void 0, void 0, function* () {
         if (!url) {
             return;

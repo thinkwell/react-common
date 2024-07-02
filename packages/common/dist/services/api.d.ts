@@ -1,1 +1,1 @@
-export default function (props: any): Promise<void | ({} & {})>;
+export default function (props: any): () => Promise<void | ({} & {})>;

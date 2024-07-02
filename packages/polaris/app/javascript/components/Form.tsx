@@ -1,7 +1,7 @@
 import React, { useState, useRef, useContext, MutableRefObject, CSSProperties } from 'react';
 import {FormLayout, InlineError, Link, Button} from '@shopify/polaris';
 import Spinner from './Spinner.js'
-import {Util, FormContext, useEffect, api} from '@thinkwell/react.common';
+import {Util, FormContext, useEffect, useApi} from '@thinkwell/react.common';
 import map from 'lodash/map.js';
 
 type Props = {
@@ -28,7 +28,8 @@ export default function Form(props:Props) {
   const [submitting, setSubmitting] = useState(false)
   const [submitClicked, setSubmitClicked] = useState(false)
   const [submitError, setSubmitError] = useState(props.submitError)
-
+  const api = useApi()
+  
   useEffect(() => setSubmitting(props.submitting), [props.submitting]);
   useEffect(() => setSubmitError(props.submitError), [props.submitError]);
 

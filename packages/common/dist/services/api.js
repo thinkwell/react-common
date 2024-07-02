@@ -12,8 +12,8 @@ import axios from 'axios';
 import useFetcherWithPromise from '../hooks/useFetcherWithPromise.js';
 import { ApiContext } from '../contexts/Api.js';
 export default function (props) {
-    return __awaiter(this, void 0, void 0, function* () {
-        const [useFetcher] = useContext(ApiContext);
+    const [useFetcher] = useContext(ApiContext);
+    return () => __awaiter(this, void 0, void 0, function* () {
         if (useFetcher) {
             const fetcher = useFetcherWithPromise();
             if (props.method = ~/get/i) {

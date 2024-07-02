@@ -8,7 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import useReducer from './useReducer.js';
-import api from '../services/api.js';
+import useApi from './useApi.js';
 export default function useReducerRequest(method, props) {
     function reducer(state, action) {
         const payload = action.payload;
@@ -24,6 +24,7 @@ export default function useReducerRequest(method, props) {
     }
     const initialArg = {};
     const [state, dispatch, onAction] = useReducer(props, initialArg, reducer);
+    const api = useApi();
     const onSuccess = onAction('onSuccess');
     const onRequesting = onAction('onRequesting');
     const onError = onAction('onError');

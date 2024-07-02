@@ -17,7 +17,7 @@ import useReducerModal from './hooks/useReducerModal.js'
 import useReducerRequest from './hooks/useReducerRequest.js'
 import useReducerTab from './hooks/useReducerTab.js'
 import useSearch from './hooks/useSearch.js'
-import api from './services/api.js'
+import useApi from './hooks/useApi.js'
 export {Util, FormProvider, FormContext, FormProps, FetchStateProps, Items, ApiContext, ApiProvider, PagingContext, PagingProvider, SearchContext, SearchProvider,
   useEffect, useFetch, useFetchState, useReducer, useReducerFetch, useReducerForm, useReducerItem, useReducerModal,
-  useReducerRequest, useReducerTab, useSearch, api}
+  useReducerRequest, useReducerTab, useSearch, useApi}
