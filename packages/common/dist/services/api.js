@@ -9,8 +9,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import { useContext } from 'react';
 import axios from 'axios';
-import useFetcherWithPromise from '../hooks/useFetcherWithPromise';
-import { ApiContext } from '../contexts/Api';
+import useFetcherWithPromise from '../hooks/useFetcherWithPromise.js';
+import { ApiContext } from '../contexts/Api.js';
 export default function (props) {
     return __awaiter(this, void 0, void 0, function* () {
         const [useFetcher] = useContext(ApiContext);

@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import axios from 'axios';
-import useFetcherWithPromise from '../hooks/useFetcherWithPromise'
-import { ApiContext } from '../contexts/Api'
+import useFetcherWithPromise from '../hooks/useFetcherWithPromise.js'
+import { ApiContext } from '../contexts/Api.js'
 
 export default async function(props) {
     const [useFetcher] = useContext(ApiContext)    
