@@ -8,15 +8,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import { useEffect, useState } from 'react';
-import useFetcherWithPromise from './useFetcherWithPromise.js';
+import api from '../services/api.js';
 export default function useFetchState(props) {
     const [loading, setLoading] = useState(false);
     const [state, setState] = useState({});
-    const fetcher = useFetcherWithPromise();
     const fetch = (url) => __awaiter(this, void 0, void 0, function* () {
         setLoading(true);
         setState({});
-        const result = yield fetcher.load(url);
+        const result = yield api({ method: 'get', url: url });
         setLoading(false);
         setState(result);
         return result;

@@ -2,10 +2,9 @@ import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { useState, useRef, useContext } from 'react';
 import { FormLayout, InlineError, Button } from '@shopify/polaris';
 import Spinner from './Spinner.js';
-import { Util, FormContext, useEffect, useFetcherWithPromise, api } from '@thinkwell/react.common';
+import { Util, FormContext, useEffect, api } from '@thinkwell/react.common';
 import map from 'lodash/map.js';
 export default function Form(props) {
-    const fetcher = useFetcherWithPromise();
     const form = useContext(FormContext);
     const formRef = useRef();
     const [fileDownloadToken, setFileDownloadToken] = useState(Math.random().toString(36).substring(7));
@@ -67,20 +66,9 @@ export default function Form(props) {
             if (props.headers) {
                 config.headers = props.headers;
             }
-            if (props.useFetcher) {
-                return fetcher.submit(data, config)
-                    .then(onSuccess)
-                    .catch(onError);
-            }
-            else {
-                const csrfTokenEl = document.querySelector("meta[name=csrf-token]");
-                if (csrfTokenEl) {
-                    api.defaults.headers.common['X-CSRF-Token'] = csrfTokenEl.content;
-                }
-                return api(config)
-                    .then(onSuccess)
-                    .catch(onError);
-            }
+            return api(config)
+                .then(onSuccess)
+                .catch(onError);
         }
         else {
             let attempts = 30;

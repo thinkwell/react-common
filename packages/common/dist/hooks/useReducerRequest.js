@@ -8,7 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import useReducer from './useReducer.js';
-import useFetcherWithPromise from './useFetcherWithPromise.js';
+import api from '../services/api.js';
 export default function useReducerRequest(method, props) {
     function reducer(state, action) {
         const payload = action.payload;
@@ -24,7 +24,6 @@ export default function useReducerRequest(method, props) {
     }
     const initialArg = {};
     const [state, dispatch, onAction] = useReducer(props, initialArg, reducer);
-    const fetcher = useFetcherWithPromise();
     const onSuccess = onAction('onSuccess');
     const onRequesting = onAction('onRequesting');
     const onError = onAction('onError');
@@ -36,8 +35,8 @@ export default function useReducerRequest(method, props) {
             onRequesting();
             const encType = "application/json";
             const methodArg = method;
-            const config = { method: methodArg, action: url, encType: encType };
-            const response = yield fetcher.submit(data, config);
+            const config = { method: methodArg, url: url, action: url, data: data, encType: encType };
+            const response = yield api(config);
             onSuccess(response);
             return response;
         }

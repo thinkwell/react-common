@@ -1,8 +1,7 @@
 import React, { useContext } from 'react';
 import useReducerFetch, { FetchStateProps } from './useReducerFetch.js'
-import axios from 'axios';
-import useFetcherWithPromise from "./useFetcherWithPromise.js";
 import { PagingContext } from '../contexts/Paging.js'
+import api from '../services/api.js'
 import useEffect from './useEffect.js'
 
 export default function useFetch<T>(props):[FetchStateProps, (url, params?) =>Promise<T[]>] {
@@ -10,7 +9,6 @@ export default function useFetch<T>(props):[FetchStateProps, (url, params?) =>Pr
 
   const initialState = {loading: false, error: null}
   const [state, onFetch, onSuccess, onError] = useReducerFetch(props, initialState);
-  const fetcher = useFetcherWithPromise()
 
   const fetch = async(url, params?):Promise<T[]> => {
     if (!url) {
@@ -30,7 +28,7 @@ export default function useFetch<T>(props):[FetchStateProps, (url, params?) =>Pr
         }
         url = `${url}?${searchParams.toString()}`
       }
-      data = await fetcher.load(url);
+      data = await api({method: 'get', url: url});
 
       let newItems:T[] = data.items || data
       console.debug(`${url} : fetched ${newItems.length}`)

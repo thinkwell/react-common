@@ -1,6 +1,6 @@
 import React from 'react';
 import useReducer from './useReducer.js'
-import useFetcherWithPromise from './useFetcherWithPromise.js';
+import api from '../services/api.js';
 
 type RequestState = {
   requesting: boolean,
@@ -25,7 +25,6 @@ export default function useReducerRequest (method:string, props):[RequestState, 
   const initialArg = {}
   const [state, dispatch, onAction] = useReducer(props, initialArg, reducer)
 
-  const fetcher = useFetcherWithPromise()
   const onSuccess = onAction('onSuccess')
   const onRequesting = onAction('onRequesting')
   const onError = onAction('onError')
@@ -39,8 +38,8 @@ export default function useReducerRequest (method:string, props):[RequestState, 
       onRequesting()
       const encType = "application/json" as any
       const methodArg = method as any
-      const config = {method: methodArg, action: url, encType: encType}
-      const response = await fetcher.submit(data, config)
+      const config = {method: methodArg, url: url, action: url, data: data, encType: encType}
+      const response = await api(config)
       onSuccess(response)
       return response
     } catch(error) {

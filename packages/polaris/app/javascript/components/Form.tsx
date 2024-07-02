@@ -1,9 +1,8 @@
 import React, { useState, useRef, useContext, MutableRefObject, CSSProperties } from 'react';
 import {FormLayout, InlineError, Link, Button} from '@shopify/polaris';
 import Spinner from './Spinner.js'
-import {Util, FormContext, useEffect, useFetcherWithPromise, api} from '@thinkwell/react.common';
+import {Util, FormContext, useEffect, api} from '@thinkwell/react.common';
 import map from 'lodash/map.js';
-import {AxiosRequestConfig} from 'axios';
 
 type Props = {
   url: string | ((form) => string)
@@ -24,7 +23,6 @@ type Props = {
 }
 
 export default function Form(props:Props) {
-  const fetcher = useFetcherWithPromise()
   const form = useContext(FormContext)
   const formRef = useRef() as MutableRefObject<HTMLFormElement>;
   const [fileDownloadToken, setFileDownloadToken] = useState(Math.random().toString(36).substring(7))
@@ -91,19 +89,9 @@ export default function Form(props:Props) {
       if(props.headers) {
         config.headers = props.headers
       }
-      if (props.useFetcher) {
-        return fetcher.submit(data, config)
-        .then(onSuccess)
-        .catch(onError)
-      } else {
-        const csrfTokenEl:HTMLMetaElement = document.querySelector("meta[name=csrf-token]")
-        if (csrfTokenEl) {
-          api.defaults.headers.common['X-CSRF-Token'] = csrfTokenEl.content
-        }
-        return api(config)
-        .then(onSuccess)
-        .catch(onError)
-      }
+      return api(config)
+      .then(onSuccess)
+      .catch(onError)
     } else {
       let attempts = 30;
       const getCookie = ( name ) => {

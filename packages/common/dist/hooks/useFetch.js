@@ -9,14 +9,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import { useContext } from 'react';
 import useReducerFetch from './useReducerFetch.js';
-import useFetcherWithPromise from "./useFetcherWithPromise.js";
 import { PagingContext } from '../contexts/Paging.js';
+import api from '../services/api.js';
 import useEffect from './useEffect.js';
 export default function useFetch(props) {
     const [page_info, previous_page_info, next_page_info, setPageInfo, setPreviousPageInfo, setNextPageInfo] = useContext(PagingContext);
     const initialState = { loading: false, error: null };
     const [state, onFetch, onSuccess, onError] = useReducerFetch(props, initialState);
-    const fetcher = useFetcherWithPromise();
     const fetch = (url, params) => __awaiter(this, void 0, void 0, function* () {
         if (!url) {
             return;
@@ -35,7 +34,7 @@ export default function useFetch(props) {
                 }
                 url = `${url}?${searchParams.toString()}`;
             }
-            data = yield fetcher.load(url);
+            data = yield api({ method: 'get', url: url });
             let newItems = data.items || data;
             console.debug(`${url} : fetched ${newItems.length}`);
             setPreviousPageInfo(data.previous_page_info);

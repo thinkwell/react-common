@@ -1,2 +1,1 @@
-import axios from 'axios';
-export default axios;
+export default function (props: any): Promise<void | ({} & {})>;
