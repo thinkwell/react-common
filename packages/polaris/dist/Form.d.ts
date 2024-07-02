@@ -7,7 +7,6 @@ type Props = {
     onSubmitting?: (boolean: any) => void;
     onError?: (string: any) => void;
     useHtml?: boolean;
-    useFetcher?: boolean;
     method?: string | (() => string);
     headers?: any;
     submitRef?: MutableRefObject<(extraData?: any) => void>;
