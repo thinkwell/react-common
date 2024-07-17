@@ -127,7 +127,7 @@ export default function EditForm(props) {
           <Stack.Item fill><Button onClick={() => onActive(false)}>Cancel</Button></Stack.Item>
         {
           typeof saveText != 'undefined' && !saveText ? null :
-            <Button primary loading={state.saving} onClick={save}>{saveText || 'Save'}</Button>
+            <Button variant="primary" loading={state.saving} onClick={save}>{saveText || 'Save'}</Button>
         }
         </Stack>
       </Card.Section>
