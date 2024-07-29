@@ -5,7 +5,7 @@ import { ApiContext } from '../contexts/Api.js'
 
 export default function useApi():((any) => Promise<any>) {
   const [useFetcher] = useContext(ApiContext)    
-  const fetcher = useFetcherWithPromise()
+  const fetcher = !!useFetcher && useFetcherWithPromise()
   return async(props) => {
       if (useFetcher) {
           if (props.method =~ /get/i) {

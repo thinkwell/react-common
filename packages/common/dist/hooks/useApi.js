@@ -13,7 +13,7 @@ import useFetcherWithPromise from './useFetcherWithPromise.js';
 import { ApiContext } from '../contexts/Api.js';
 export default function useApi() {
     const [useFetcher] = useContext(ApiContext);
-    const fetcher = useFetcherWithPromise();
+    const fetcher = !!useFetcher && useFetcherWithPromise();
     return (props) => __awaiter(this, void 0, void 0, function* () {
         if (useFetcher) {
             if (props.method = ~/get/i) {
