@@ -8,6 +8,7 @@ export default function useApi():((any) => Promise<any>) {
   const fetcher = !!useFetcher && useFetcherWithPromise()
   return async(props) => {
       if (useFetcher) {
+        console.log('--------------- useApi : fetcher')
           if (props.method =~ /get/i) {
               return await fetcher.load(props.url)
           } else {
@@ -18,6 +19,7 @@ export default function useApi():((any) => Promise<any>) {
           if (csrfTokenEl) {
             axios.defaults.headers.common['X-CSRF-Token'] = csrfTokenEl.content
           }
+          console.log('--------------- useApi : axios')
           return await axios(props)
       }
   }
