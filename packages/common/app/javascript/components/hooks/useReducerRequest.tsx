@@ -38,8 +38,11 @@ export default function useReducerRequest (method:string, props):[RequestState, 
     try {
       onRequesting()
       const methodArg = method as any
-      const config = {method: methodArg, url: url, data: data}
+      const config = {method: methodArg, url: url} as any
       const response = await api(config)
+      if(data) {
+        config.data = data
+      }
       onSuccess(response)
       return response
     } catch(error) {
