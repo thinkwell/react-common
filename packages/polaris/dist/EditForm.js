@@ -82,5 +82,5 @@ export default function EditForm(props) {
                                     : null, state.saveError ?
                                     _jsx(InlineError, { message: (_jsx("div", { className: "submit-error", children: state.saveError })), fieldID: "submitErrorFieldID" })
                                     : null, _jsx("div", { className: state.saving ? 'saving' : '', children: _jsx(Form, { onError: onSaveError, onSuccess: onSuccess, submitRef: submitRef, method: props.method, url: props.url, onSubmitting: onSaving, children: props.children }) })] }) }), _jsx(Card.Section, { children: _jsxs(Stack, { children: [_jsx(Stack.Item, { fill: true, children: _jsx(Button, { onClick: () => onActive(false), children: "Cancel" }) }), typeof saveText != 'undefined' && !saveText ? null :
-                                    _jsx(Button, { primary: true, loading: state.saving, onClick: save, children: saveText || 'Save' })] }) })] }) }) }));
+                                    _jsx(Button, { variant: "primary", loading: state.saving, onClick: save, children: saveText || 'Save' })] }) })] }) }) }));
 }

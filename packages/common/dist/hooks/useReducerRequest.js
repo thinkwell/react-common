@@ -34,9 +34,8 @@ export default function useReducerRequest(method, props) {
         }
         try {
             onRequesting();
-            const encType = "application/json";
             const methodArg = method;
-            const config = { method: methodArg, url: url, action: url, data: data, encType: encType };
+            const config = { method: methodArg, url: url, data: data };
             const response = yield api(config);
             onSuccess(response);
             return response;

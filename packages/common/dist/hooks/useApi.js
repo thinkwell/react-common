@@ -16,11 +16,12 @@ export default function useApi() {
     const fetcher = !!useFetcher && useFetcherWithPromise();
     return (props) => __awaiter(this, void 0, void 0, function* () {
         if (useFetcher) {
-            console.log('--------------- useApi : fetcher');
             if (props.method = ~/get/i) {
                 return yield fetcher.load(props.url);
             }
             else {
+                props.encType || (props.encType = "application/json");
+                props.action || (props.action = props.url);
                 return yield fetcher.submit(props.data, props);
             }
         }
@@ -29,7 +30,6 @@ export default function useApi() {
             if (csrfTokenEl) {
                 axios.defaults.headers.common['X-CSRF-Token'] = csrfTokenEl.content;
             }
-            console.log('--------------- useApi : axios');
             return yield axios(props);
         }
     });
