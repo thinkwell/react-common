@@ -36,10 +36,10 @@ export default function useReducerRequest(method, props) {
             onRequesting();
             const methodArg = method;
             const config = { method: methodArg, url: url };
-            const response = yield api(config);
             if (data) {
                 config.data = data;
             }
+            const response = yield api(config);
             onSuccess(response);
             return response;
         }
