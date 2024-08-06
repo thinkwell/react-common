@@ -23,7 +23,7 @@ export default function useFetch(props) {
         }
         onFetch();
         try {
-            let data;
+            let response;
             if (params) {
                 const searchParams = new URLSearchParams();
                 for (const key in params) {
@@ -35,11 +35,11 @@ export default function useFetch(props) {
                 }
                 url = `${url}?${searchParams.toString()}`;
             }
-            data = yield api({ method: 'get', url: url });
-            let newItems = data.items || data;
+            response = yield api({ method: 'get', url: url });
+            let newItems = response.data && response.data.items || response.data || response;
             console.debug(`${url} : fetched ${newItems.length}`);
-            setPreviousPageInfo(data.previous_page_info);
-            setNextPageInfo(data.next_page_info);
+            setPreviousPageInfo(response.previous_page_info);
+            setNextPageInfo(response.next_page_info);
             onSuccess(newItems);
             return newItems;
         }
