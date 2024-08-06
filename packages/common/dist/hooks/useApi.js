@@ -20,6 +20,7 @@ export default function useApi() {
                 return yield fetcher.load(props.url);
             }
             else {
+                console.log(`------------ useApi : before fetcher`);
                 props.encType || (props.encType = "application/json");
                 props.action || (props.action = props.url);
                 return yield fetcher.submit(props.data, props);
@@ -30,7 +31,6 @@ export default function useApi() {
             if (csrfTokenEl) {
                 axios.defaults.headers.common['X-CSRF-Token'] = csrfTokenEl.content;
             }
-            console.log(`------------ useApi : before axios`);
             return yield axios(props);
         }
     });

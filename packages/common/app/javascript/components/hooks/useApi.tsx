@@ -11,6 +11,7 @@ export default function useApi():((any) => Promise<any>) {
           if (props.method =~ /get/i) {
               return await fetcher.load(props.url)
           } else {
+              console.log(`------------ useApi : before fetcher`)
               props.encType ||= "application/json"
               props.action ||= props.url
               return await fetcher.submit(props.data, props)
@@ -20,7 +21,6 @@ export default function useApi():((any) => Promise<any>) {
           if (csrfTokenEl) {
             axios.defaults.headers.common['X-CSRF-Token'] = csrfTokenEl.content
           }
-          console.log(`------------ useApi : before axios`)
           return await axios(props)
       }
   }
