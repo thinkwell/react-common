@@ -35,7 +35,9 @@ export default function useFetch(props) {
                 }
                 url = `${url}?${searchParams.toString()}`;
             }
+            console.log(`------------ useFetch : before api`);
             data = yield api({ method: 'get', url: url });
+            console.log(`------------ useFetch : after api`);
             let newItems = data.items || data;
             console.debug(`${url} : fetched ${newItems.length}`);
             setPreviousPageInfo(data.previous_page_info);

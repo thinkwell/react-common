@@ -20,6 +20,7 @@ export default function useApi():((any) => Promise<any>) {
           if (csrfTokenEl) {
             axios.defaults.headers.common['X-CSRF-Token'] = csrfTokenEl.content
           }
+          console.log(`------------ useApi : before axios`)
           return await axios(props)
       }
   }

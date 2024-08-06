@@ -29,7 +29,9 @@ export default function useFetch<T>(props):[FetchStateProps, (url, params?) =>Pr
         }
         url = `${url}?${searchParams.toString()}`
       }
+      console.log(`------------ useFetch : before api`)
       data = await api({method: 'get', url: url});
+      console.log(`------------ useFetch : after api`)
 
       let newItems:T[] = data.items || data
       console.debug(`${url} : fetched ${newItems.length}`)

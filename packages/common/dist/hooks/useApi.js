@@ -30,6 +30,7 @@ export default function useApi() {
             if (csrfTokenEl) {
                 axios.defaults.headers.common['X-CSRF-Token'] = csrfTokenEl.content;
             }
+            console.log(`------------ useApi : before axios`);
             return yield axios(props);
         }
     });
