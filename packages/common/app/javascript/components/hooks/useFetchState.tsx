@@ -16,8 +16,9 @@ export default function useFetchState<T>(props?:Props):UseFetchStateProps<T> {
     setState({} as SetStateAction<T>)
     const result:any = await api({method: 'get', url: url})
     setLoading(false)
-    setState(result)
-    return result
+    const data = result && result.data || result
+    setState(data)
+    return data
   }
   
   useEffect(() => {

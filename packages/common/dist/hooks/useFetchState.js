@@ -18,8 +18,9 @@ export default function useFetchState(props) {
         setState({});
         const result = yield api({ method: 'get', url: url });
         setLoading(false);
-        setState(result);
-        return result;
+        const data = result && result.data || result;
+        setState(data);
+        return data;
     });
     useEffect(() => {
         if (props && props.url) {
