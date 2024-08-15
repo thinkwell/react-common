@@ -1,3 +1,4 @@
+import { flushSync } from 'react-dom';
 import React, { useState, useRef, useContext, RefObject, ReactElement, JSXElementConstructor, MutableRefObject } from 'react';
 import {FormLayout, Modal, InlineError} from '@shopify/polaris';
 import Form from './Form.js';
@@ -41,7 +42,9 @@ export default function EditModal<S extends IEditModal>(props:S) {
   }
 
   const save = () => {
-    onSaveClicked()
+    flushSync(() => {
+      onSaveClicked()
+    })
     if (form.errors.length) {
       console.error(`validation errors : ${JSON.stringify(form.errors)}`)
     } else {

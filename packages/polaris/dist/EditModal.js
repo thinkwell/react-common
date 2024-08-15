@@ -1,4 +1,5 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import { flushSync } from 'react-dom';
 import { useRef, useContext } from 'react';
 import { Modal, InlineError } from '@shopify/polaris';
 import Form from './Form.js';
@@ -15,7 +16,9 @@ export default function EditModal(props) {
         useEffect(() => { onActive(props.active); }, [props.active]);
     }
     const save = () => {
-        onSaveClicked();
+        flushSync(() => {
+            onSaveClicked();
+        });
         if (form.errors.length) {
             console.error(`validation errors : ${JSON.stringify(form.errors)}`);
         }
