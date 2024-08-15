@@ -1,4 +1,3 @@
-import { flushSync } from 'react-dom';
 import React, { useState, useRef, useContext, RefObject, ReactElement, JSXElementConstructor, MutableRefObject } from 'react';
 import {FormLayout, Modal, InlineError} from '@shopify/polaris';
 import Form from './Form.js';
@@ -42,9 +41,7 @@ export default function EditModal<S extends IEditModal>(props:S) {
   }
 
   const save = () => {
-    flushSync(() => {
-      onSaveClicked()
-    })
+    onSaveClicked()
     if (form.errors.length) {
       console.error(`validation errors : ${JSON.stringify(form.errors)}`)
     } else {
@@ -79,6 +76,7 @@ export default function EditModal<S extends IEditModal>(props:S) {
   const saveText = props.saveText && (typeof props.saveText == 'function' ? props.saveText(form) : props.saveText)
   const title = props.title && (typeof props.title == 'function' ? props.title(form) : props.title)
 
+  console.log(`------------- state.saveClicked && form.errors.length : ${state.saveClicked} : ${form.errors.length}`)
   return (
     <div className={props.className}>
       <Spinner active={state.saving}>
