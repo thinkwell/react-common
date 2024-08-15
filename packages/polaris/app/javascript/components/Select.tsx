@@ -27,6 +27,7 @@ export default function Select(props:Props) {
   }
 
   const validate = () => {
+    console.log(`------------- Select::validate(${props.name}) : ${props.required} : ${form.field(props.name)}`)
     if (props.required && !form.field(props.name)) {
       return {[props.name]: "Required " + (props.label.singular || props.label)}
     }

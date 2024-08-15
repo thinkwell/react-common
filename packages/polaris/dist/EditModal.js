@@ -44,7 +44,7 @@ export default function EditModal(props) {
     const linkText = props.linkText && (typeof props.linkText == 'function' ? props.linkText(form) : props.linkText);
     const saveText = props.saveText && (typeof props.saveText == 'function' ? props.saveText(form) : props.saveText);
     const title = props.title && (typeof props.title == 'function' ? props.title(form) : props.title);
-    console.log(`------------- state.saveClicked && form.errors.length : ${state.saveClicked} : ${form.errors.length}`);
+    console.log(`------------- state.saveClicked && form.errors : ${state.saveClicked} : ${JSON.stringify(form.errors)}`);
     return (_jsxs("div", { className: props.className, children: [_jsx(Spinner, { active: state.saving, children: typeof props.active != 'undefined' ?
                     _jsx("span", { className: "link-text", children: linkText || title }) :
                     _jsx("button", { className: props.linkClass || 'Polaris-Link', onClick: () => onActive(true), children: linkText || title }) }), _jsx(Modal, { activator: props.activator, open: state.active, onTransitionEnd: props.onTransitionEnd, onClose: () => onActive(false), title: title, primaryAction: typeof saveText != 'undefined' && !saveText ? undefined : {

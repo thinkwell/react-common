@@ -76,7 +76,7 @@ export default function EditModal<S extends IEditModal>(props:S) {
   const saveText = props.saveText && (typeof props.saveText == 'function' ? props.saveText(form) : props.saveText)
   const title = props.title && (typeof props.title == 'function' ? props.title(form) : props.title)
 
-  console.log(`------------- state.saveClicked && form.errors.length : ${state.saveClicked} : ${form.errors.length}`)
+  console.log(`------------- state.saveClicked && form.errors : ${state.saveClicked} : ${JSON.stringify(form.errors)}`)
   return (
     <div className={props.className}>
       <Spinner active={state.saving}>
