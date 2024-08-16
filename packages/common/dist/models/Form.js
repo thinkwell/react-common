@@ -9,11 +9,12 @@ export default function Form(props) {
     const scope = props.scope || 'data';
     const [initialData] = useState(props.data && props.data[scope] || props.data || {});
     const [formState, onAction] = useReducerForm({}, initialData);
-    const validations = {};
+    const [validations, setValidations] = useState({});
     const children = {};
     const register = (name, validator) => {
         validations[scope] = validations[scope] || {};
         validations[scope][name] = validator;
+        setValidations(validations);
     };
     const validate = () => {
         const validators = validations[scope];
