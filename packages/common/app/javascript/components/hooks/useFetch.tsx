@@ -31,7 +31,7 @@ export default function useFetch<T>(props):[FetchStateProps, (url, params?) =>Pr
       }
       response = await api({method: 'get', url: url});
 
-      let newItems:T[] = response.data && response.data.items || response.data || response
+      let newItems:T[] = response.data && response.data.items || response.data || response.items || response
       console.debug(`${url} : fetched ${newItems.length}`)
       setPreviousPageInfo(response.previous_page_info)
       setNextPageInfo(response.next_page_info)
