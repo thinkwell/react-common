@@ -20,7 +20,6 @@ export default function useApi() {
                 return yield fetcher.load(props.url);
             }
             else {
-                console.log(`------------ useApi : before fetcher`);
                 props.encType || (props.encType = "application/json");
                 props.action || (props.action = props.url);
                 return yield fetcher.submit(props.data, props);

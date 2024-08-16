@@ -19,13 +19,11 @@ export default function Form(props) {
     const validate = () => {
         const validators = validations[scope];
         if (!validators) {
-            console.log(`------------------ Form#validate : no validators`);
             return [];
         }
         const errors = Object.keys(validators).map((name) => {
             return { [name]: validators[name]() };
         });
-        console.log(`------------------ Form#validate : errors : ${JSON.stringify(errors)}`);
         return errors;
     };
     const isInt = (value) => {
@@ -74,7 +72,6 @@ export default function Form(props) {
             return props.format && props.format(value) || value;
         },
         get errors() {
-            console.log(`------------------ Form#errors`);
             const errorsObj = validate();
             const childrenErrors = values(children).map((form) => form.errors);
             return Util.flattenDeep(Object.assign({}, errorsObj, ...childrenErrors));
