@@ -15,6 +15,7 @@ export default function Form(props) {
         validations[scope] = validations[scope] || {};
         validations[scope][name] = validator;
         setValidations(validations);
+        console.log(`-------------------- register with validations : ${JSON.stringify(validations)}`);
     };
     const validate = () => {
         const validators = validations[scope];
