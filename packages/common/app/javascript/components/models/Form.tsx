@@ -36,11 +36,9 @@ export default function Form (props:Props) {
   const children = {}
 
   const register = (name, validator) => {
-    useEffect(() => {
-      validations[scope] = validations[scope] || {}
-      validations[scope][name] = validator
-      setValidations(validations)
-    }, [])
+    validations[scope] = validations[scope] || {}
+    validations[scope][name] = validator
+    setValidations(validations)
   }
 
   const validate = () => {
