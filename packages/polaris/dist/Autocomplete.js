@@ -8,7 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import { jsx as _jsx } from "react/jsx-runtime";
-import { useState, useContext, useRef } from 'react';
+import { useState, useEffect, useContext, useRef } from 'react';
 import { Autocomplete as AutocompletePolaris, Icon } from '@shopify/polaris';
 import { SearchIcon } from '@shopify/polaris-icons';
 import { FormContext } from '@thinkwell/react.common';
@@ -45,7 +45,9 @@ export default function Autocomplete(props) {
         }
         return errors;
     };
-    form.register(props.name, validate);
+    useEffect(() => {
+        form.register(props.name, validate);
+    }, []);
     const formatLabel = props.formatLabel || ((value) => {
         return value[props.valueProp];
     });

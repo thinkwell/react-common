@@ -1,5 +1,5 @@
 import { jsx as _jsx } from "react/jsx-runtime";
-import { useContext } from 'react';
+import { useEffect, useContext } from 'react';
 import { TextField as TextFieldPolaris } from '@shopify/polaris';
 import { FormContext } from '@thinkwell/react.common';
 export default function TextField(props) {
@@ -38,6 +38,8 @@ export default function TextField(props) {
         }
         return errors;
     };
-    form.register(props.name, validate);
+    useEffect(() => {
+        form.register(props.name, validate);
+    }, []);
     return (_jsx("div", { onKeyDown: handleKeyPress, children: _jsx(TextFieldPolaris, { autoComplete: props.autoComplete || "", multiline: props.multiline, label: props.label || "", labelHidden: props.labelHidden, type: props.type || 'text', value: valueAsString, onChange: onChange, onBlur: props.onBlur, onFocus: props.onFocus, name: nameHtml, id: id, disabled: props.disabled, pattern: props.pattern, maxLength: props.maxLength, placeholder: props.placeholder }) }));
 }

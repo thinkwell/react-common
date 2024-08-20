@@ -57,7 +57,9 @@ export default function TextField(props:Props) {
     return errors
   }
 
-  form.register(props.name, validate)
+  useEffect(() => {
+    form.register(props.name, validate)
+  }, [])
 
   return (<div onKeyDown={handleKeyPress}>
     <TextFieldPolaris

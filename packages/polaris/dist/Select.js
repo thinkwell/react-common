@@ -1,5 +1,5 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { Select as SelectPolaris, LegacyStack } from '@shopify/polaris';
 import Spinner from './Spinner.js';
 import { FormContext } from '@thinkwell/react.common';
@@ -19,7 +19,9 @@ export default function Select(props) {
         }
         return {};
     };
-    form.register(props.name, validate);
+    useEffect(() => {
+        form.register(props.name, validate);
+    }, []);
     const selectEl = _jsx(SelectPolaris, { label: startCase(props.label.plural || props.label), labelInline: typeof props.labelInline !== 'undefined' ? props.labelInline : true, options: props.options, onChange: onChange, value: form.field(props.name), error: props.fetchState && props.fetchState.error });
     return typeof props.labelInline !== 'undefined' && !props.labelInline ? selectEl : (_jsxs(LegacyStack, { children: [props.options && props.options.length || props.fetchState && props.fetchState.error ?
                 _jsx(LegacyStack.Item, { fill: true, children: selectEl }) :

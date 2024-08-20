@@ -61,7 +61,10 @@ export default function CKTextArea(props) {
     return errors
   }
 
-  form.register(props.name, validate)
+  useEffect(() => {
+    form.register(props.name, validate)
+  }, [])
+
   const value = form.field(props.name)
   return (
     <div>

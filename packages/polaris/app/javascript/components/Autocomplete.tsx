@@ -51,7 +51,9 @@ export default function Autocomplete(props:Props) {
     return errors
   }
 
-  form.register(props.name, validate)
+  useEffect(() => {
+    form.register(props.name, validate)
+  }, [])
 
   const formatLabel = props.formatLabel || ((value) => {
     return value[props.valueProp]

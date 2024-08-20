@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import {Select as SelectPolaris, SelectProps, LegacyStack} from '@shopify/polaris';
 import Spinner from './Spinner.js'
 import {FormContext} from '@thinkwell/react.common';
@@ -33,7 +33,10 @@ export default function Select(props:Props) {
     return {}
   }
 
-  form.register(props.name, validate)
+  useEffect(() => {
+    form.register(props.name, validate)
+  }, [])
+
 
   const selectEl = <SelectPolaris
     label={startCase(props.label.plural || props.label)}
