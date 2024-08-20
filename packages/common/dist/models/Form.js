@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import useReducerForm from '../hooks/useReducerForm.js';
 import Util from '../Util.js';
 import values from 'lodash/values.js';
@@ -12,9 +12,11 @@ export default function Form(props) {
     const [validations, setValidations] = useState({});
     const children = {};
     const register = (name, validator) => {
-        validations[scope] = validations[scope] || {};
-        validations[scope][name] = validator;
-        setValidations(validations);
+        useEffect(() => {
+            validations[scope] = validations[scope] || {};
+            validations[scope][name] = validator;
+            setValidations(validations);
+        }, []);
     };
     const validate = () => {
         const validators = validations[scope];
