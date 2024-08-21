@@ -30,6 +30,7 @@ export default function TextField(props) {
     const validate = () => {
         const errors = [];
         const valueAsString = getValueAsString();
+        console.log(`----------------------- TextField#validate : ${props.label} : ${valueAsString}`);
         if (props.required && (!valueAsString || !valueAsString.length)) {
             errors.push("Required " + props.label);
         }

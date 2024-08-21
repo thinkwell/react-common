@@ -14,7 +14,9 @@ export default function Select(props) {
         props.onChange && props.onChange(value, form);
     };
     const validate = () => {
-        if (props.required && !form.field(props.name)) {
+        const value = form.field(props.name);
+        console.log(`----------------------- Select#validate : ${props.name} : ${value}`);
+        if (props.required && !value) {
             return { [props.name]: "Required " + (props.label.singular || props.label) };
         }
         return {};
