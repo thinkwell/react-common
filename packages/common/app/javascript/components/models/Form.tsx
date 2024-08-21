@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState, useCallback } from 'react';
 import useReducerForm from '../hooks/useReducerForm.js'
 import Util from '../Util.js'
 import values from 'lodash/values.js'
@@ -37,8 +37,8 @@ export default function Form (props:Props) {
 
   const register = (name, validator) => {
     validations[scope] = validations[scope] || {}
-    validations[scope][name] = validator
-    console.log(`-------------------- register with validations ${name} : ${scope} : ${JSON.stringify(Object.keys(validations[scope]))} : ${JSON.stringify(validator)}`)
+    validations[scope][name] = useCallback(validator, [])
+    console.log(`-------------------- register with validations ${name} : ${scope} : ${JSON.stringify(Object.keys(validations[scope]))} : ${JSON.stringify(validations[scope][name])}`)
     setValidations(validations)
   }
 
