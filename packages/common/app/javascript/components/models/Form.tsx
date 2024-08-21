@@ -48,8 +48,8 @@ export default function Form (props:Props) {
       return []
     }
 
-    console.log(`------------------- Form#validate : ${JSON.stringify(obj.data)}`)
     const errors = Object.keys(validators).map((name) => {
+      console.log(`------------------- Form#validate : ${name} : ${JSON.stringify(obj.field(name))}`)
       return {[name]: validators[name]()}
     })
     return errors
