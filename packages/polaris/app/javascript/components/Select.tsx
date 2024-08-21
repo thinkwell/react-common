@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useCallback, useContext, useEffect } from 'react';
 import {Select as SelectPolaris, SelectProps, LegacyStack} from '@shopify/polaris';
 import Spinner from './Spinner.js'
 import {FormContext} from '@thinkwell/react.common';
@@ -26,14 +26,14 @@ export default function Select(props:Props) {
     props.onChange && props.onChange(value, form)
   }
 
-  const validate = () => {
+  const validate = useCallback(() => {
     const value = form.field(props.name)
     console.log(`----------------------- Select#validate : ${props.name} : ${value}`)
     if (props.required && !value) {
       return {[props.name]: "Required " + (props.label.singular || props.label)}
     }
     return {}
-  }
+  }, [])
 
   useEffect(() => {
     form.register(props.name, validate)

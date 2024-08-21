@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useCallback } from 'react';
 import {TextField as TextFieldPolaris, TextFieldProps} from '@shopify/polaris';
 import {FormContext} from '@thinkwell/react.common';
 
@@ -43,7 +43,7 @@ export default function TextField(props:Props) {
     }
   }
 
-  const validate = () => {
+  const validate = useCallback(() => {
     const errors = [];
     const valueAsString = getValueAsString()
     console.log(`----------------------- TextField#validate : ${props.name} : ${valueAsString}`)
@@ -56,7 +56,7 @@ export default function TextField(props:Props) {
     }
 
     return errors
-  }
+  }, []);
 
   useEffect(() => {
     console.log(`------------------ TextField : form.register : ${props.name} : ${JSON.stringify(validate)}`)

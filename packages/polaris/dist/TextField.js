@@ -1,5 +1,5 @@
 import { jsx as _jsx } from "react/jsx-runtime";
-import { useEffect, useContext } from 'react';
+import { useEffect, useContext, useCallback } from 'react';
 import { TextField as TextFieldPolaris } from '@shopify/polaris';
 import { FormContext } from '@thinkwell/react.common';
 export default function TextField(props) {
@@ -27,7 +27,7 @@ export default function TextField(props) {
             props.onEnterPressed && props.onEnterPressed();
         }
     };
-    const validate = () => {
+    const validate = useCallback(() => {
         const errors = [];
         const valueAsString = getValueAsString();
         console.log(`----------------------- TextField#validate : ${props.name} : ${valueAsString}`);
@@ -38,7 +38,7 @@ export default function TextField(props) {
             errors.push("Invalid " + props.label);
         }
         return errors;
-    };
+    }, []);
     useEffect(() => {
         console.log(`------------------ TextField : form.register : ${props.name} : ${JSON.stringify(validate)}`);
         form.register(props.name, validate);

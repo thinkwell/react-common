@@ -1,4 +1,4 @@
-import React, { useState, useContext, useRef } from 'react';
+import React, { useState, useContext, useRef, useCallback } from 'react';
 import {FormContext, useEffect} from '@thinkwell/react.common';
 import 'requestidlecallback-polyfill';
 import ckeditorConfig from './ckeditor/config';
@@ -46,7 +46,7 @@ export default function CKTextArea(props) {
     })
   }, []);
 
-  const validate = () => {
+  const validate = useCallback(() => {
     const errors = [];
     const value = form.field(props.name)
     const valueAsString = value && value.toString()
@@ -59,7 +59,7 @@ export default function CKTextArea(props) {
     }
 
     return errors
-  }
+  }, [])
 
   useEffect(() => {
     form.register(props.name, validate)

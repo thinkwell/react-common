@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useRef } from 'react';
+import React, { useState, useEffect, useContext, useRef, useCallback } from 'react';
 import {Autocomplete as AutocompletePolaris, Icon} from '@shopify/polaris';
 import {SearchIcon} from '@shopify/polaris-icons';
 import {FormContext} from '@thinkwell/react.common';
@@ -40,7 +40,7 @@ export default function Autocomplete(props:Props) {
     }
   }
 
-  const validate = () => {
+  const validate = useCallback(() => {
     const errors = [];
     const value = form.field(props.name)
     const valueAsString = value && value.toString()
@@ -49,7 +49,7 @@ export default function Autocomplete(props:Props) {
     }
 
     return errors
-  }
+  }, [])
 
   useEffect(() => {
     form.register(props.name, validate)
