@@ -82,6 +82,8 @@ export default function Form (props:Props) {
             return null
           }
       })
+      console.log(`------------------- Form#field : ${name} : ${JSON.stringify(formState[scope])} : ${JSON.stringify(formState.data)} : ${JSON.stringify(props.data)}`)
+
       if (Array.isArray(name)) {
         return get(data, name)
       } else {

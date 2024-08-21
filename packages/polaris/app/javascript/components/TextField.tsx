@@ -46,7 +46,7 @@ export default function TextField(props:Props) {
   const validate = () => {
     const errors = [];
     const valueAsString = getValueAsString()
-    console.log(`----------------------- TextField#validate : ${props.label} : ${valueAsString}`)
+    console.log(`----------------------- TextField#validate : ${props.name} : ${valueAsString}`)
     if (props.required && (!valueAsString || !valueAsString.length)) {
       errors.push("Required " + props.label)
     }
