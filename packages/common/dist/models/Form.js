@@ -22,6 +22,7 @@ export default function Form(props) {
         if (!validators) {
             return [];
         }
+        console.log(`------------------- Form#validate : ${JSON.stringify(obj.data)}`);
         const errors = Object.keys(validators).map((name) => {
             return { [name]: validators[name]() };
         });
