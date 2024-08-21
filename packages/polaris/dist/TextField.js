@@ -30,7 +30,7 @@ export default function TextField(props) {
     const validate = () => {
         const errors = [];
         const valueAsString = getValueAsString();
-        console.log(`----------------------- TextField#validate : ${props.label} : ${valueAsString}`);
+        console.log(`----------------------- TextField#validate : ${props.name} : ${valueAsString}`);
         if (props.required && (!valueAsString || !valueAsString.length)) {
             errors.push("Required " + props.label);
         }
@@ -40,6 +40,7 @@ export default function TextField(props) {
         return errors;
     };
     useEffect(() => {
+        console.log(`------------------ TextField : form.register : ${props.name} : ${JSON.stringify(validate)}`);
         form.register(props.name, validate);
     }, []);
     return (_jsx("div", { onKeyDown: handleKeyPress, children: _jsx(TextFieldPolaris, { autoComplete: props.autoComplete || "", multiline: props.multiline, label: props.label || "", labelHidden: props.labelHidden, type: props.type || 'text', value: valueAsString, onChange: onChange, onBlur: props.onBlur, onFocus: props.onFocus, name: nameHtml, id: id, disabled: props.disabled, pattern: props.pattern, maxLength: props.maxLength, placeholder: props.placeholder }) }));
