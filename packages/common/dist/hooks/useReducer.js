@@ -5,6 +5,7 @@ export default function useReducer(props, initialArg, reducer, init) {
     function reducerCommon(state, action) {
         const attribute = lowerFirst(action.type.replace(/^on/, ''));
         const newState = reducer(state, action, attribute);
+        console.log(`------------------- useReducer : ${attribute} : ${newState}`);
         stateRef.current = newState;
         return newState;
     }
