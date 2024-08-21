@@ -39,7 +39,7 @@ export default function Form (props:Props) {
     validations[scope] = validations[scope] || {}
     validations[scope][name] = validator
     setValidations(validations)
-    console.log(`-------------------- register with validations ${name} : ${scope} : ${JSON.stringify(Object.keys(validations[scope]))}`)
+    console.log(`-------------------- register with validations ${name} : ${scope} : ${JSON.stringify(Object.keys(validations[scope]))} : ${JSON.stringify(validator)}`)
   }
 
   const validate = () => {
@@ -82,7 +82,6 @@ export default function Form (props:Props) {
             return null
           }
       })
-      console.log(`------------------- Form#field : ${name} : ${JSON.stringify(formState[scope])} : ${JSON.stringify(formState.data)} : ${JSON.stringify(props.data)}`)
 
       if (Array.isArray(name)) {
         return get(data, name)
