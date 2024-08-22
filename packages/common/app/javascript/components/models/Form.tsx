@@ -49,9 +49,9 @@ export default function Form (props:Props) {
     }
 
     const errors = Object.keys(validators).map((name) => {
-      const value = obj.field(name)
+      const value = obj.current.field(name)
       console.log(`------------------- Form#validate : ${name} : ${JSON.stringify(value)}`)
-      return {[name]: validators[name](value, obj)}
+      return {[name]: validators[name](value, obj.current)}
     })
     return errors
   }
@@ -62,7 +62,7 @@ export default function Form (props:Props) {
       !isNaN(parseInt(value, 10));
   }
 
-  const obj = {
+  const obj = useRef({
     field: (name) => {
       const data = mergeWith({},
         props.data && props.data[scope] || props.data,
@@ -132,7 +132,7 @@ export default function Form (props:Props) {
       children.current = Object.assign({}, children.current, {[name]: form})
     },
     rootName: props.rootName
-  } as FormProps
+  } as FormProps)
 
   if (props.parent) {
     if (!props.name) {
@@ -141,5 +141,5 @@ export default function Form (props:Props) {
     props.parent.setChild(props.name, obj)
   }
 
-  return obj
+  return obj.current
 }
