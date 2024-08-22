@@ -10,7 +10,7 @@ export default function Form(props) {
     const [initialData] = useState(props.data && props.data[scope] || props.data || {});
     const [formState, onAction] = useReducerForm({}, initialData);
     const [validations, setValidations] = useState({});
-    const children = {};
+    const [children, setChildren] = useState({});
     const register = (name, validator) => {
         validations[scope] = validations[scope] || {};
         validations[scope][name] = validator;
@@ -76,7 +76,9 @@ export default function Form(props) {
         },
         get errors() {
             const errorsObj = validate();
+            console.log(`------------------- Form#errors : ${JSON.stringify(errorsObj)}`);
             const childrenErrors = values(children).map((form) => form.errors);
+            console.log(`------------------- Form#childrenErrors : ${JSON.stringify(childrenErrors)}`);
             return Util.flattenDeep(Object.assign({}, errorsObj, ...childrenErrors));
         },
         onData: (name) => {
@@ -84,7 +86,7 @@ export default function Form(props) {
         },
         register: register,
         setChild: (name, form) => {
-            children[name] = form;
+            setChildren(Object.assign({}, children, { [name]: form }));
         },
         rootName: props.rootName
     };
