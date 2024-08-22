@@ -38,6 +38,7 @@ export default function Form (props:Props) {
   const register = (name, validator) => {
     validations[scope] = validations[scope] || {}
     validations[scope][name] = validator
+    console.log(`-------------------- register with validations ${name} : ${scope} : ${JSON.stringify(Object.keys(validations[scope]))} : ${validator}`)
     setValidations(validations)
   }
 
@@ -48,6 +49,7 @@ export default function Form (props:Props) {
     }
 
     const errors = Object.keys(validators).map((name) => {
+      console.log(`------------------- Form#validate : ${name} : ${JSON.stringify(obj.field(name))}`)
       return {[name]: validators[name](obj.field(name), obj)}
     })
     return errors
