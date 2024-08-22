@@ -79,7 +79,9 @@ export default function Form(props) {
             console.log(`------------------- Form#errors : ${JSON.stringify(errorsObj)}`);
             const childrenErrors = values(children.current).map((form) => form.errors);
             console.log(`------------------- Form#childrenErrors : ${JSON.stringify(childrenErrors)}`);
-            return Util.flattenDeep(Object.assign({}, errorsObj, ...childrenErrors));
+            const result = Util.flattenDeep(Object.assign({}, errorsObj, ...childrenErrors));
+            console.log(`------------------- Form#errors : result : ${JSON.stringify(result)}`);
+            return result;
         },
         onData: (name) => {
             return onAction(scope, name);
