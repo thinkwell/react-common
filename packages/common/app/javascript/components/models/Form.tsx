@@ -49,8 +49,9 @@ export default function Form (props:Props) {
     }
 
     const errors = Object.keys(validators).map((name) => {
-      console.log(`------------------- Form#validate : ${name} : ${JSON.stringify(obj.field(name))}`)
-      return {[name]: validators[name](obj.field(name), obj)}
+      const value = obj.field(name)
+      console.log(`------------------- Form#validate : ${name} : ${JSON.stringify(value)}`)
+      return {[name]: validators[name](value, obj)}
     })
     return errors
   }

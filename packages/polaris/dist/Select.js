@@ -14,6 +14,7 @@ export default function Select(props) {
         props.onChange && props.onChange(value, form);
     };
     const validate = useCallback((value) => {
+        console.log(`------------------ Select#validate : ${props.name} : ${value}`);
         value || (value = form.field(props.name));
         if (props.required && !value) {
             return { [props.name]: "Required " + (props.label.singular || props.label) };
