@@ -46,9 +46,9 @@ export default function CKTextArea(props) {
     })
   }, []);
 
-  const validate = useCallback((form) => {
+  const validate = useCallback((value) => {
     const errors = [];
-    value = form.field(props.name)
+    value ||= form.field(props.name)
     const valueAsString = value && value.toString()
     if (props.required && (!valueAsString || !valueAsString.length)) {
       errors.push("Required " + props.label)

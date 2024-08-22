@@ -20,12 +20,12 @@ export default function TextField(props:Props) {
   const nameHtml = Array.isArray(props.name) ? props.name.join('_') : props.name
   const id = props.id || nameHtml
 
-  const getValueAsString = (form) => {
-    const value = form.field(props.name)
+  const getValueAsString = (value?) => {
+    value ||= form.field(props.name)
     return value && (props.format && props.format(value) || value.toString())
   }
 
-  const valueAsString = getValueAsString(form)
+  const valueAsString = getValueAsString()
 
   const isInvalid = (value) => {
     return !new RegExp("^" + props.pattern + "$").test(value);
@@ -43,9 +43,9 @@ export default function TextField(props:Props) {
     }
   }
 
-  const validate = useCallback((form) => {
+  const validate = useCallback((value) => {
     const errors = [];
-    const valueAsString = getValueAsString(form)
+    const valueAsString = getValueAsString(value)
     if (props.required && (!valueAsString || !valueAsString.length)) {
       errors.push("Required " + props.label)
     }

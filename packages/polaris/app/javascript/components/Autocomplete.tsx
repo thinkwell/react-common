@@ -40,9 +40,9 @@ export default function Autocomplete(props:Props) {
     }
   }
 
-  const validate = useCallback(() => {
+  const validate = useCallback((value) => {
     const errors = [];
-    const value = form.field(props.name)
+    value ||= form.field(props.name)
     const valueAsString = value && value.toString()
     if (props.required && (!valueAsString || !valueAsString.length)) {
       errors.push("Required " + props.label)
