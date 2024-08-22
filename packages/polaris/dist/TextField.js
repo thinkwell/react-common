@@ -9,11 +9,11 @@ export default function TextField(props) {
     const form = useContext(FormContext);
     const nameHtml = Array.isArray(props.name) ? props.name.join('_') : props.name;
     const id = props.id || nameHtml;
-    const getValueAsString = () => {
+    const getValueAsString = (form) => {
         const value = form.field(props.name);
         return value && (props.format && props.format(value) || value.toString());
     };
-    const valueAsString = getValueAsString();
+    const valueAsString = getValueAsString(form);
     const isInvalid = (value) => {
         return !new RegExp("^" + props.pattern + "$").test(value);
     };
@@ -27,10 +27,9 @@ export default function TextField(props) {
             props.onEnterPressed && props.onEnterPressed();
         }
     };
-    const validate = useCallback(() => {
+    const validate = useCallback((form) => {
         const errors = [];
-        const valueAsString = getValueAsString();
-        console.log(`----------------------- TextField#validate : ${props.name} : ${valueAsString}`);
+        const valueAsString = getValueAsString(form);
         if (props.required && (!valueAsString || !valueAsString.length)) {
             errors.push("Required " + props.label);
         }
@@ -38,9 +37,8 @@ export default function TextField(props) {
             errors.push("Invalid " + props.label);
         }
         return errors;
-    }, [form]);
+    }, []);
     useEffect(() => {
-        console.log(`------------------ TextField : form.register : ${props.name} : ${JSON.stringify(validate)}`);
         form.register(props.name, validate);
     }, []);
     return (_jsx("div", { onKeyDown: handleKeyPress, children: _jsx(TextFieldPolaris, { autoComplete: props.autoComplete || "", multiline: props.multiline, label: props.label || "", labelHidden: props.labelHidden, type: props.type || 'text', value: valueAsString, onChange: onChange, onBlur: props.onBlur, onFocus: props.onFocus, name: nameHtml, id: id, disabled: props.disabled, pattern: props.pattern, maxLength: props.maxLength, placeholder: props.placeholder }) }));
