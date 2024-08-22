@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState, useRef } from 'react';
 import useReducerForm from '../hooks/useReducerForm.js'
 import Util from '../Util.js'
 import values from 'lodash/values.js'
@@ -33,7 +33,7 @@ export default function Form (props:Props) {
   const [initialData] = useState(props.data && props.data[scope] || props.data || {})
   const [formState, onAction] = useReducerForm({}, initialData)
   const [validations, setValidations] = useState({})
-  const [children, setChildren] = useState({})
+  const children = useRef({})
 
   const register = (name, validator) => {
     validations[scope] = validations[scope] || {}
@@ -91,7 +91,7 @@ export default function Form (props:Props) {
       }
     },
     get data() {
-      const childrenData = values(children).map((form) => form.data)
+      const childrenData = values(children.current).map((form) => form.data)
       const data = mergeWith({},
         props.data && props.data[scope] || props.data,
         formState.data,
@@ -118,7 +118,7 @@ export default function Form (props:Props) {
     get errors() {
       const errorsObj = validate()
       console.log(`------------------- Form#errors : ${JSON.stringify(errorsObj)}`)
-      const childrenErrors = values(children).map((form) => form.errors)
+      const childrenErrors = values(children.current).map((form) => form.errors)
       console.log(`------------------- Form#childrenErrors : ${JSON.stringify(childrenErrors)}`)
       return Util.flattenDeep(Object.assign({}, errorsObj, ...childrenErrors));
     },
@@ -127,7 +127,7 @@ export default function Form (props:Props) {
     },
     register: register,
     setChild: (name, form) => {
-      setChildren(Object.assign({}, children, {[name]: form}))
+      children.current = Object.assign({}, children.current, {[name]: form})
     },
     rootName: props.rootName
   } as FormProps
