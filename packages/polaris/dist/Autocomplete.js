@@ -44,7 +44,7 @@ export default function Autocomplete(props) {
             errors.push("Required " + props.label);
         }
         return errors;
-    }, []);
+    }, [form]);
     useEffect(() => {
         form.register(props.name, validate);
     }, []);

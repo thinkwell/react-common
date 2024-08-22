@@ -38,7 +38,7 @@ export default function TextField(props) {
             errors.push("Invalid " + props.label);
         }
         return errors;
-    }, []);
+    }, [form]);
     useEffect(() => {
         console.log(`------------------ TextField : form.register : ${props.name} : ${JSON.stringify(validate)}`);
         form.register(props.name, validate);

@@ -49,7 +49,7 @@ export default function Autocomplete(props:Props) {
     }
 
     return errors
-  }, [])
+  }, [form])
 
   useEffect(() => {
     form.register(props.name, validate)

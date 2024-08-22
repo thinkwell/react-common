@@ -33,7 +33,7 @@ export default function Select(props:Props) {
       return {[props.name]: "Required " + (props.label.singular || props.label)}
     }
     return {}
-  }, [])
+  }, [form])
 
   useEffect(() => {
     form.register(props.name, validate)

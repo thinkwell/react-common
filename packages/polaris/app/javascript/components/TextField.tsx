@@ -56,7 +56,7 @@ export default function TextField(props:Props) {
     }
 
     return errors
-  }, []);
+  }, [form]);
 
   useEffect(() => {
     console.log(`------------------ TextField : form.register : ${props.name} : ${JSON.stringify(validate)}`)

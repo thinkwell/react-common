@@ -59,7 +59,7 @@ export default function CKTextArea(props) {
     }
 
     return errors
-  }, [])
+  }, [form])
 
   useEffect(() => {
     form.register(props.name, validate)
