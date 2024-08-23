@@ -16,10 +16,10 @@ export default function EditModal(props) {
     }
     const save = () => {
         onSaveClicked();
-        console.error(`EditModal#save`);
+        console.log(`EditModal#save`);
         const formErrors = form.errors();
         if (formErrors.length) {
-            console.error(`validation errors : ${JSON.stringify(formErrors)}`);
+            console.log(`validation errors : ${JSON.stringify(formErrors)}`);
         }
         else {
             submitRef.current();
