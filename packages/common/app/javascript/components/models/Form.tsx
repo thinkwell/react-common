@@ -38,7 +38,6 @@ export default function Form (props:Props) {
   const register = (name, validator) => {
     validations[scope] = validations[scope] || {}
     validations[scope][name] = validator
-    console.log(`-------------------- register with validations ${name} : ${scope} : ${JSON.stringify(Object.keys(validations[scope]))} : ${validator}`)
     setValidations(validations)
   }
 
@@ -50,7 +49,6 @@ export default function Form (props:Props) {
 
     const errors = Object.keys(validators).map((name) => {
       const value = obj.field(name)
-      console.log(`------------------- Form#validate : ${name} : ${JSON.stringify(value)}`)
       return {[name]: validators[name](value, obj)}
     })
     return errors
@@ -117,11 +115,8 @@ export default function Form (props:Props) {
     },
     errors: () => {
       const errorsObj = validate()
-      console.log(`------------------- Form#errors : ${JSON.stringify(errorsObj)}`)
       const childrenErrors = values(children.current).map((form) => form.errors())
-      console.log(`------------------- Form#childrenErrors : ${JSON.stringify(childrenErrors)}`)
       const result = Util.flattenDeep(Object.assign({}, errorsObj, ...childrenErrors))
-      console.log(`------------------- Form#errors : result : ${JSON.stringify(result)}`)
       return result;
     },
     onData: (name:(string | string[])) => {
