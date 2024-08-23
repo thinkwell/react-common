@@ -42,7 +42,6 @@ export default function EditModal<S extends IEditModal>(props:S) {
 
   const save = () => {
     onSaveClicked()
-    console.log(`EditModal#save`)
     const formErrors = form.errors()
     if (formErrors.length) {
       console.log(`validation errors : ${JSON.stringify(formErrors)}`)
