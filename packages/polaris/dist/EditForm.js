@@ -38,8 +38,9 @@ export default function EditForm(props) {
             ckEditorInstances[key].focusManager.blur(true);
         }
         onSaveClicked();
-        if (form.errors.length) {
-            console.error(`validation errors : ${JSON.stringify(form.errors)}`);
+        const formErrors = form.errors();
+        if (formErrors.length) {
+            console.error(`validation errors : ${JSON.stringify(formErrors)}`);
         }
         else {
             // hippo#76 : setTimeout to allow CKTextArea#blur handler to fire
@@ -77,8 +78,9 @@ export default function EditForm(props) {
     const linkText = props.linkText && (typeof props.linkText == 'function' ? props.linkText(form) : props.linkText);
     const saveText = props.saveText && (typeof props.saveText == 'function' ? props.saveText(form) : props.saveText);
     const title = props.title && (typeof props.title == 'function' ? props.title(form) : props.title);
-    return (_jsx(Card, { children: _jsx("div", { className: props.className, children: _jsxs("div", { style: { display: state.active ? 'block' : 'none' }, children: [_jsx(Card.Section, { children: _jsxs(LegacyStack, { children: [_jsx(LegacyStack.Item, { fill: true, children: _jsx(Text, { variant: "headingMd", as: "h2", children: title }) }), _jsx(Button, { accessibilityLabel: "Cancel", icon: XIcon, onClick: () => onActive(false), plain: true })] }) }), _jsx(Card.Section, { children: _jsxs(Scrollable, { style: { padding: '1.6rem', height: '100%' }, children: [state.saveClicked && form.errors.length ?
-                                    _jsx(InlineError, { message: (_jsxs("div", { children: [" ", form.errors.map((error) => (_jsx("div", { children: error }, error))), " "] })), fieldID: "validationErrorFieldID" })
+    const formErrors = form.errors();
+    return (_jsx(Card, { children: _jsx("div", { className: props.className, children: _jsxs("div", { style: { display: state.active ? 'block' : 'none' }, children: [_jsx(Card.Section, { children: _jsxs(LegacyStack, { children: [_jsx(LegacyStack.Item, { fill: true, children: _jsx(Text, { variant: "headingMd", as: "h2", children: title }) }), _jsx(Button, { accessibilityLabel: "Cancel", icon: XIcon, onClick: () => onActive(false), plain: true })] }) }), _jsx(Card.Section, { children: _jsxs(Scrollable, { style: { padding: '1.6rem', height: '100%' }, children: [state.saveClicked && formErrors.length ?
+                                    _jsx(InlineError, { message: (_jsxs("div", { children: [" ", formErrors.map((error) => (_jsx("div", { children: error }, error))), " "] })), fieldID: "validationErrorFieldID" })
                                     : null, state.saveError ?
                                     _jsx(InlineError, { message: (_jsx("div", { className: "submit-error", children: state.saveError })), fieldID: "submitErrorFieldID" })
                                     : null, _jsx("div", { className: state.saving ? 'saving' : '', children: _jsx(Form, { onError: onSaveError, onSuccess: onSuccess, submitRef: submitRef, method: props.method, url: props.url, onSubmitting: onSaving, children: props.children }) })] }) }), _jsx(Card.Section, { children: _jsxs(Stack, { children: [_jsx(Stack.Item, { fill: true, children: _jsx(Button, { onClick: () => onActive(false), children: "Cancel" }) }), typeof saveText != 'undefined' && !saveText ? null :

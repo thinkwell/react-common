@@ -56,8 +56,8 @@ export default function Form(props) {
                 return data[name];
             }
         },
-        get data() {
-            const childrenData = values(children.current).map((form) => form.data);
+        data: () => {
+            const childrenData = values(children.current).map((form) => form.data());
             const data = mergeWith({}, props.data && props.data[scope] || props.data, formState.data, formState[scope], ...childrenData, (objValue, srcValue, key) => {
                 // merge with default for arrays
                 if (isInt(key)) {
@@ -74,10 +74,10 @@ export default function Form(props) {
             const value = omit(data, props.omit || []);
             return props.format && props.format(value) || value;
         },
-        get errors() {
+        errors: () => {
             const errorsObj = validate();
             console.log(`------------------- Form#errors : ${JSON.stringify(errorsObj)}`);
-            const childrenErrors = values(children.current).map((form) => form.errors);
+            const childrenErrors = values(children.current).map((form) => form.errors());
             console.log(`------------------- Form#childrenErrors : ${JSON.stringify(childrenErrors)}`);
             const result = Util.flattenDeep(Object.assign({}, errorsObj, ...childrenErrors));
             console.log(`------------------- Form#errors : result : ${JSON.stringify(result)}`);

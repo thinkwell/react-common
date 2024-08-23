@@ -57,7 +57,7 @@ export default function Form(props) {
     const submit = (extraData) => {
         onSubmitting(true);
         if (!props.useHtml) {
-            const formData = Object.assign({}, form.data, extraData || {});
+            const formData = Object.assign({}, form.data(), extraData || {});
             const method = props.method ? (typeof props.method == 'function' ? props.method() : props.method) : 'put';
             const url = typeof props.url == 'function' ? props.url(form) : props.url;
             const data = {};
@@ -110,7 +110,7 @@ export default function Form(props) {
     const onClick = (event) => {
         event.preventDefault();
         setSubmitClicked(true);
-        if (!form.errors.length) {
+        if (!form.errors().length) {
             submit();
         }
     };
@@ -121,10 +121,11 @@ export default function Form(props) {
                             _jsx(Button, { submit: true, disabled: !!submitting, onClick: onClick, children: props.submitButton })
                             : null] })
                 : null] }));
+    const formErrors = form.errors();
     return (_jsxs("div", { style: props.style, children: [submitError ?
                 _jsx(InlineError, { message: submitError, fieldID: "submitErrorFieldID" })
-                : null, submitClicked && form.errors.length ?
-                _jsx(InlineError, { message: (_jsxs("div", { children: [" ", form.errors.map((error, index) => (_jsx("div", { children: error }, index))), " "] })), fieldID: "validationErrorFieldID" })
+                : null, submitClicked && formErrors.length ?
+                _jsx(InlineError, { message: (_jsxs("div", { children: [" ", formErrors.map((error, index) => (_jsx("div", { children: error }, index))), " "] })), fieldID: "validationErrorFieldID" })
                 : null, !props.useHtml ?
                 formLayout :
                 _jsxs("form", { method: "post", action: typeof props.url == 'function' ? props.url(form) : props.url, acceptCharset: "UTF-8", ref: formRef, className: "form", children: [formLayout, _jsx("input", { type: "hidden", name: "fileDownloadToken", value: fileDownloadToken })] })] }));

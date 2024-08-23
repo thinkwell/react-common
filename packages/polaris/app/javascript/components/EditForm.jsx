@@ -42,8 +42,9 @@ export default function EditForm(props) {
       ckEditorInstances[key].focusManager.blur(true)
     }
     onSaveClicked()
-    if (form.errors.length) {
-      console.error(`validation errors : ${JSON.stringify(form.errors)}`)
+    const formErrors = form.errors();
+    if (formErrors.length) {
+      console.error(`validation errors : ${JSON.stringify(formErrors)}`)
     } else {
       // hippo#76 : setTimeout to allow CKTextArea#blur handler to fire
       // TODO : remove after moving to ckeditor v5
@@ -85,6 +86,7 @@ export default function EditForm(props) {
   const linkText = props.linkText && (typeof props.linkText == 'function' ? props.linkText(form) : props.linkText)
   const saveText = props.saveText && (typeof props.saveText == 'function' ? props.saveText(form) : props.saveText)
   const title = props.title && (typeof props.title == 'function' ? props.title(form) : props.title)
+  const formErrors = form.errors()
 
   return (
     <Card>
@@ -102,8 +104,8 @@ export default function EditForm(props) {
       </Card.Section>
       <Card.Section>
         <Scrollable style={{padding: '1.6rem', height: '100%'}}>
-        { state.saveClicked && form.errors.length ?
-          <InlineError message={(<div> {form.errors.map((error) => (<div key={error}>{error}</div>)) } </div>)} fieldID="validationErrorFieldID" />
+        { state.saveClicked && formErrors.length ?
+          <InlineError message={(<div> {formErrors.map((error) => (<div key={error}>{error}</div>)) } </div>)} fieldID="validationErrorFieldID" />
         : null }
         { state.saveError ?
           <InlineError message={(<div className="submit-error">{state.saveError}</div>)} fieldID="submitErrorFieldID" />

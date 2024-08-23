@@ -1,7 +1,7 @@
 export interface FormProps {
     rootName: string;
-    data: any;
-    errors: string[];
+    data: () => any;
+    errors: () => string[];
     field: (name: string | string[]) => any;
     onData: (name: string | string[]) => (payload: any) => void;
     setChild: (name: string, form: FormProps) => void;

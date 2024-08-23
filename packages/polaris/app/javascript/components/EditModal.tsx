@@ -43,8 +43,9 @@ export default function EditModal<S extends IEditModal>(props:S) {
   const save = () => {
     onSaveClicked()
     console.error(`EditModal#save`)
-    if (form.errors.length) {
-      console.error(`validation errors : ${JSON.stringify(form.errors)}`)
+    const formErrors = form.errors()
+    if (formErrors.length) {
+      console.error(`validation errors : ${JSON.stringify(formErrors)}`)
     } else {
       submitRef.current()
       onSaveSubmitted()
@@ -76,6 +77,7 @@ export default function EditModal<S extends IEditModal>(props:S) {
   const linkText = props.linkText && (typeof props.linkText == 'function' ? props.linkText(form) : props.linkText)
   const saveText = props.saveText && (typeof props.saveText == 'function' ? props.saveText(form) : props.saveText)
   const title = props.title && (typeof props.title == 'function' ? props.title(form) : props.title)
+  const formErrors = form.errors()
 
   return (
     <div className={props.className}>
@@ -104,8 +106,8 @@ export default function EditModal<S extends IEditModal>(props:S) {
         ]}
       >
         <Modal.Section>
-        { state.saveClicked && form.errors.length ?
-          <InlineError message={(<div> {form.errors.map((error) => (<div key={error}>{error}</div>)) } </div>)} fieldID="validationErrorFieldID" />
+        { state.saveClicked && formErrors.length ?
+          <InlineError message={(<div> {formErrors.map((error) => (<div key={error}>{error}</div>)) } </div>)} fieldID="validationErrorFieldID" />
         : null }
         { state.saveError ?
           <InlineError message={(<div className="submit-error">{state.saveError}</div>)} fieldID="submitErrorFieldID" />

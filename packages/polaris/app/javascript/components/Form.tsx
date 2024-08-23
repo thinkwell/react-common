@@ -79,7 +79,7 @@ export default function Form(props:Props) {
   const submit = (extraData?) => {
     onSubmitting(true)
     if (!props.useHtml) {
-      const formData = Object.assign({}, form.data, extraData || {})
+      const formData = Object.assign({}, form.data(), extraData || {})
       const method = props.method ? (typeof props.method == 'function' ? props.method() : props.method) : 'put' as any;
       const url = typeof props.url == 'function' ? props.url(form) : props.url;
       const data = {};
@@ -132,7 +132,7 @@ export default function Form(props:Props) {
   const onClick = (event?) => {
     event.preventDefault();
     setSubmitClicked(true);
-    if(!form.errors.length) {
+    if(!form.errors().length) {
       submit();
     }
   }
@@ -151,14 +151,14 @@ export default function Form(props:Props) {
         </Spinner>
        : null}
     </FormLayout>)
-
+  const formErrors = form.errors()
   return (
     <div style={props.style}>
       { submitError ?
         <InlineError message={submitError} fieldID="submitErrorFieldID" />
       : null }
-      { submitClicked && form.errors.length ?
-        <InlineError message={(<div> {form.errors.map((error, index) => (<div key={index}>{error}</div>)) } </div>)} fieldID="validationErrorFieldID" />
+      { submitClicked && formErrors.length ?
+        <InlineError message={(<div> {formErrors.map((error, index) => (<div key={index}>{error}</div>)) } </div>)} fieldID="validationErrorFieldID" />
       : null }
       { !props.useHtml ?
         formLayout :
