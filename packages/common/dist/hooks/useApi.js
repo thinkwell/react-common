@@ -16,7 +16,7 @@ export default function useApi() {
     const fetcher = !!useFetcher && useFetcherWithPromise();
     return (props) => __awaiter(this, void 0, void 0, function* () {
         if (useFetcher) {
-            if (props.method = ~/get/i) {
+            if (props.method.match(/get/i)) {
                 return yield fetcher.load(props.url);
             }
             else {

@@ -8,7 +8,7 @@ export default function useApi():((any) => Promise<any>) {
   const fetcher = !!useFetcher && useFetcherWithPromise()
   return async(props) => {
       if (useFetcher) {
-          if (props.method =~ /get/i) {
+          if (props.method.match(/get/i)) {
               return await fetcher.load(props.url)
           } else {
               props.encType ||= "application/json"
