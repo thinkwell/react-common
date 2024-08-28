@@ -22,6 +22,7 @@ export default function useApi() {
             else {
                 props.encType || (props.encType = "application/json");
                 props.action || (props.action = props.url);
+                props.data || (props.data = {});
                 return yield fetcher.submit(props.data, props);
             }
         }
