@@ -13,6 +13,7 @@ export default function useApi():((any) => Promise<any>) {
           } else {
               props.encType ||= "application/json"
               props.action ||= props.url
+              props.data ||= {}
               return await fetcher.submit(props.data, props)
           }
       } else {
