@@ -19,7 +19,7 @@ export default function TextField(props) {
     };
     const onChange = (value) => {
         form.onData(props.name)(value);
-        props.onChange && props.onChange(value, form);
+        props.onChange && props.onChange(value, form, props.name);
     };
     const handleKeyPress = (event) => {
         const enterKeyPressed = event.keyCode === 13;

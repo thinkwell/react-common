@@ -4,7 +4,7 @@ export type Props = Omit<TextFieldProps, "autoComplete" | "name" | "label"> & {
     label?: string;
     autoComplete?: string;
     format?: (value: any) => string;
-    onChange?: (value: any, form: any) => void;
+    onChange?: (value: any, form: any, name: any) => void;
     onEnterPressed?: () => void;
     required?: boolean;
 };

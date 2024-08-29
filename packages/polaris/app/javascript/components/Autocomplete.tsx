@@ -30,7 +30,7 @@ export default function Autocomplete(props:Props) {
 
   const onChange = (value) => {
     form.onData(props.name)(value)
-    props.onChange && props.onChange(value, form)
+    props.onChange && props.onChange(value, form, props.name)
   }
 
   const handleKeyPress = (event) => {

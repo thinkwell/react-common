@@ -7,7 +7,7 @@ export type Props = Omit<TextFieldProps, "autoComplete" | "name" | "label"> & {
   label?: string,
   autoComplete?: string,
   format?: (value) => string,
-  onChange?: (value, form) => void,
+  onChange?: (value, form, name) => void,
   onEnterPressed?: () => void,
   required?: boolean
 }
@@ -33,7 +33,7 @@ export default function TextField(props:Props) {
 
   const onChange = (value) => {
     form.onData(props.name)(value)
-    props.onChange && props.onChange(value, form)
+    props.onChange && props.onChange(value, form, props.name)
   }
 
   const handleKeyPress = (event) => {
