@@ -125,13 +125,13 @@ export default function EditForm(props) {
         </Scrollable>
       </Card.Section>
       <Card.Section>
-        <Stack>
-          <Stack.Item fill><Button onClick={() => onActive(false)}>Cancel</Button></Stack.Item>
+        <LegacyStack>
+          <LegacyStack.Item fill><Button onClick={() => onActive(false)}>Cancel</Button></LegacyStack.Item>
         {
           typeof saveText != 'undefined' && !saveText ? null :
             <Button variant="primary" loading={state.saving} onClick={save}>{saveText || 'Save'}</Button>
         }
-        </Stack>
+        </LegacyStack>
       </Card.Section>
     </div>
     </div>
