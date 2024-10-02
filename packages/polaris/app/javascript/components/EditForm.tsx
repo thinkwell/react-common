@@ -1,21 +1,27 @@
 import React, { useState, useRef, useContext } from 'react';
-import {FormLayout, InlineError, Text, Scrollable, Button, Card, LegacyStack} from '@shopify/polaris';
+import {FormLayout, InlineError, Text, Scrollable, Button, LegacyCard, LegacyStack} from '@shopify/polaris';
 import {XIcon} from '@shopify/polaris-icons';
 import Form from './Form.js';
-import Spinner from './Spinner.js';
-import {Util, FormContext, useReducerModal, useEffect} from '@thinkwell/react.common';
+import {FormContext, useReducerModal, useEffect} from '@thinkwell/react.common';
+
+declare global {
+  interface Window {
+    CKEDITOR: any,
+    MathJax: any
+  }
+}
 
 export default function EditForm(props) {
   const form = useContext(FormContext)
 
   const onActiveProp = props.onActive
-  const ckEditorInstances = typeof CKEDITOR !== 'undefined' ? CKEDITOR.instances : {}
+  const ckEditorInstances = typeof window.CKEDITOR !== 'undefined' ? window.CKEDITOR.instances : {}
 
   const [state, onActive, onSaveClicked, onSaveSubmitted, onSaveError, onSaving, onClear] = useReducerModal({...props, onActive: (active) => {
     if(!active) {
       setTimeout(() => {
-        if (typeof MathJax !== 'undefined') {
-          MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+        if (typeof window.MathJax !== 'undefined') {
+          window.MathJax.Hub.Queue(["Typeset",window.MathJax.Hub]);
         }
       }, 100)
     } else {
@@ -89,20 +95,20 @@ export default function EditForm(props) {
   const formErrors = form.errors()
 
   return (
-    <Card>
+    <LegacyCard>
     <div className={props.className}>
-      <div style={{display: state.active ? 'block' : 'none'}}><Card.Section>
+      <div style={{display: state.active ? 'block' : 'none'}}><LegacyCard.Section>
         <LegacyStack>
           <LegacyStack.Item fill><Text variant="headingMd" as="h2">{title}</Text></LegacyStack.Item>
           <Button
             accessibilityLabel="Cancel"
             icon={XIcon}
             onClick={() => onActive(false)}
-            plain
+            variant="plain"
           />
         </LegacyStack>
-      </Card.Section>
-      <Card.Section>
+      </LegacyCard.Section>
+      <LegacyCard.Section>
         <Scrollable style={{padding: '1.6rem', height: '100%'}}>
         { state.saveClicked && formErrors.length ?
           <InlineError message={(<div> {formErrors.map((error) => (<div key={error}>{error}</div>)) } </div>)} fieldID="validationErrorFieldID" />
@@ -123,8 +129,8 @@ export default function EditForm(props) {
             </Form>
           </div>
         </Scrollable>
-      </Card.Section>
-      <Card.Section>
+      </LegacyCard.Section>
+      <LegacyCard.Section>
         <LegacyStack>
           <LegacyStack.Item fill><Button onClick={() => onActive(false)}>Cancel</Button></LegacyStack.Item>
         {
@@ -132,9 +138,9 @@ export default function EditForm(props) {
             <Button variant="primary" loading={state.saving} onClick={save}>{saveText || 'Save'}</Button>
         }
         </LegacyStack>
-      </Card.Section>
+      </LegacyCard.Section>
     </div>
     </div>
-    </Card>
+    </LegacyCard>
   );
 }

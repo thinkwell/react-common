@@ -1,19 +1,18 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import React, { useState, useRef, useContext } from 'react';
-import { FormLayout, InlineError, Text, Scrollable, Button, Card, LegacyStack } from '@shopify/polaris';
+import { useRef, useContext } from 'react';
+import { InlineError, Text, Scrollable, Button, LegacyCard, LegacyStack } from '@shopify/polaris';
 import { XIcon } from '@shopify/polaris-icons';
 import Form from './Form.js';
-import Spinner from './Spinner.js';
-import { Util, FormContext, useReducerModal, useEffect } from '@thinkwell/react.common';
+import { FormContext, useReducerModal, useEffect } from '@thinkwell/react.common';
 export default function EditForm(props) {
     const form = useContext(FormContext);
     const onActiveProp = props.onActive;
-    const ckEditorInstances = typeof CKEDITOR !== 'undefined' ? CKEDITOR.instances : {};
+    const ckEditorInstances = typeof window.CKEDITOR !== 'undefined' ? window.CKEDITOR.instances : {};
     const [state, onActive, onSaveClicked, onSaveSubmitted, onSaveError, onSaving, onClear] = useReducerModal(Object.assign(Object.assign({}, props), { onActive: (active) => {
             if (!active) {
                 setTimeout(() => {
-                    if (typeof MathJax !== 'undefined') {
-                        MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+                    if (typeof window.MathJax !== 'undefined') {
+                        window.MathJax.Hub.Queue(["Typeset", window.MathJax.Hub]);
                     }
                 }, 100);
             }
@@ -79,10 +78,10 @@ export default function EditForm(props) {
     const saveText = props.saveText && (typeof props.saveText == 'function' ? props.saveText(form) : props.saveText);
     const title = props.title && (typeof props.title == 'function' ? props.title(form) : props.title);
     const formErrors = form.errors();
-    return (_jsx(Card, { children: _jsx("div", { className: props.className, children: _jsxs("div", { style: { display: state.active ? 'block' : 'none' }, children: [_jsx(Card.Section, { children: _jsxs(LegacyStack, { children: [_jsx(LegacyStack.Item, { fill: true, children: _jsx(Text, { variant: "headingMd", as: "h2", children: title }) }), _jsx(Button, { accessibilityLabel: "Cancel", icon: XIcon, onClick: () => onActive(false), plain: true })] }) }), _jsx(Card.Section, { children: _jsxs(Scrollable, { style: { padding: '1.6rem', height: '100%' }, children: [state.saveClicked && formErrors.length ?
+    return (_jsx(LegacyCard, { children: _jsx("div", { className: props.className, children: _jsxs("div", { style: { display: state.active ? 'block' : 'none' }, children: [_jsx(LegacyCard.Section, { children: _jsxs(LegacyStack, { children: [_jsx(LegacyStack.Item, { fill: true, children: _jsx(Text, { variant: "headingMd", as: "h2", children: title }) }), _jsx(Button, { accessibilityLabel: "Cancel", icon: XIcon, onClick: () => onActive(false), variant: "plain" })] }) }), _jsx(LegacyCard.Section, { children: _jsxs(Scrollable, { style: { padding: '1.6rem', height: '100%' }, children: [state.saveClicked && formErrors.length ?
                                     _jsx(InlineError, { message: (_jsxs("div", { children: [" ", formErrors.map((error) => (_jsx("div", { children: error }, error))), " "] })), fieldID: "validationErrorFieldID" })
                                     : null, state.saveError ?
                                     _jsx(InlineError, { message: (_jsx("div", { className: "submit-error", children: state.saveError })), fieldID: "submitErrorFieldID" })
-                                    : null, _jsx("div", { className: state.saving ? 'saving' : '', children: _jsx(Form, { onError: onSaveError, onSuccess: onSuccess, submitRef: submitRef, method: props.method, url: props.url, onSubmitting: onSaving, children: props.children }) })] }) }), _jsx(Card.Section, { children: _jsxs(LegacyStack, { children: [_jsx(LegacyStack.Item, { fill: true, children: _jsx(Button, { onClick: () => onActive(false), children: "Cancel" }) }), typeof saveText != 'undefined' && !saveText ? null :
+                                    : null, _jsx("div", { className: state.saving ? 'saving' : '', children: _jsx(Form, { onError: onSaveError, onSuccess: onSuccess, submitRef: submitRef, method: props.method, url: props.url, onSubmitting: onSaving, children: props.children }) })] }) }), _jsx(LegacyCard.Section, { children: _jsxs(LegacyStack, { children: [_jsx(LegacyStack.Item, { fill: true, children: _jsx(Button, { onClick: () => onActive(false), children: "Cancel" }) }), typeof saveText != 'undefined' && !saveText ? null :
                                     _jsx(Button, { variant: "primary", loading: state.saving, onClick: save, children: saveText || 'Save' })] }) })] }) }) }));
 }
