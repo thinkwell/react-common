@@ -12,6 +12,7 @@ type Props = {
     searchResultsVisible?: TopBarProps['searchResultsVisible'];
     searchResults?: TopBarProps['searchResults'];
     onSearchResultsDismiss?: TopBarProps['onSearchResultsDismiss'];
+    showNavigationToggle?: boolean;
     href?: string;
     navigation?: React.ReactNode;
     children: any;

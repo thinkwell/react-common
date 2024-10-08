@@ -14,6 +14,7 @@ type Props = {
   searchResultsVisible?: TopBarProps['searchResultsVisible'],
   searchResults?: TopBarProps['searchResults'],
   onSearchResultsDismiss?:  TopBarProps['onSearchResultsDismiss'],
+  showNavigationToggle?: boolean,
   href?: string,
   navigation?: React.ReactNode,
   children: any
@@ -84,7 +85,7 @@ export default function MainFrame(props:Props) {
   );
 
   const topBarMarkup = (<TopBar
-    showNavigationToggle
+    showNavigationToggle={props.showNavigationToggle}
     userMenu={props.userMenu}
     searchResultsVisible={props.searchResultsVisible}
     searchField={searchFieldMarkup}

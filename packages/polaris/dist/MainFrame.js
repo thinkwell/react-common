@@ -49,6 +49,6 @@ export default function MainFrame(props) {
     }, []);
     const toggleMobileNavigationActive = useCallback(() => setMobileNavigationActive((mobileNavigationActive) => !mobileNavigationActive), []);
     const searchFieldMarkup = (props.withoutSearch ? null : _jsx("div", { onKeyDown: props.onSearchKeyPress, children: _jsx(TopBar.SearchField, { onChange: handleSearchFieldChange, value: decodeURIComponent(searchValue), placeholder: props.searchPlaceHolder || "Search" }) }));
-    const topBarMarkup = (_jsx(TopBar, { showNavigationToggle: true, userMenu: props.userMenu, searchResultsVisible: props.searchResultsVisible, searchField: searchFieldMarkup, searchResults: props.searchResults, onSearchResultsDismiss: props.onSearchResultsDismiss, onNavigationToggle: toggleMobileNavigationActive }));
+    const topBarMarkup = (_jsx(TopBar, { showNavigationToggle: props.showNavigationToggle, userMenu: props.userMenu, searchResultsVisible: props.searchResultsVisible, searchField: searchFieldMarkup, searchResults: props.searchResults, onSearchResultsDismiss: props.onSearchResultsDismiss, onNavigationToggle: toggleMobileNavigationActive }));
     return (_jsx("div", { className: `${mobileNavigationActive ? 'mobile-nav-active' : 'mobile-nav-hidden'}`, "data-href": props.href, children: _jsxs(Frame, { topBar: topBarMarkup, navigation: props.navigation, showMobileNavigation: mobileNavigationActive, onNavigationDismiss: toggleMobileNavigationActive, children: [loading ? _jsx(Loading, {}) : null, props.children] }) }));
 }
