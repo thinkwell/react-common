@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useContext, ReactNode } from 'react';
-import {LegacyStack, ResourceList as ResourceListShopify, Pagination, InlineError, EmptyState} from '@shopify/polaris';
+import {LegacyStack, ResourceList as ResourceListShopify, Pagination, InlineError, EmptyState, LegacyCard} from '@shopify/polaris';
 import {SearchContext, PagingContext, FormContext, useReducerForm, useReducerRequest, FetchStateProps} from '@thinkwell/react.common';
 
 type Props = {
@@ -86,6 +86,7 @@ export default function ResourceList(props:Props) {
     <LegacyStack vertical={true}>
       { props.fetchItemsState && props.fetchItemsState.error ? <InlineError message={props.fetchItemsState && props.fetchItemsState.error} fieldID="resourceListError" /> : null }
       { props.fetchItemsError ? <InlineError message={props.fetchItemsError} fieldID="resourceListError" /> : null }
+      <LegacyCard>
       <ResourceListShopify
       selectedItems={props.selectable && form.field && form.field(props.name)}
       onSelectionChange={props.selectable && form.onData && form.onData(props.name)}
@@ -100,6 +101,7 @@ export default function ResourceList(props:Props) {
       onSortChange={handleSortChange}
       loading={props.fetchItemsState && props.fetchItemsState.loading || props.fetchItemsLoading}
       />
+      </LegacyCard>
       {paginationMarkup}
     </LegacyStack>
   );
