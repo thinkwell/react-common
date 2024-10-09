@@ -16,7 +16,8 @@ type Props = {
   selectable?: boolean,
   fetchItemsState?: FetchStateProps,
   fetchItemsError?: string,
-  filterControl?: ReactNode
+  filterControl?: ReactNode,
+  alternateTool?: ReactNode
 }
 
 export default function ResourceList(props:Props) {
@@ -91,6 +92,7 @@ export default function ResourceList(props:Props) {
       selectedItems={props.selectable && form.field && form.field(props.name)}
       onSelectionChange={props.selectable && form.onData && form.onData(props.name)}
       filterControl={props.filterControl}
+      alternateTool={props.alternateTool}
       selectable={props.selectable}
       resourceName={resourceName}
       emptyState={emptyStateMarkup}
