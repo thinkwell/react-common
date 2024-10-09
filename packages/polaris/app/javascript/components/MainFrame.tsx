@@ -84,7 +84,7 @@ export default function MainFrame(props:Props) {
     /></div>
   );
 
-  const topBarMarkup = (<TopBar
+  const topBarMarkup = (props.userMenu || searchFieldMarkup || props.showNavigationToggle) ? (<TopBar
     showNavigationToggle={props.showNavigationToggle}
     userMenu={props.userMenu}
     searchResultsVisible={props.searchResultsVisible}
@@ -92,7 +92,7 @@ export default function MainFrame(props:Props) {
     searchResults={props.searchResults}
     onSearchResultsDismiss={props.onSearchResultsDismiss}
     onNavigationToggle={toggleMobileNavigationActive}
-  />)
+  />) : null
 
   return (
     <div className={`${mobileNavigationActive ? 'mobile-nav-active' : 'mobile-nav-hidden'}`} data-href={props.href}>
