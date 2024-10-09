@@ -15,7 +15,8 @@ type Props = {
   resourceName?: {singular: string, plural: string},
   selectable?: boolean,
   fetchItemsState?: FetchStateProps,
-  fetchItemsError?: string
+  fetchItemsError?: string,
+  filterControl?: ReactNode
 }
 
 export default function ResourceList(props:Props) {
@@ -88,6 +89,7 @@ export default function ResourceList(props:Props) {
       <ResourceListShopify
       selectedItems={props.selectable && form.field && form.field(props.name)}
       onSelectionChange={props.selectable && form.onData && form.onData(props.name)}
+      filterControl={props.filterControl}
       selectable={props.selectable}
       resourceName={resourceName}
       emptyState={emptyStateMarkup}

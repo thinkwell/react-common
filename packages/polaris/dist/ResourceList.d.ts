@@ -17,6 +17,7 @@ type Props = {
     selectable?: boolean;
     fetchItemsState?: FetchStateProps;
     fetchItemsError?: string;
+    filterControl?: ReactNode;
 };
 export default function ResourceList(props: Props): import("react/jsx-runtime").JSX.Element;
 export {};
