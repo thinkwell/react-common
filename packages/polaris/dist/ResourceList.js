@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { useState, useContext } from 'react';
-import { LegacyStack, ResourceList as ResourceListShopify, Pagination, InlineError, EmptyState } from '@shopify/polaris';
+import { LegacyStack, ResourceList as ResourceListShopify, Pagination, InlineError, EmptyState, LegacyCard } from '@shopify/polaris';
 import { SearchContext, PagingContext, FormContext } from '@thinkwell/react.common';
 export default function ResourceList(props) {
     const form = useContext(FormContext);
@@ -60,5 +60,5 @@ export default function ResourceList(props) {
         { label: 'Oldest update', value: `${orderProp} asc` },
     ] : null;
     const emptyStateMarkup = !props.items || !props.items.length ? _jsx(EmptyState, { image: "", heading: `No ${resourceName.plural} found` }) : null;
-    return (_jsxs(LegacyStack, { vertical: true, children: [props.fetchItemsState && props.fetchItemsState.error ? _jsx(InlineError, { message: props.fetchItemsState && props.fetchItemsState.error, fieldID: "resourceListError" }) : null, props.fetchItemsError ? _jsx(InlineError, { message: props.fetchItemsError, fieldID: "resourceListError" }) : null, _jsx(ResourceListShopify, { selectedItems: props.selectable && form.field && form.field(props.name), onSelectionChange: props.selectable && form.onData && form.onData(props.name), filterControl: props.filterControl, selectable: props.selectable, resourceName: resourceName, emptyState: emptyStateMarkup, items: itemsSorted, renderItem: props.renderItem, sortValue: order, sortOptions: sortOptions, onSortChange: handleSortChange, loading: props.fetchItemsState && props.fetchItemsState.loading || props.fetchItemsLoading }), paginationMarkup] }));
+    return (_jsxs(LegacyStack, { vertical: true, children: [props.fetchItemsState && props.fetchItemsState.error ? _jsx(InlineError, { message: props.fetchItemsState && props.fetchItemsState.error, fieldID: "resourceListError" }) : null, props.fetchItemsError ? _jsx(InlineError, { message: props.fetchItemsError, fieldID: "resourceListError" }) : null, _jsx(LegacyCard, { children: _jsx(ResourceListShopify, { selectedItems: props.selectable && form.field && form.field(props.name), onSelectionChange: props.selectable && form.onData && form.onData(props.name), filterControl: props.filterControl, selectable: props.selectable, resourceName: resourceName, emptyState: emptyStateMarkup, items: itemsSorted, renderItem: props.renderItem, sortValue: order, sortOptions: sortOptions, onSortChange: handleSortChange, loading: props.fetchItemsState && props.fetchItemsState.loading || props.fetchItemsLoading }) }), paginationMarkup] }));
 }
