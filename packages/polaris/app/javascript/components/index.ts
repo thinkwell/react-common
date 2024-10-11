@@ -16,4 +16,6 @@ import IFrameModal from './IFrameModal.js'
 import Table from './Table.js'
 import RadioButton from './RadioButton.js'
 import ImageUpload from './ImageUpload.js'
-export {AppProvider, MainFrame, ResourceList, Form, EditModal, EditSheet, EditForm, TextField, TextFieldProps, Spinner, Select, SelectProps, Checkbox, Autocomplete, IFrameModal, Table, RadioButton, ImageUpload}
+import SearchTextField from './SearchTextField.js'
+import SortSelect from './SortSelect.js'
+export {AppProvider, MainFrame, ResourceList, Form, EditModal, EditSheet, EditForm, TextField, TextFieldProps, Spinner, Select, SelectProps, Checkbox, Autocomplete, IFrameModal, Table, RadioButton, ImageUpload, SearchTextField, SortSelect}
