@@ -1,17 +1,14 @@
 import React, { useState, useEffect, useRef, useContext, ReactNode } from 'react';
 import {LegacyStack, ResourceList as ResourceListShopify, Pagination, InlineError, EmptyState, LegacyCard} from '@shopify/polaris';
-import {SearchContext, PagingContext, FormContext, useReducerForm, useReducerRequest, FetchStateProps} from '@thinkwell/react.common';
+import {SearchContext, PagingContext, FormContext, SortContext, useReducerForm, useReducerRequest, FetchStateProps, useSearch} from '@thinkwell/react.common';
 
 type Props = {
   fetchItemsLoading?: boolean;
   renderItem: (item: any, id: string, index: number) => ReactNode;
   name?: string | string[],
-  order?: string,
   limit?: number,
   items: any[],
-  withoutSort?: boolean,
-  url?: string,
-  fetchItems?: ((url:string, params?) => void),
+  onSearch?: ((params?) => void),
   resourceName?: {singular: string, plural: string},
   selectable?: boolean,
   fetchItemsState?: FetchStateProps,
@@ -22,37 +19,16 @@ type Props = {
 
 export default function ResourceList(props:Props) {
   const form = useContext(FormContext)
+  const [sort] = useContext(SortContext)
   const [page_info, previous_page_info, next_page_info, setPageInfo] = useContext(PagingContext)
-  const [search] = useContext(SearchContext)
-  const orderProp = props.order || 'updated_at'
-  const [order, setOrder] = useState(`${orderProp} desc`)
+  const [onSearchChange, onSortChange] = useSearch(props.onSearch || function(){})
   const limit = props.limit || 10;
 
-  const itemsSorted = [].concat(props.items)
-  if (!props.withoutSort && order) {
-    const [field, type] = order.split(' ')
-    itemsSorted.sort((a, b) => {
-      if (type == 'desc') {
-        return new Date(b[field]).valueOf() - new Date(a[field]).valueOf()
-      } else {
-        return new Date(a[field]).valueOf() - new Date(b[field]).valueOf()
-      }
-    })
-  }
-
   const doSearch = async(params) => {
-    if (search) {
-      params.query = search
-    }
     params.limit = params.limit || limit
-    params.order = params.order || order
-    const results = await props.fetchItems(props.url, params)
+    await props.onSearch(params)
   };
 
-  const handleSortChange = (order) => {
-    setOrder(order);
-    doSearch({order: order})
-  };
   const handlePreviousPage = () => {
     setPageInfo(previous_page_info)
     doSearch({page_info: previous_page_info})
@@ -75,11 +51,6 @@ export default function ResourceList(props:Props) {
         onNext={handleNextPage}
       />
     ) : null;
-  const sortOptions =
-    !props.withoutSort && !!props.url ? [
-      {label: 'Newest update', value: `${orderProp} desc`},
-      {label: 'Oldest update', value: `${orderProp} asc`},
-    ] : null;
 
   const emptyStateMarkup = !props.items || !props.items.length ?  <EmptyState image="" heading={`No ${resourceName.plural} found`}></EmptyState> : null
 
@@ -96,11 +67,8 @@ export default function ResourceList(props:Props) {
       selectable={props.selectable}
       resourceName={resourceName}
       emptyState={emptyStateMarkup}
-      items={itemsSorted}
+      items={props.items}
       renderItem={props.renderItem}
-      sortValue={order}
-      sortOptions={sortOptions}
-      onSortChange={handleSortChange}
       loading={props.fetchItemsState && props.fetchItemsState.loading || props.fetchItemsLoading}
       />
       </LegacyCard>

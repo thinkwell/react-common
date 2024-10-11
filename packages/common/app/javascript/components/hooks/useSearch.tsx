@@ -3,7 +3,7 @@ import { SearchContext } from '../contexts/Search.js'
 import { SortContext } from '../contexts/Sort.js'
 import debounce from 'lodash/debounce.js';
 
-export default function useSearch (fetch):[(value:string) => void, (value:string) => void] {
+export default function useSearch (fetch):[(value:string) => void, (value:string) => void, (params:any) => void] {
   const [search, setSearch] = useContext(SearchContext);
   const [sort, setSort] = useContext(SortContext);
 
@@ -19,7 +19,7 @@ export default function useSearch (fetch):[(value:string) => void, (value:string
 
   const delayedSearch = useRef(debounce(onSearch, 1000));
 
-  const onSearchChange = (value:string) => {
+  const onQueryChange = (value:string) => {
     setSearch(value)
     delayedSearch.current({query: value})
   }
@@ -29,5 +29,5 @@ export default function useSearch (fetch):[(value:string) => void, (value:string
     onSearch({order: value})
   }
 
-  return [onSearchChange, onSortChange]
+  return [onQueryChange, onSortChange, onSearch]
 }

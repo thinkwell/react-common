@@ -4,12 +4,9 @@ type Props = {
     fetchItemsLoading?: boolean;
     renderItem: (item: any, id: string, index: number) => ReactNode;
     name?: string | string[];
-    order?: string;
     limit?: number;
     items: any[];
-    withoutSort?: boolean;
-    url?: string;
-    fetchItems?: ((url: string, params?: any) => void);
+    onSearch?: ((params?: any) => void);
     resourceName?: {
         singular: string;
         plural: string;
