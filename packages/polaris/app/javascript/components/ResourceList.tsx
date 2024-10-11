@@ -21,12 +21,12 @@ export default function ResourceList(props:Props) {
   const form = useContext(FormContext)
   const [sort] = useContext(SortContext)
   const [page_info, previous_page_info, next_page_info, setPageInfo] = useContext(PagingContext)
-  const [onSearchChange, onSortChange] = useSearch(props.onSearch || function(){})
+  const [onSearchChange, onSortChange, onSearch] = useSearch(props.onSearch || function(){})
   const limit = props.limit || 10;
 
   const doSearch = async(params) => {
     params.limit = params.limit || limit
-    await props.onSearch(params)
+    await onSearch(params)
   };
 
   const handlePreviousPage = () => {
