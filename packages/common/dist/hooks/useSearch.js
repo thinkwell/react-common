@@ -6,11 +6,11 @@ export default function useSearch(fetch) {
     const [search, setSearch] = useContext(SearchContext);
     const [sort, setSort] = useContext(SortContext);
     const onSearch = (params) => {
-        if (sort) {
-            params.order || (params.order = sort);
+        if (!params.order && !!sort) {
+            params.order = sort;
         }
-        if (search) {
-            params.query || (params.query = search);
+        if (!params.query && !!search) {
+            params.query = search;
         }
         fetch(params);
     };

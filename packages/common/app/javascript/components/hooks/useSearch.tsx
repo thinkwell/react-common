@@ -8,11 +8,11 @@ export default function useSearch (fetch):[(value:string) => void, (value:string
   const [sort, setSort] = useContext(SortContext);
 
   const onSearch = (params) => {
-    if (sort) {
-      params.order ||= sort 
+    if (!params.order && !!sort) {
+      params.order = sort 
     }
-    if (search) {
-      params.query ||= search 
+    if (!params.query && !!search) {
+      params.query = search 
     }
     fetch(params)
   }
