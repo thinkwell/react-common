@@ -1,6 +1,6 @@
 import React, { useContext, useRef } from 'react';
 import {SearchContext, useSearch} from '@thinkwell/react.common';
-import {TextField, Icon} from '@shopify/polaris';
+import {TextField, Icon, Button} from '@shopify/polaris';
 import {SearchIcon, XCircleIcon} from '@shopify/polaris-icons';
 
 export default function SearchTextField(props) {
@@ -23,7 +23,7 @@ export default function SearchTextField(props) {
         labelHidden={true}
         onChange={onSearchChange}
         value={query}
-        suffix={<div onClick={onClear}><Icon source={XCircleIcon} tone="base" /></div>}
+        suffix={<Button onClick={onClear} icon={XCircleIcon} />}
         prefix={<Icon source={SearchIcon} tone="base" />}
         placeholder={props.placeholder}
       />
