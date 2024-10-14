@@ -6,7 +6,7 @@ type SortContextType = [sort: string, setSort: (string) => void]
 const SortContext = React.createContext<SortContextType>(["", () => {}]);
 
 const SortProvider = (props) => {
-  const value = props && props.sort || !(typeof document === "undefined") && Util.getParam(window.location.href, 'sort') || ''
+  const value = props && props.sort
   const [sort, setSort] = useState<string>(value)
 
   return (
