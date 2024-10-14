@@ -12,5 +12,5 @@ export default function SearchTextField(props) {
             onSearchChange("");
         }
     };
-    return (_jsx("div", { children: _jsx(TextField, { autoComplete: 'off', label: "", labelHidden: true, onChange: onSearchChange, value: query, suffix: _jsx(Button, { onClick: onClear, icon: XCircleIcon }), prefix: _jsx(Icon, { source: SearchIcon, tone: "base" }), placeholder: props.placeholder }) }));
+    return (_jsx("div", { children: _jsx(TextField, { autoComplete: 'off', label: "", labelHidden: true, onChange: onSearchChange, value: query, suffix: _jsx(Button, { onClick: onClear, icon: XCircleIcon, variant: "plain" }), prefix: _jsx(Icon, { source: SearchIcon, tone: "base" }), placeholder: props.placeholder }) }));
 }

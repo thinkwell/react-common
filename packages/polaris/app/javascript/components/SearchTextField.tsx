@@ -23,7 +23,7 @@ export default function SearchTextField(props) {
         labelHidden={true}
         onChange={onSearchChange}
         value={query}
-        suffix={<Button onClick={onClear} icon={XCircleIcon} />}
+        suffix={<Button onClick={onClear} icon={XCircleIcon} variant="plain" />}
         prefix={<Icon source={SearchIcon} tone="base" />}
         placeholder={props.placeholder}
       />
