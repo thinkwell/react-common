@@ -52,7 +52,7 @@ export default function ResourceList(props:Props) {
       />
     ) : null;
 
-  const emptyStateMarkup = !props.items || !props.items.length ?  <div>{`No ${resourceName.plural} found`}</div> : null
+  const emptyStateMarkup = !props.items || !props.items.length ?  <EmptyState image="" heading={`No ${resourceName.plural} found`}></EmptyState> : null
 
   return (
     <LegacyStack vertical={true}>
@@ -66,12 +66,12 @@ export default function ResourceList(props:Props) {
       alternateTool={props.alternateTool}
       selectable={props.selectable}
       resourceName={resourceName}
+      emptySearchState={emptyStateMarkup}
       items={props.items}
       renderItem={props.renderItem}
       loading={props.fetchItemsState && props.fetchItemsState.loading || props.fetchItemsLoading}
       />
       </LegacyCard>
-      {emptyStateMarkup}
       {paginationMarkup}
     </LegacyStack>
   );
