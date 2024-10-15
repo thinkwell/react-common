@@ -6,7 +6,6 @@ export default function useSearch(fetch) {
     const [search, setSearch] = useContext(SearchContext);
     const [sort, setSort] = useContext(SortContext);
     const onSearch = (params) => {
-        console.log(`useSearch#onSearch : ${sort} : ${search} : ${JSON.stringify(params)}`);
         if (!params.order && !!sort) {
             params.order = sort;
         }
@@ -17,9 +16,8 @@ export default function useSearch(fetch) {
     };
     const delayedSearch = useRef(debounce(onSearch, 1000));
     const onSearchChange = (value) => {
-        console.log(`useSearch#onSearchChange : ${sort} : ${search} : ${value}`);
         setSearch(value);
-        delayedSearch.current({ query: value });
+        delayedSearch.current({ query: value, order: sort });
     };
     const onSortChange = (value) => {
         setSort(value);
