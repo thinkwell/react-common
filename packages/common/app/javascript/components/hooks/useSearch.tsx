@@ -21,7 +21,11 @@ export default function useSearch (fetch):[(value:string) => void, (value:string
 
   const onSearchChange = (value:string) => {
     setSearch(value)
-    delayedSearch.current({query: value, order: sort})
+    const params:any = {query: value}
+    if (!!sort) {
+      params.order = sort
+    }
+    delayedSearch.current(params)
   }
 
   const onSortChange = (value:string) => {
