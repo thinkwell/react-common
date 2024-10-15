@@ -6,6 +6,7 @@ export default function useSearch(fetch) {
     const [search, setSearch] = useContext(SearchContext);
     const [sort, setSort] = useContext(SortContext);
     const onSearch = (params) => {
+        console.log(`useSearch#onSearch : ${sort} : ${search} : ${JSON.stringify(params)}`);
         if (!params.order && !!sort) {
             params.order = sort;
         }
