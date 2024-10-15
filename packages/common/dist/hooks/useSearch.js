@@ -15,7 +15,8 @@ export default function useSearch(fetch) {
         fetch(params);
     };
     const delayedSearch = useRef(debounce(onSearch, 1000));
-    const onQueryChange = (value) => {
+    const onSearchChange = (value) => {
+        console.log(`useSearch#onSearchChange : ${sort} : ${search} : ${value}`);
         setSearch(value);
         delayedSearch.current({ query: value });
     };
@@ -23,5 +24,5 @@ export default function useSearch(fetch) {
         setSort(value);
         onSearch({ order: value });
     };
-    return [onQueryChange, onSortChange, onSearch];
+    return [onSearchChange, onSortChange, onSearch];
 }
