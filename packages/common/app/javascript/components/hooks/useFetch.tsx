@@ -18,7 +18,7 @@ export default function useFetch<T>(props):[FetchStateProps, (url, params?) =>Pr
     onFetch();
     try {
       let response;
-      if (params) {
+      if (params && Object.keys(params).length) {
         const searchParams = new URLSearchParams()
         for (const key in params) {
           let value = params[key]
