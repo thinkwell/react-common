@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useRef } from 'react';
+import React, { useState, useEffect, useContext, useCallback, useRef } from 'react';
 import {Autocomplete as AutocompletePolaris, Icon} from '@shopify/polaris';
 import {SearchMinor, DeleteMajor} from '@shopify/polaris-icons';
 import {FormContext} from '@thinkwell/react.common';
@@ -48,7 +48,7 @@ export default function Autocomplete(props) {
     return value[props.valueProp]
   })
 
-  const updateText = (value) => {
+  const updateText = useCallback((value) => {
     setInputValue(value);
 
     if (value.length < 2) {
@@ -80,7 +80,7 @@ export default function Autocomplete(props) {
       setOptions(resultOptions);
       setLoading(false);
     }, 500)
-  }
+  }, [])
 
   const updateSelection = (selectedItems) => {
     const idProp = props.idProp || 'id'
