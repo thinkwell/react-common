@@ -8,12 +8,16 @@ export default function Autocomplete(props) {
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [inputValue, setInputValue] = useState(props.value);
   const [options, setOptions] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(props.loading || false);
   const timeout = useRef(null);
 
   if (!props.name) {
     throw `Property name is required for Autocomplete ${props.label}`
   }
+
+  useEffect(() => { setInputValue(props.value); }, [props.value])
+  useEffect(() => { setLoading(props.loading); }, [props.loading])
+
   const form = useContext(FormContext)
   const nameHtml = Array.isArray(props.name) ? props.name.join('_') : props.name
   const id = props.id || nameHtml
