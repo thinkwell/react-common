@@ -1,15 +1,18 @@
-import React, { useState, useEffect, useContext, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useContext, useCallback } from 'react';
 import {Autocomplete as AutocompletePolaris, Icon} from '@shopify/polaris';
 import {SearchMinor, DeleteMajor} from '@shopify/polaris-icons';
-import {FormContext} from '@thinkwell/react.common';
+import {FormContext, useSearch} from '@thinkwell/react.common';
 import axios from 'axios'
 
 export default function Autocomplete(props) {
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [inputValue, setInputValue] = useState(props.value);
-  const [options, setOptions] = useState([]);
+  const [options, setOptions] = useState([{
+    value: null,
+    label: 'No Results Found'
+  }]);
   const [loading, setLoading] = useState(props.loading || false);
-  const timeout = useRef(null);
+  const [onSearchChange] = useSearch((params) => fetchValues(params.query))
 
   if (!props.name) {
     throw `Property name is required for Autocomplete ${props.label}`
@@ -59,34 +62,30 @@ export default function Autocomplete(props) {
       return
     }
 
-    if (timeout.current) {
-      clearTimeout(timeout.current)
-      timeout.current = null
-    }
-
-    timeout.current = setTimeout(async() => {
-      timeout.current = null
-      setLoading(true);
-      const url = new URL(props.url)
-      url.searchParams.set('query', encodeURIComponent(value))
-      if (props.limit) {
-        url.searchParams.set('limit', props.limit)
-      }
-      const response = await axios({method: 'get', url: url.toString()})
-      // Format data into JSON
-      const data = response.data;
-      const resultOptions = (data.items || data).map((result) => {
-        return {
-          value: result,
-          label: formatLabel(result)
-        }
-      })
-      setOptions(resultOptions);
-      setLoading(false);
-    }, 500)
+    onSearchChange(value)
   }, [])
 
-  const updateSelection = (selectedItems) => {
+  const fetchValues = async(value) => {
+    setLoading(true);
+    const url = new URL(props.url)
+    url.searchParams.set('query', value)
+    if (props.limit) {
+      url.searchParams.set('limit', props.limit)
+    }
+    const response = await axios({method: 'get', url: url.toString()})
+    // Format data into JSON
+    const data = response.data;
+    const resultOptions = (data.items || data).map((result) => {
+      return {
+        value: result,
+        label: formatLabel(result)
+      }
+    })
+    setOptions(resultOptions);
+    setLoading(false);
+  }
+
+  const updateSelection = useCallback((selectedItems) => {
     const idProp = props.idProp || 'id'
     const selected = selectedItems.map((selectedItem) => {
       return options.find((option) => option.value[idProp] == selectedItem[idProp])
@@ -94,7 +93,7 @@ export default function Autocomplete(props) {
     form.onData(props.name)(selected && selected.value[idProp])
     setInputValue(formatLabel(selected.value));
     setSelectedOptions([selected]);
-  }
+  }, [options])
 
   const onClearButtonClick = () => {
     setInputValue('')
