@@ -3,6 +3,7 @@ import {Autocomplete as AutocompletePolaris, Icon} from '@shopify/polaris';
 import {SearchMinor, DeleteMajor} from '@shopify/polaris-icons';
 import {FormContext, useSearch} from '@thinkwell/react.common';
 import axios from 'axios'
+import { Spinner } from "./index";
 
 export default function Autocomplete(props) {
   const [selectedOptions, setSelectedOptions] = useState([]);
@@ -110,7 +111,8 @@ export default function Autocomplete(props) {
       clearButton
       onClearButtonClick={onClearButtonClick}
       prefix={<Icon source={SearchMinor} color="base" />}
-      placeholder={props.placeholder || `Search ${props.label}`}
+      placeholder={(props.placeholder || `Search ${props.label}`) + (loading ? '...' : '')}
+      connectedRight={loading ? <Spinner active={true}></Spinner> : null}
     />
   );
 
