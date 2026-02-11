@@ -114,6 +114,8 @@ export default function EditForm(props) {
               onSuccess={onSuccess}
               submitRef={submitRef}
               method={props.method}
+              useHtml={props.useHtml}
+              headers={props.headers}
               url={props.url}
               onSubmitting={onSaving}
             >
