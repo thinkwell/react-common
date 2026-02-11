@@ -57,6 +57,44 @@ export default function Form(props) {
     }
   }
 
+  const handleSubmitHtml = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(formRef.current);
+
+    try {
+      const csrfToken = document.querySelector("meta[name=csrf-token]").content
+
+      const authToken = localStorage.getItem("authToken")
+      const method = props.method ? (typeof props.method == 'function' ? props.method() : props.method) : 'put';
+      const url = typeof props.url == 'function' ? props.url(form) : props.url;
+
+      const headers = {
+        'X-CSRF-Token': csrfToken,  // ← Add CSRF header
+      };
+      if (authToken) {
+        headers['Authorization'] = `Bearer ${authToken}`
+      }
+      const response = await fetch(url, {
+        method: method,
+        headers: headers,
+        body: formData,
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        onSuccess(response)
+      } else {
+        onError(result.error);
+      }
+    } catch (error) {
+      onError(error.message);
+    } finally {
+      onSubmitting(false)
+    }
+  };
+
   const submit = (extraData) => {
     onSubmitting(true)
     if (!props.useHtml) {
@@ -74,36 +112,7 @@ export default function Form(props) {
       .then(onSuccess)
       .catch(onError)
     } else {
-      let attempts = 30;
-      const getCookie = ( name ) => {
-        var parts = window.document.cookie.split(name + "=");
-        if (parts.length == 2) return parts.pop().split(";").shift();
-      }
-      const expireCookie = ( cName ) => {
-        window.document.cookie = encodeURIComponent(cName) + "=deleted; expires=" + new Date( 0 ).toUTCString();
-      }
-      let interval;
-      interval = setInterval(() => {
-        attempts--;
-        const cookie = getCookie('fileDownloadToken')
-        let cookieValueObj = {}
-        try {
-          cookieValueObj = cookie && JSON.parse(decodeURIComponent(cookie))
-        } catch (error) {
-          console.error(`fileDownloadToken : could not parse cookie : ${decodeURIComponent(cookie)}`)
-        }
-        const token = cookieValueObj && cookieValueObj.value
-        if (token == fileDownloadToken || attempts <= 0) {
-          clearInterval(interval)
-          onSubmitting(false)
-          expireCookie('fileDownloadToken')
-          setFileDownloadToken(Math.random().toString(36).substring(7))
-          onSuccess({data: cookieValueObj.result || {}})
-          return;
-        }
-      }, 1000);
-
-      formRef.current.submit()
+      formRef.current.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
     }
   }
 
@@ -144,7 +153,7 @@ export default function Form(props) {
       : null }
       { !props.useHtml ?
         formLayout :
-        <form method="post" action={props.url} acceptCharset="UTF-8" ref={formRef} className="form">
+        <form method="post" action={props.url} acceptCharset="UTF-8" ref={formRef} className="form" onSubmit={handleSubmitHtml}>
           {formLayout}
           <input type="hidden" name="fileDownloadToken" value={fileDownloadToken} />
         </form>
