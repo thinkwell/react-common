@@ -65,7 +65,7 @@ export default function Form(props) {
     try {
       const csrfToken = document.querySelector("meta[name=csrf-token]").content
 
-      const authToken = localStorage.getItem("authToken")
+      const authToken = await props.getAuthToken()
       const method = props.method ? (typeof props.method == 'function' ? props.method() : props.method) : 'put';
       const url = typeof props.url == 'function' ? props.url(form) : props.url;
 
@@ -84,12 +84,14 @@ export default function Form(props) {
       const result = await response.json();
 
       if (response.ok) {
-        onSuccess(response)
+        onSuccess({data: result})
       } else {
-        onError(result.error);
+        console.log(result)
+        onError(result);
       }
     } catch (error) {
-      onError(error.message);
+      console.log(error)
+      onError(error);
     } finally {
       onSubmitting(false)
     }

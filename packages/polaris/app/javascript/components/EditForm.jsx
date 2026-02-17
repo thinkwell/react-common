@@ -110,11 +110,12 @@ export default function EditForm(props) {
         : null }
           <div className={state.saving ? 'saving' : ''}>
             <Form
-              onError={onSaveError}
+              onError={props.onError || onSaveError}
               onSuccess={onSuccess}
               submitRef={submitRef}
               method={props.method}
               useHtml={props.useHtml}
+              getAuthToken={props.getAuthToken}
               headers={props.headers}
               url={props.url}
               onSubmitting={onSaving}
