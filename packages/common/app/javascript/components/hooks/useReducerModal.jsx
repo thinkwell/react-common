@@ -1,5 +1,5 @@
 import React from 'react';
-import useReducer from './useReducer'
+import useReducer from './useReducer.jsx'
 
 export default function useReducerModal (props, active) {
   function reducer(state, action, attribute) {

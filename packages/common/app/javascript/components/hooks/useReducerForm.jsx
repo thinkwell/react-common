@@ -1,5 +1,5 @@
 import React from 'react';
-import useReducer from './useReducer'
+import useReducer from './useReducer.jsx'
 import set from 'lodash/set'
 
 export default function useReducerForm (props, data) {

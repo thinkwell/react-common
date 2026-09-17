@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
-import useReducerFetch from './useReducerFetch'
+import useReducerFetch from './useReducerFetch.jsx'
 import axios from 'axios';
-import { PagingContext } from '../contexts/Paging'
-import useEffect from './useEffect'
+import { PagingContext } from '../contexts/Paging.jsx'
+import useEffect from './useEffect.jsx'
 
 export default function useFetch (props) {
   const [page_info, previous_page_info, next_page_info, setPageInfo, setPreviousPageInfo, setNextPageInfo] = useContext(PagingContext)

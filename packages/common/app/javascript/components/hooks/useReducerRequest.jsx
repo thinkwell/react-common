@@ -1,5 +1,5 @@
 import React from 'react';
-import useReducer from './useReducer'
+import useReducer from './useReducer.jsx'
 import api from '../services/api';
 
 export default function useReducerRequest (method, props) {
