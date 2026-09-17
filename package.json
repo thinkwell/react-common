@@ -5,5 +5,9 @@
   "workspaces": [
     "packages/*"
   ],
+  "engines": {
+    "node": "18.x",
+    "yarn": "3.x"
+  },
   "packageManager": "yarn@3.6.4"
 }

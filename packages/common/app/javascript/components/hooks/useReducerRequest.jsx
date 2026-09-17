@@ -38,6 +38,7 @@ export default function useReducerRequest (method, props) {
       }
       const response = await api(config)
       onSuccess(response)
+      return response
     } catch(error) {
       onError(error)
     }

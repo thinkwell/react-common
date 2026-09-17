@@ -10,6 +10,13 @@ export default function TextField(props) {
   const nameHtml = Array.isArray(props.name) ? props.name.join('_') : props.name
   const id = props.id || nameHtml
 
+  const getValueAsString = () => {
+    const value = form.field(props.name)
+    return value && (props.format && props.format(value) || value.toString())
+  }
+
+  const valueAsString = getValueAsString()
+
   const isInvalid = (value) => {
     return !new RegExp("^" + props.pattern + "$").test(value);
   };
@@ -28,8 +35,7 @@ export default function TextField(props) {
 
   const validate = () => {
     const errors = [];
-    const value = form.field(props.name)
-    const valueAsString = value && value.toString()
+    const valueAsString = getValueAsString()
     if (props.required && (!valueAsString || !valueAsString.length)) {
       errors.push("Required " + props.label)
     }
@@ -47,13 +53,15 @@ export default function TextField(props) {
     <TextFieldPolaris
     multiline={props.multiline}
     label={props.label}
+    labelHidden={props.labelHidden}
     type={props.type || 'text'}
-    value={form.field(props.name)}
+    value={valueAsString}
     onChange={onChange}
     onBlur={props.onBlur}
     onFocus={props.onFocus}
     name={nameHtml}
     id={id}
+    disabled={props.disabled}
     pattern={props.pattern}
     maxLength={props.maxLength}
     placeholder={props.placeholder}

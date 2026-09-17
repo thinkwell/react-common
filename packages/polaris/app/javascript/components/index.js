@@ -8,4 +8,9 @@ import Spinner from './Spinner'
 import Form from './Form'
 import Select from './Select'
 import Checkbox from './Checkbox'
-export {AppProvider, MainFrame, ResourceList, Form, EditModal, EditForm, TextField, Spinner, Select, Checkbox}
+import Autocomplete from './Autocomplete'
+import IFrameModal from './IFrameModal'
+import Table from './Table'
+import RadioButton from './RadioButton'
+import ImageUpload from './ImageUpload'
+export {AppProvider, MainFrame, ResourceList, Form, EditModal, EditForm, TextField, Spinner, Select, Checkbox, Autocomplete, IFrameModal, Table, RadioButton, ImageUpload}

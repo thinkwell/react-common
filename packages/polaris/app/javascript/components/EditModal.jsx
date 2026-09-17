@@ -93,6 +93,7 @@ export default function EditModal(props) {
               onSuccess={onSuccess}
               submitRef={submitRef}
               method={props.method}
+              headers={props.headers}
               url={props.url}
               onSubmitting={onSaving}
             >
