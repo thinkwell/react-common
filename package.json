@@ -2,5 +2,8 @@
   "name": "@thinkwell/react-common",
   "version": "1.0.27",
   "private": true,
-  "workspaces": ["packages/*"]
+  "workspaces": [
+    "packages/*"
+  ],
+  "packageManager": "yarn@4.18.0"
 }
