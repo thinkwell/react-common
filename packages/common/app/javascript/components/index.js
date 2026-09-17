@@ -1,4 +1,4 @@
-import Util from './Util'
+import Util from './Util.js'
 import { FormProvider, FormContext } from './contexts/Form.jsx'
 import Items from './contexts/Items.jsx'
 import { PagingContext, PagingProvider } from './contexts/Paging.jsx'
@@ -14,7 +14,7 @@ import useReducerModal from './hooks/useReducerModal.jsx'
 import useReducerRequest from './hooks/useReducerRequest.jsx'
 import useReducerTab from './hooks/useReducerTab.jsx'
 import useSearch from './hooks/useSearch.jsx'
-import api from './services/api'
+import api from './services/api.js'
 export {Util, FormProvider, FormContext, Items, PagingContext, PagingProvider, SearchContext, SearchProvider,
   useEffect, useFetch, useFetchState, useReducer, useReducerFetch, useReducerForm, useReducerItem, useReducerModal,
   useReducerRequest, useReducerTab, useSearch, api}

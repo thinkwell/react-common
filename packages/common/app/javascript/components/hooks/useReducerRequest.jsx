@@ -1,6 +1,6 @@
 import React from 'react';
 import useReducer from './useReducer.jsx'
-import api from '../services/api';
+import api from '../services/api.js';
 
 export default function useReducerRequest (method, props) {
   function reducer(state, action) {
