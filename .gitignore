@@ -4,4 +4,12 @@
 /polaris/node_modules
 yarn-error.log
 /coverage
+
+.idea
+.pnp.*
+.yarn/*
 .yarn/cache
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
